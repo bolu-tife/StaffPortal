@@ -11,6 +11,10 @@ namespace StaffPortal.Data
         {
         }
         public virtual DbSet<Faculty> Faculties { get; set; }
-       
+        public virtual DbSet<Department> Departments { get; set; }
+        public virtual DbSet<Grade> Grades { get; set; }
+
+
+
     }
 }
