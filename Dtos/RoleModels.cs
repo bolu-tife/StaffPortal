@@ -5,7 +5,6 @@ namespace StaffPortal.Dtos
     {
        
             public string Name { get; set; }
-
     }
 }
 
