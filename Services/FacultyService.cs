@@ -40,11 +40,11 @@ namespace StaffPortal.Services
         public async Task<bool> Delete(int Id)//Delete
         {
             // find the entity/object
-            var faculty = await _context.Facultys.FindAsync(Id);
+            var faculty = await _context.Faculties.FindAsync(Id);
 
             if(faculty != null)
             {
-                _context.Facultys.Remove(faculty);
+                _context.Faculties.Remove(faculty);
                 _context.SaveChanges();
                 return true;
             }
@@ -55,23 +55,23 @@ namespace StaffPortal.Services
         public async Task<IEnumerable<Faculty>> GetAll() //GetAll
         {
 
-            return await _context.Facultys.ToListAsync();
+            return await _context.Faculties.ToListAsync();
         }
 
         public async Task<Faculty> GetById(int Id) //GetById
         {
-            var faculty = await _context.Facultys.FindAsync(Id);
+            var faculty = await _context.Faculties.FindAsync(Id);
 
             return faculty;
         }
 
         public async Task<bool> Update(Faculty faculty) //Update
         {
-            var aut = await _context.Facultys.FindAsync(faculty.Id);
-            if(aut != null)
+            var fac = await _context.Faculties.FindAsync(faculty.Id);
+            if(fac != null)
             {
-                aut.Name = faculty.Name;
-                aut.Title = faculty.Title;
+                fac.Name = faculty.Name;
+                fac.Code = faculty.Code;
 
                await  _context.SaveChangesAsync();
                 return true;

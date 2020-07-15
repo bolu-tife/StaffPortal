@@ -1,5 +1,5 @@
 ﻿using System;
-namespace BookWeb.Enums
+namespace StaffPortal.Enums
 {
     public enum NotificationType
     {

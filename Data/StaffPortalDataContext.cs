@@ -10,7 +10,7 @@ namespace StaffPortal.Data
         public StaffPortalDataContext(DbContextOptions<StaffPortalDataContext> options) : base(options)
         {
         }
-        public virtual DbSet<Faculty> Authors { get; set; }
+        public virtual DbSet<Faculty> Faculties { get; set; }
        
     }
 }
