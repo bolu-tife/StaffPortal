@@ -35,5 +35,9 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Views\Faculty\" />
+    <Folder Include="wwwroot\sweetAlert\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Views\Department\Create.cshtml" />
   </ItemGroup>
 </Project><!-- <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" /> -->
