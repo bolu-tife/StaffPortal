@@ -64,17 +64,15 @@ namespace StaffPortal.Services
 
             return _grade;
         }
-
         public async Task<bool> Update(Grade grade) //Update
         {
             var _grade = await _context.Grades.FindAsync(grade.Id);
-            if(grade != null)
+            if (_grade != null)
             {
-                grade.GradeName = _grade.GradeName;
-                grade.Level = _grade.Level;
-                grade.Step = _grade.Step;
-
-
+                _grade.GradeName = grade.GradeName;
+                _grade.Level = grade.Level;
+                _grade.Step = grade.Step;
+              
                 await _context.SaveChangesAsync();
                 return true;
             }
@@ -82,7 +80,7 @@ namespace StaffPortal.Services
             return false;
 
         }
-
+       
 
     }
 }

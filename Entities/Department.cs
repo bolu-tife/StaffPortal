@@ -12,7 +12,7 @@ namespace StaffPortal.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int DeptCode { get; set; }
+        public string DeptCode { get; set; }
         public string DeptName { get; set; }
         public string CreatedBy { get; set; }
         private DateTime? dateCreated = null;
