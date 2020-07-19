@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using StaffPortal.Entities
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<!DOCTYPE html>
 
 <html lang="en">
 
@@ -36,7 +41,7 @@
         <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0">
             <div class="navbar-header">
                 <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>
-                <div class="top-left-part"><a class="logo" asp-controller="Home" asp-action="Index" ><i class="glyphicon glyphicon-fire"></i>&nbsp;<span class="hidden-xs">StaffPortal</span></a></div>
+                <div class="top-left-part"><a class="logo" asp-controller="Home" asp-action="Index"><i class="glyphicon glyphicon-fire"></i>&nbsp;<span class="hidden-xs">StaffPortal</span></a></div>
                 <ul class="nav navbar-top-links navbar-left hidden-xs">
                     <li>
                         <a href="javascript:void(0)" class="open-close hidden-xs hidden-lg waves-effect waves-light">
@@ -45,6 +50,11 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-top-links navbar-right pull-right">
+                    
+                    <li 
+                        class="theme-btn btn-info"><a href="#" target="_blank" style="color:white;text-align: center">Admin Section</a>
+                    
+                    </li>
                     <li>
                         <form role="search" class="app-search hidden-xs">
                             <input type="text" placeholder="Search..." class="form-control">
@@ -52,7 +62,35 @@
                         </form>
                     </li>
                     <li>
-                        <a class="profile-pic" href="#"> <img src="images/users/hritik.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">Maruti</b> </a>
+
+                        <div class="profile_details">
+                            <ul>
+                                <li class="dropdown profile_details_drop open">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                        <div>
+                                            <b class="profile-pic" href="#">
+                                                <img src="images/users/hritik.jpg" alt="user-img" width="36" class="img-circle">
+                                                <b class="hidden-xs">@UserManager.GetUserName(User)</b>
+                                            </b>
+
+                                            <i class="fa fa-angle-down lnr"></i>
+                                            <i class="fa fa-angle-up lnr"></i>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </a>
+
+
+                                    <ul class="dropdown-menu drp-mnu">
+                                        <li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li>
+                                        <li> <a href="#"><i class="fa fa-user"></i> Profile</a> </li>
+                                        <li> <a href="/Account/LogOut"><i class="fa fa-sign-out"></i> Logout</a> </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                        @*<a class="profile-pic" href="#"> <img src="images/users/hritik.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">Maruti</b> </a>*@
+
                     </li>
                 </ul>
             </div>
@@ -87,9 +125,9 @@
                         <a asp-controller="UserProfile" asp-action="Index" class="waves-effect"><i class="ti-user fa-fw"></i>UserProfile</a>
                     </li>
                 </ul>
-               <!-- <div class="center p-20">
-                    <span class="hide-menu"><a href="http://wrappixel.com/templates/myadmin/" target="_blank" class="btn btn-info btn-block btn-rounded waves-effect waves-light">Upgrade to Pro</a></span>
-                </div> -->
+                <!-- <div class="center p-20">
+                     <span class="hide-menu"><a href="http://wrappixel.com/templates/myadmin/" target="_blank" class="btn btn-info btn-block btn-rounded waves-effect waves-light">Upgrade to Pro</a></span>
+                 </div> -->
             </div>
             <!-- /.sidebar-collapse -->
         </div>
@@ -125,12 +163,13 @@
     <!-- Custom Theme JavaScript -->
     <script src="~/js/myadmin.js"></script>
     <script src="~/js/dashboard1.js"></script>
-    <script type="text/javascript">$(document).on('submit', 'form', function () {
+    <script type="text/javascript">
+    $(document).on('submit', 'form', function () {
             displayBusyIndicator();
         });
         function displayBusyIndicator() {
             $('.loading').show();
         }</script>
     @RenderSection("Scripts", required: false)
- </body>
+</body>
 </html>
