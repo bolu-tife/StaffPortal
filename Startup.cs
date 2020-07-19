@@ -57,7 +57,8 @@ namespace StaffPortal
             services.AddScoped<IFaculty, FacultyService>();
             services.AddScoped<IDepartment, DepartmentService>();
             services.AddScoped<IGrade, GradeService>();
-            //services.AddScoped<IGenre, GenreService>();
+            services.AddScoped<IUserProfile, UserProfileService>();
+            services.AddScoped<IState, StateService>();
             //services.AddScoped<IPublisher, PublisherService>();
             //services.AddScoped<IUser, UserService>();
             //services.AddScoped<IAccount, AccountService>();

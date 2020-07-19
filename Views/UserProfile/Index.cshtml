@@ -1,0 +1,68 @@
+﻿@model IEnumerable<StaffPortal.Entities.UserProfile>
+@{
+    ViewData["Title"] = "Faculties";
+}
+<!-- ============================================================== -->
+
+
+
+<div class="row">
+    <!-- column -->
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">List</h4>
+                <!-- <h6 class="card-subtitle">Add New Author</h6>-->
+                <div class="col-md-12 col-12 align-self-center">
+                    <a asp-controller="Book" asp-action="Create" class="btn float-right hidden-sm-down btn-success"><i class="mdi mdi-plus-circle"></i>New Book</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table v-middle">
+                        <thead>
+                            <tr class="bg-light">
+                                <th class="border-top-0">ID</th>
+                                <th class="border-top-0">FirstName</th>
+                                <th class="border-top-0">AuthorID</th>
+                                <th class="border-top-0">GenreID</th>
+                                <th class="border-top-0">Publisher</th>
+                                <th class="border-top-0">ISBN</th>
+                                <th class="border-top-0">Year of Publish</th>
+                                <th class="border-top-0">Rating</th>
+                                <th class="border-top-0">Summary</th>
+                                <th class="border-top-0">Created By</th>
+                                <th class="border-top-0">Date Created</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var userprofile in Model)
+                            {
+                                <tr>
+                                    <td>@userprofile.Id</td>
+                                    <td>@userprofile.FirstName </td>
+                                    <td>@userprofile.LastName  </td>
+                                    <td>@userprofile.email  </td>
+                                    <td>@userprofile.Faculty.Name </td>
+                                    <td>@userprofile.Department.DeptName </td>
+                                    <td>@userprofile.State.Name</td>
+                                  
+
+                                    <td>
+
+                                        <a class="btn btn-success btn-sm rounded-0" data-toggle="tooltip" data-placement="top" title="Edit" asp-action="Edit" asp-route-id="@userprofile.Id" alt="Edit"><i class=" fa fa-edit" aria-hidden="true"></i></a>
+
+                                        <a class="btn btn-danger btn-sm rounded-0" data-toggle="tooltip" data-placement="top" title="Delete" asp-action="Delete" asp-route-id="@userprofile.Id" onclick="return confirm('Are you sure you want to Delete this user: @userprofile.FirstName')">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -36,6 +36,8 @@
     <Folder Include="Data\" />
     <Folder Include="Views\Faculty\" />
     <Folder Include="wwwroot\sweetAlert\" />
+    <Folder Include="Views\Account\" />
+    <Folder Include="Views\UserProfile\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\Department\Create.cshtml" />

@@ -13,6 +13,8 @@ namespace StaffPortal.Data
         public virtual DbSet<Faculty> Faculties { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Grade> Grades { get; set; }
+        public virtual DbSet<State> NgStates { get; set; }
+        public virtual DbSet<UserProfile> UserProfiles { get; set; }
 
 
 
