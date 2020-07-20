@@ -1,0 +1,153 @@
+﻿@model StaffPortal.Models.SigninViewModel
+@{
+
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+    ViewData["Title"] = "Signup";
+}
+
+<div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
+    <form method="POST" class="login100-form validate-form">
+        <span class="login100-form-title p-b-55">
+            Signup
+        </span>
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="wrap-input100 validate-input m-b-16">
+            <input asp-for="UserName" class="input100" type="text" name="email" placeholder="Username">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+                <span class="lnr lnr-envelope"></span>
+            </span>
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+        <div class="wrap-input100 validate-input m-b-16">
+            <input asp-for="FirstName" class="input100" type="text" name="firstname" placeholder="firstname">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+                <span class="lnr lnr-envelope"></span>
+            </span>
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="wrap-input100 validate-input m-b-16">
+            <input asp-for="LastName" class="input100" type="text" name="lastname" placeholder="lastname">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+                <span class="lnr lnr-envelope"></span>
+            </span>
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <div class="wrap-input100 validate-input m-b-16" data-validate="Valid email is required: ex@abc.xyz">
+            <input asp-for="Email" class="input100" type="text" name="email" placeholder="Email">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+                <span class="lnr lnr-envelope"></span>
+            </span>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+
+        <div class="wrap-input100 validate-input m-b-16" data-validate="Password is required">
+            <input asp-for="Password" class="input100" type="password" name="pass" placeholder="Password">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+                <span class="lnr lnr-lock"></span>
+            </span>
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="wrap-input100 validate-input m-b-16">
+
+            <label asp-for="FacultyId">Faculty</label>
+            <select asp-for="FacultyId" asp-items="@ViewBag.faculty"
+                    class="form-control select" required="">
+                <option value="">Please select one</option>
+            </select>
+            <span asp-validation-for="FacultyId" class="text-danger"></span>
+
+        </div>
+
+        <div class="wrap-input100 validate-input m-b-16">
+
+            <label asp-for="DepartmentId">Department</label>
+            <select asp-for="DepartmentId" asp-items="@ViewBag.department"
+                    class="form-control select" required="">
+                <option value="">Please select one</option>
+            </select>
+            <span asp-validation-for="DepartmentId" class="text-danger"></span>
+
+        </div>
+
+        <div class="wrap-input100 validate-input m-b-16">
+
+            <label asp-for="Country">Country</label>
+            <select asp-for="Country"
+                    class="form-control select">
+                <option value="Nigera">Nigeria</option>
+            </select>
+            <span asp-validation-for="Country" class="text-danger"></span>
+
+        </div>
+
+        <div class="wrap-input100 validate-input m-b-16">
+
+            <label asp-for="StateId">States</label>
+            <select asp-for="StateId" asp-items="@ViewBag.state"
+                    class="form-control select" required="">
+                <option value="">Please select one</option>
+            </select>
+            <span asp-validation-for="StateId" class="text-danger"></span>
+
+        </div>
+
+        <!--Bolu1@omo.com   <div class="wrap-input100 validate-input m-b-16">
+
+                <label asp-for="LocalId">Local</label>
+                <select asp-for="LocalId" asp-items="@ViewBag.local"
+                        class="form-control select" >
+                    <option value="">Please select one</option>
+                </select>
+                <span asp-validation-for="LocalId" class="text-danger"></span>
+
+            </div>
+-->
+
+
+            <div class="container-login100-form-btn p-t-25">
+                <button class="login100-form-btn">
+                    SignUp
+                </button>
+            </div>
+
+            <div class="text-center w-full p-t-42 p-b-22">
+                <span class="txt1">
+                    Or login with
+                </span>
+            </div>
+
+            <a href="#" class="btn-face m-b-10">
+                <i class="fa fa-facebook-official"></i>
+                Facebook
+            </a>
+
+            <a href="#" class="btn-google m-b-10">
+                <img src="~Login/images/icons/icon-google.png" alt="GOOGLE">
+                Google
+            </a>
+
+            <div class="text-center w-full p-t-115">
+                <span class="txt1">
+                    Already a member?
+                </span>
+
+                <a class="txt1 bo1 hov1" asp-controller="Account" asp-action="login">
+                    Login
+                </a>
+            </div>
+        </form>
+    </div>
+
+
+
+
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }

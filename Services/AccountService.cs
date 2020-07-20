@@ -62,12 +62,12 @@ namespace StaffPortal.Services
 
 
 
+      
 
-
-        public async Task<IEnumerable<ApplicationUser>> GetAll() //GetAll
+        public async Task<IEnumerable<ApplicationUser>> GetAll() 
         {
 
-            return await _userManager.Users.ToListAsync();
+            return await _userManager.Users.Include(s => s.State).Include(f => f.Faculty).Include(d => d.Department).ToListAsync();
         }
 
 
@@ -154,6 +154,13 @@ namespace StaffPortal.Services
             var updateUser = await _userManager.FindByIdAsync(user.Id);
             if (updateUser != null)
             {
+
+                updateUser.FacultyId = user.FacultyId;
+                updateUser.DepartmentId = user.DepartmentId;
+                updateUser.StateId = user.StateId;
+                updateUser.LocalId = user.LocalId;
+                updateUser.country = user.country;
+
                 updateUser.FirstName = user.FirstName;
                 
 

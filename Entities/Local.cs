@@ -4,13 +4,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StaffPortal.Entities
 {
-    public class LGA
+    public class Local
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; }
-        
+        public int StateId { get; set; }
+
+
     }
 }
 

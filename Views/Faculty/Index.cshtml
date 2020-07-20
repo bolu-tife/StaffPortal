@@ -20,22 +20,7 @@
 
         <div class="white-box">
 
-            <a asp-controller="Faculty" asp-action="Create" class="btn float-right hidden-sm-down btn-success"><i class="mdi mdi-plus-circle"></i>New Faculty</a>
-
-
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Code</th>
-                            <th>Date Created</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            
 
                         @foreach (var Faculty in Model)
                         {

@@ -75,7 +75,7 @@ namespace StaffPortal.Services
                 _userprofile.FacultyId = userprofile.FacultyId;
                 _userprofile.DepartmentId = userprofile.DepartmentId;
                 _userprofile.StateId = userprofile.StateId;
-                _userprofile.LGAId = userprofile.LGAId;
+                _userprofile.LocalId = userprofile.LocalId;
                 _userprofile.country = userprofile.country;
                 
 

@@ -21,12 +21,12 @@ namespace StaffPortal.Services
         public async Task<IEnumerable<State>> GetAll() //GetAll
         {
 
-            return await _context.NgStates.ToListAsync();
+            return await _context.State.ToListAsync();
         }
 
         public async Task<State> GetById(int Id) //GetById
         {
-            var _state = await _context.NgStates.FindAsync(Id);
+            var _state = await _context.State.FindAsync(Id);
 
             return _state;
         }

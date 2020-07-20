@@ -13,12 +13,12 @@ namespace StaffPortal.Entities
         public string LastName { get; set; }
         public string email { get; set; }
         public State State { get; set; }
-        public LGA LGA { get; set; }
+        public Local Local { get; set; }
         public string country { get; set; }
         public int DepartmentId { get; set; }
         public int FacultyId { get; set; }
         public int StateId { get; set; }
-        public int LGAId { get; set; }
+        public int LocalId { get; set; }
 
         public Department Department { get; set; }
         public Faculty Faculty { get; set; }

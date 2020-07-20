@@ -4,6 +4,10 @@ VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaffPortal", "StaffPortal.csproj", "{18D8E1C5-DC4B-4020-96AA-5B94C779E923}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "New Folder", "New Folder", "{A6CAAD51-ADA9-4D65-A96D-F033CA704116}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookWeb", "..\..\..\Proj\Book\Book\BookWeb\BookWeb.csproj", "{C1A3A85C-5250-4283-B1BD-521C0F54FDAE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,11 +18,18 @@ Global
 		{18D8E1C5-DC4B-4020-96AA-5B94C779E923}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18D8E1C5-DC4B-4020-96AA-5B94C779E923}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18D8E1C5-DC4B-4020-96AA-5B94C779E923}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1A3A85C-5250-4283-B1BD-521C0F54FDAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1A3A85C-5250-4283-B1BD-521C0F54FDAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1A3A85C-5250-4283-B1BD-521C0F54FDAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1A3A85C-5250-4283-B1BD-521C0F54FDAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BDE31853-ACFA-40FF-AEA2-6E456F35E8E3}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C1A3A85C-5250-4283-B1BD-521C0F54FDAE} = {A6CAAD51-ADA9-4D65-A96D-F033CA704116}
 	EndGlobalSection
 EndGlobal

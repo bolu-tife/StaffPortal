@@ -10,6 +10,7 @@ using StaffPortal.Entities;
 using StaffPortal.Dtos;
 using Microsoft.AspNetCore.Identity;
 using StaffPortal.Enums;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace StaffPortal.Controllers
 {
@@ -31,12 +32,20 @@ namespace StaffPortal.Controllers
         //    _userManager = userManager;
         //    _roleManager = roleManager;
         //}
+        private IFaculty _faculty;
+        private IDepartment _department;
+        private IState _state;
+        private ILocal _local;
 
-
-        public AccountController(IAccount account, SignInManager<ApplicationUser> signInManager)
+        public AccountController(IAccount account, IFaculty faculty, IDepartment department, IState state,ILocal local,SignInManager<ApplicationUser> signInManager)
         {
             _account = account;
             _signInManager = signInManager;
+            _faculty = faculty;
+            _department = department;
+            _state = state;
+            _local = local;
+
         }
         public IActionResult Login()
         {
@@ -63,10 +72,57 @@ namespace StaffPortal.Controllers
 
 
         }
-        public IActionResult Signup()
+        public async Task<IActionResult> UserProfile()
         {
+
+            var model = await _account.GetAll();
+
+            if (model != null)
+                return View(model);
             return View();
         }
+        [HttpGet]
+        public async Task<IActionResult> Signup()
+        {
+            var faculty = await _faculty.GetAll();
+            var department = await _department.GetAll();
+            var state = await _state.GetAll();
+            //var local = await _local.GetAll();
+
+            var facultyList = faculty.Select(f => new SelectListItem()
+            {
+                Value = f.Id.ToString(),
+                Text = f.Name
+            });
+
+            var departmentList = department.Select(d => new SelectListItem()
+            {
+                Value = d.Id.ToString(),
+                Text = d.DeptName
+            });
+
+            var stateList = state.Select(s => new SelectListItem()
+            {
+                Value = s.Id.ToString(),
+                Text = s.Name
+            });
+
+            //var localList = local.Select(l => new SelectListItem()
+            //{
+            //    Value = l.Id.ToString(),
+            //    Text = l.Name
+            //});
+            ViewBag.faculty = facultyList;
+            ViewBag.department = departmentList;
+            ViewBag.state = stateList;
+            //ViewBag.local = localList;
+            return View();
+        }
+
+        //public IActionResult Signup()
+        //{
+        //    return View();
+        ////}
        
         [HttpPost]
         public async Task<IActionResult> Signup( SigninViewModel signupmodel)
@@ -75,7 +131,13 @@ namespace StaffPortal.Controllers
 
             user.UserName = signupmodel.UserName;
             user.Email = signupmodel.Email;
-
+            user.FirstName = signupmodel.FirstName;
+            user.LastName = signupmodel.LastName;
+            user.country = signupmodel.Country;
+            user.StateId = signupmodel.StateId;
+            user.DepartmentId = signupmodel.DepartmentId;
+            user.FacultyId = signupmodel.FacultyId;
+            user.Email = signupmodel.Email;
             var sign = await _account.CreateUser(user, signupmodel.Password);
             if (sign)
             {
@@ -85,44 +147,11 @@ namespace StaffPortal.Controllers
             }
             Alert("Account not created!", NotificationType.error);
             return View();
-            //ApplicationUser user = new ApplicationUser();
-
-
-            //user.UserName = signup.Username;
-            //user.Email = signup.Email;
-
-
-            //var newUser = await _account.CreateUser(user, signup.Password);
-            //if (newUser)
-            //{
-            //    Alert("Welcome "+ signup.Username + "!", NotificationType.success);
-            //    return RedirectToAction("Index", "Home");
-            //}
-
-            //Alert("Author not created!", NotificationType.error);
-            //return View();
+           
+          
         }
 
 
-
-
-        //[HttpPost]
-        //public async Task<IActionResult> Signup([FromBody] UserDto registerUser)
-        //{
-        //    ApplicationUser user = new ApplicationUser();
-
-
-        //    user.UserName = registerUser.Username;
-        //    user.Email = registerUser.Email;
-
-
-        //    var newUser = await _account.CreateUser(user, registerUser.Password);
-        //    if (newUser)
-        //        return RedirectToAction("Index", "Home");
-
-
-        //    return View();
-        //}
 
         [HttpGet]
         public async Task<IActionResult> LogOut()
