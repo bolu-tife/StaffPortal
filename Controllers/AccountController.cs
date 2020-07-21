@@ -22,7 +22,7 @@ namespace StaffPortal.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         
 
-        public AccountController(IAccount account, IFaculty faculty, IDepartment department, SignInManager<ApplicationUser> signInManager)
+        public AccountController(IAccount account, SignInManager<ApplicationUser> signInManager)
         {
             _account = account;
             _signInManager = signInManager;
