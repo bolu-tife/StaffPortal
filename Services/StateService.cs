@@ -10,26 +10,26 @@ namespace StaffPortal.Services
 {
     public class StateService : IState
     {
-        private StaffPortalDataContext _context;
-        public StateService(StaffPortalDataContext context)
-        {
-            _context = context;
-        }
+        //private StaffPortalDataContext _context;
+        //public StateService(StaffPortalDataContext context)
+        //{
+        //    _context = context;
+        //}
 
         
 
-        public async Task<IEnumerable<State>> GetAll() //GetAll
-        {
+        //public async Task<IEnumerable<State>> GetAll() //GetAll
+        //{
 
-            return await _context.State.ToListAsync();
-        }
+        //    return await _context.State.ToListAsync();
+        //}
 
-        public async Task<State> GetById(int Id) //GetById
-        {
-            var _state = await _context.State.FindAsync(Id);
+        //public async Task<State> GetById(int Id) //GetById
+        //{
+        //    var _state = await _context.State.FindAsync(Id);
 
-            return _state;
-        }
+        //    return _state;
+        //}
         
        
 

@@ -139,20 +139,14 @@ namespace StaffPortal.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<int>("DepartmentId");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<int>("FacultyId");
-
                     b.Property<string>("FirstName");
 
                     b.Property<string>("LastName");
-
-                    b.Property<int>("LocalId");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -172,22 +166,12 @@ namespace StaffPortal.Migrations
 
                     b.Property<string>("SecurityStamp");
 
-                    b.Property<int>("StateId");
-
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
 
-                    b.Property<string>("country");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("DepartmentId");
-
-                    b.HasIndex("FacultyId");
-
-                    b.HasIndex("LocalId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -196,8 +180,6 @@ namespace StaffPortal.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("StateId");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -370,29 +352,6 @@ namespace StaffPortal.Migrations
                     b.HasOne("StaffPortal.Entities.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("StaffPortal.Entities.ApplicationUser", b =>
-                {
-                    b.HasOne("StaffPortal.Entities.Department", "Department")
-                        .WithMany()
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("StaffPortal.Entities.Faculty", "Faculty")
-                        .WithMany()
-                        .HasForeignKey("FacultyId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("StaffPortal.Entities.Local", "Local")
-                        .WithMany()
-                        .HasForeignKey("LocalId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("StaffPortal.Entities.State", "State")
-                        .WithMany()
-                        .HasForeignKey("StateId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

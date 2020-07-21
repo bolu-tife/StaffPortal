@@ -12,30 +12,16 @@
         </span>
         <div asp-validation-summary="All" class="text-danger"></div>
 
-        <div class="wrap-input100 validate-input m-b-16">
-            <input asp-for="UserName" class="input100" type="text" name="email" placeholder="Username">
+        <div class="wrap-input100 6">
+            <input asp-for="UserName" class="input100" type="text" name="username" placeholder="Username">
             <span class="focus-input100"></span>
             <span class="symbol-input100">
                 <span class="lnr lnr-envelope"></span>
             </span>
             <span asp-validation-for="UserName" class="text-danger"></span>
         </div>
-        <div class="wrap-input100 validate-input m-b-16">
-            <input asp-for="FirstName" class="input100" type="text" name="firstname" placeholder="firstname">
-            <span class="focus-input100"></span>
-            <span class="symbol-input100">
-                <span class="lnr lnr-envelope"></span>
-            </span>
-            <span asp-validation-for="FirstName" class="text-danger"></span>
-        </div>
-        <div class="wrap-input100 validate-input m-b-16">
-            <input asp-for="LastName" class="input100" type="text" name="lastname" placeholder="lastname">
-            <span class="focus-input100"></span>
-            <span class="symbol-input100">
-                <span class="lnr lnr-envelope"></span>
-            </span>
-            <span asp-validation-for="LastName" class="text-danger"></span>
-        </div>
+       
+        
         <div class="wrap-input100 validate-input m-b-16" data-validate="Valid email is required: ex@abc.xyz">
             <input asp-for="Email" class="input100" type="text" name="email" placeholder="Email">
             <span class="focus-input100"></span>
@@ -46,69 +32,17 @@
         </div>
 
 
-        <div class="wrap-input100 validate-input m-b-16" data-validate="Password is required">
-            <input asp-for="Password" class="input100" type="password" name="pass" placeholder="Password">
+        <div class="wrap-input100 " >
+            <input asp-for="Password" class="input100" type="password"  id="Password" placeholder="Password">
             <span class="focus-input100"></span>
             <span class="symbol-input100">
                 <span class="lnr lnr-lock"></span>
             </span>
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
-        <div class="wrap-input100 validate-input m-b-16">
-
-            <label asp-for="FacultyId">Faculty</label>
-            <select asp-for="FacultyId" asp-items="@ViewBag.faculty"
-                    class="form-control select" required="">
-                <option value="">Please select one</option>
-            </select>
-            <span asp-validation-for="FacultyId" class="text-danger"></span>
-
-        </div>
-
-        <div class="wrap-input100 validate-input m-b-16">
-
-            <label asp-for="DepartmentId">Department</label>
-            <select asp-for="DepartmentId" asp-items="@ViewBag.department"
-                    class="form-control select" required="">
-                <option value="">Please select one</option>
-            </select>
-            <span asp-validation-for="DepartmentId" class="text-danger"></span>
-
-        </div>
-
-        <div class="wrap-input100 validate-input m-b-16">
-
-            <label asp-for="Country">Country</label>
-            <select asp-for="Country"
-                    class="form-control select">
-                <option value="Nigera">Nigeria</option>
-            </select>
-            <span asp-validation-for="Country" class="text-danger"></span>
-
-        </div>
-
-        <div class="wrap-input100 validate-input m-b-16">
-
-            <label asp-for="StateId">States</label>
-            <select asp-for="StateId" asp-items="@ViewBag.state"
-                    class="form-control select" required="">
-                <option value="">Please select one</option>
-            </select>
-            <span asp-validation-for="StateId" class="text-danger"></span>
-
-        </div>
-
-        <!--Bolu1@omo.com   <div class="wrap-input100 validate-input m-b-16">
-
-                <label asp-for="LocalId">Local</label>
-                <select asp-for="LocalId" asp-items="@ViewBag.local"
-                        class="form-control select" >
-                    <option value="">Please select one</option>
-                </select>
-                <span asp-validation-for="LocalId" class="text-danger"></span>
-
-            </div>
--->
+        
+       
+       
 
 
             <div class="container-login100-form-btn p-t-25">

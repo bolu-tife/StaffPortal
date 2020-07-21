@@ -43,7 +43,7 @@ namespace StaffPortal.Controllers
         {
             var faculty = await _faculty.GetAll();
             var department = await _department.GetAll();
-            var state = await _state.GetAll();
+            //var state = await _state.GetAll();
 
             var facultyList = faculty.Select(f => new SelectListItem()
             {
@@ -57,15 +57,15 @@ namespace StaffPortal.Controllers
                 Text = d.DeptName
             });
 
-            var stateList = state.Select(s => new SelectListItem()
-            {
-                Value = s.Id.ToString(),
-                Text = s.Name
-            });
+            //var stateList = state.Select(s => new SelectListItem()
+            //{
+            //    Value = s.Id.ToString(),
+            //    Text = s.Name
+            //});
 
             ViewBag.faculty = facultyList;
             ViewBag.department = departmentList;
-            ViewBag.state = stateList;
+            //ViewBag.state = stateList;
             return View();
         }
 
@@ -115,18 +115,18 @@ namespace StaffPortal.Controllers
                 Value = d.Id.ToString(),
                 Text = d.DeptName
             });
-            var state = await _state.GetAll();
+            //var state = await _state.GetAll();
 
-            var stateList = state.Select(s => new SelectListItem()
-            {
-                Value = s.Id.ToString(),
-                Text = s.Name
-            });
+            //var stateList = state.Select(s => new SelectListItem()
+            //{
+            //    Value = s.Id.ToString(),
+            //    Text = s.Name
+            //});
 
 
             ViewBag.faculty = facultyList;
             ViewBag.department = departmentList;
-            ViewBag.state = stateList;
+            //ViewBag.state = stateList;
             
             return View(editUserProfile);
         }

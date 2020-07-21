@@ -9,8 +9,8 @@ namespace StaffPortal.Interface
     public interface IState
     {
         
-        Task<IEnumerable<State>> GetAll();
-        Task<State> GetById(int Id);
+        //Task<IEnumerable<State>> GetAll();
+        //Task<State> GetById(int Id);
         
     }
 }

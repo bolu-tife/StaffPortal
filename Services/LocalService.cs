@@ -10,11 +10,11 @@ namespace StaffPortal.Services
 {
     public class LocalService : ILocal
     {
-        private StaffPortalDataContext _context;
-        public LocalService(StaffPortalDataContext context)
-        {
-            _context = context;
-        }
+        //private StaffPortalDataContext _context;
+        //public LocalService(StaffPortalDataContext context)
+        //{
+        //    _context = context;
+        //}
 
         //public async Task<IEnumerable<Local>> GetAll()
         //{

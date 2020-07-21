@@ -42,6 +42,7 @@ namespace StaffPortal.Services
         {
             try
             {
+
                 var checkUser = await _userManager.FindByEmailAsync(user.Email);
                 if (checkUser == null)
                 {
@@ -62,12 +63,12 @@ namespace StaffPortal.Services
 
 
 
-      
 
-        public async Task<IEnumerable<ApplicationUser>> GetAll() 
+
+        public async Task<IEnumerable<ApplicationUser>> GetAll() //GetAll
         {
 
-            return await _userManager.Users.Include(s => s.State).Include(f => f.Faculty).Include(d => d.Department).ToListAsync();
+            return await _userManager.Users.ToListAsync();
         }
 
 
@@ -155,15 +156,7 @@ namespace StaffPortal.Services
             if (updateUser != null)
             {
 
-                updateUser.FacultyId = user.FacultyId;
-                updateUser.DepartmentId = user.DepartmentId;
-                updateUser.StateId = user.StateId;
-                updateUser.LocalId = user.LocalId;
-                updateUser.country = user.country;
-
-                updateUser.FirstName = user.FirstName;
-                
-
+               
                 updateUser.LastName = user.LastName;
                 updateUser.Email = user.FirstName;
 

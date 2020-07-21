@@ -20,31 +20,13 @@ namespace StaffPortal.Controllers
         private readonly IAccount _account;
 
         private readonly SignInManager<ApplicationUser> _signInManager;
-        //private readonly UserManager<ApplicationUser> _userManager;
-        //private readonly RoleManager<ApplicationRole> _roleManager;
-        //string Message = "";
+        
 
-        //public AccountController(SignInManager<ApplicationUser> signInManager,
-        //    RoleManager<ApplicationRole> roleManager,
-        //    UserManager<ApplicationUser> userManager)
-        //{
-        //    _signInManager = signInManager;
-        //    _userManager = userManager;
-        //    _roleManager = roleManager;
-        //}
-        private IFaculty _faculty;
-        private IDepartment _department;
-        private IState _state;
-        private ILocal _local;
-
-        public AccountController(IAccount account, IFaculty faculty, IDepartment department, IState state,ILocal local,SignInManager<ApplicationUser> signInManager)
+        public AccountController(IAccount account, IFaculty faculty, IDepartment department, SignInManager<ApplicationUser> signInManager)
         {
             _account = account;
             _signInManager = signInManager;
-            _faculty = faculty;
-            _department = department;
-            _state = state;
-            _local = local;
+          
 
         }
         public IActionResult Login()
@@ -81,49 +63,14 @@ namespace StaffPortal.Controllers
                 return View(model);
             return View();
         }
-        [HttpGet]
-        public async Task<IActionResult> Signup()
+        
+        public IActionResult Signup()
         {
-            var faculty = await _faculty.GetAll();
-            var department = await _department.GetAll();
-            var state = await _state.GetAll();
-            //var local = await _local.GetAll();
-
-            var facultyList = faculty.Select(f => new SelectListItem()
-            {
-                Value = f.Id.ToString(),
-                Text = f.Name
-            });
-
-            var departmentList = department.Select(d => new SelectListItem()
-            {
-                Value = d.Id.ToString(),
-                Text = d.DeptName
-            });
-
-            var stateList = state.Select(s => new SelectListItem()
-            {
-                Value = s.Id.ToString(),
-                Text = s.Name
-            });
-
-            //var localList = local.Select(l => new SelectListItem()
-            //{
-            //    Value = l.Id.ToString(),
-            //    Text = l.Name
-            //});
-            ViewBag.faculty = facultyList;
-            ViewBag.department = departmentList;
-            ViewBag.state = stateList;
-            //ViewBag.local = localList;
             return View();
         }
 
-        //public IActionResult Signup()
-        //{
-        //    return View();
-        ////}
        
+
         [HttpPost]
         public async Task<IActionResult> Signup( SigninViewModel signupmodel)
         {
@@ -131,13 +78,7 @@ namespace StaffPortal.Controllers
 
             user.UserName = signupmodel.UserName;
             user.Email = signupmodel.Email;
-            user.FirstName = signupmodel.FirstName;
-            user.LastName = signupmodel.LastName;
-            user.country = signupmodel.Country;
-            user.StateId = signupmodel.StateId;
-            user.DepartmentId = signupmodel.DepartmentId;
-            user.FacultyId = signupmodel.FacultyId;
-            user.Email = signupmodel.Email;
+
             var sign = await _account.CreateUser(user, signupmodel.Password);
             if (sign)
             {
@@ -147,8 +88,10 @@ namespace StaffPortal.Controllers
             }
             Alert("Account not created!", NotificationType.error);
             return View();
-           
-          
+            //ApplicationUser user = new ApplicationUser();
+
+
+
         }
 
 
