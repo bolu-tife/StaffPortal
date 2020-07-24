@@ -5,15 +5,19 @@ using StaffPortal.Data;
 using StaffPortal.Entities;
 using Microsoft.EntityFrameworkCore;
 using StaffPortal.Interface;
+using Microsoft.AspNetCore.Identity;
+using StaffPortal.Models;
 
 namespace StaffPortal.Services
 {
     public class UserProfileService : IUserProfile
     {
         private StaffPortalDataContext _context;
-        public UserProfileService(StaffPortalDataContext context)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public UserProfileService(StaffPortalDataContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public void Add(UserProfile userprofile) //Add
@@ -51,7 +55,14 @@ namespace StaffPortal.Services
 
             return false;
         }
-       
+        
+        //public async Task<string> GetEmail() //GetById
+        //{
+        //    _userManager userm;
+        //    ApplicationUser user = await _userManager.FindByEmailAsync( userm.Email);
+        //    return user.Email;
+        //}
+
         public async Task<IEnumerable<UserProfile>> GetAll() //GetAll
         {
 

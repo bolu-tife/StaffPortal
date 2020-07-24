@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+    <link rel="icon" type="image/png" href="~/Login/images/icons/favicon.ico" />
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="~/Login/vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
@@ -33,14 +33,16 @@
         <!-- Page Content -->
 
         <div class="container-login100">
-
+            
+            <partial name="_NotificationPanel" />
             @RenderBody()
+
             <hr />
 
         </div>
 
     </div>
-
+    <partial name="_CookieConsentPartial" />
 
 
     <footer>

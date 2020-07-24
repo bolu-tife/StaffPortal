@@ -18,21 +18,22 @@ namespace StaffPortal.Controllers
         private IUserProfile _userProfile;
         private IFaculty _faculty;
         private IDepartment _department;
-        private IState _state;
+       
         
         private readonly UserManager<ApplicationUser> _userManager;
-        public UserProfileController(IUserProfile userProfile, IFaculty faculty, IDepartment department,IState state, UserManager<ApplicationUser> userManager)
+        public UserProfileController(IUserProfile userProfile, IFaculty faculty, IDepartment department, UserManager<ApplicationUser> userManager)
         {
             _userProfile = userProfile;
             _faculty = faculty;
             _department = department;
-            _state = state;
+            
             _userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
         {
             var model = await _userProfile.GetAll();
+            //var mail = await _userProfile.GetEmail();
 
             if (model != null)
                 return View(model);
@@ -91,8 +92,6 @@ namespace StaffPortal.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             
-           
-           
             
 
             var editUserProfile = await _userProfile.GetById(id);

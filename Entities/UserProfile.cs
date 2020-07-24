@@ -23,6 +23,8 @@ namespace StaffPortal.Entities
         public Department Department { get; set; }
         public Faculty Faculty { get; set; }
 
+        
+
     }
 }
 

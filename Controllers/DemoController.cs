@@ -53,7 +53,7 @@ namespace StaffPortal.Controllers
         public JsonResult GetLocal(int StateId)
         {
             List<Local> locallist = new List<Local>();
-            locallist = _context.Locals.Where(a => a.StateId == StateId).ToList();
+            locallist = _context.Locals.Where(a => a.States.Id == StateId).ToList();
 
             locallist.Insert(0, new Local { Id = 0, Name = "Please Select State" });
             return Json(new SelectList(locallist, "Id", "Name"));

@@ -23,6 +23,9 @@
     <link href="~/bower_components/morrisjs/morris.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="~/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/loading.css">
+    <link href="~/sweetAlert/sweetalert.css" rel="stylesheet" />
+    <script src="~/sweetAlert/sweetalert.min.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -82,7 +85,7 @@
 
                                     <ul class="dropdown-menu drp-mnu">
                                         <li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li>
-                                        <li> <a asp-controller="Account" asp-action="UserProfile"><i class="fa fa-user"></i> Profile</a> </li>
+                                        <li> <a asp-controller="UserProfile" asp-action="Index"><i class="fa fa-user"></i> Profile</a> </li>
                                         <li> <a asp-controller="Account" asp-action="login"><i class="fa fa-sign-out"></i> Logout</a> </li>
                                     </ul>
                                 </li>
@@ -121,9 +124,7 @@
                     <li>
                         <a asp-controller="Grade" asp-action="Index" class="waves-effect"><i class="ti-user fa-fw"></i>Grade</a>
                     </li>
-                    <li>
-                        <a asp-controller="UserProfile" asp-action="Index" class="waves-effect"><i class="ti-user fa-fw"></i>UserProfile</a>
-                    </li>
+                   
 
                 </ul>
                 <!-- <div class="center p-20">
@@ -135,9 +136,11 @@
         <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container body-content">
-
+                <partial name="_CookieConsentPartial" />
+                <partial name="_NotificationPanel" />
                 @RenderBody()
                 <hr />
+                <partial name="_Loading" />
                 <footer>
                     <p>&copy; 2020 - StaffPortal</p>
                 </footer>
