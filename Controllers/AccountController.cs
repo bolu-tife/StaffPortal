@@ -74,10 +74,11 @@ namespace StaffPortal.Controllers
         [HttpPost]
         public async Task<IActionResult> Signup( SigninViewModel signupmodel)
         {
-            ApplicationUser user = new ApplicationUser();
-
-            user.UserName = signupmodel.UserName;
-            user.Email = signupmodel.Email;
+            ApplicationUser user = new ApplicationUser
+            {
+                UserName = signupmodel.UserName,
+                Email = signupmodel.Email
+            };
 
             var sign = await _account.CreateUser(user, signupmodel.Password);
             if (sign)

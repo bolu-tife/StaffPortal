@@ -1,0 +1,25 @@
+﻿@model StaffPortal.Models.CreateRoleViewModel
+@{
+    ViewData["Title"] = "Create New Role";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+
+
+}
+<div id="page-wrapper">
+    <div class="forms">
+        <div class="form-title">
+            <h4>Create New Book :</h4>
+        </div>
+        <div class="form-body">
+            <form method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="RoleName"></label>
+                    <input asp-for="RoleName" class="form-control" />
+                    <span asp-validation-for="RoleName" class="text-danger"></span>
+                </div>
+                <button type="submit" class="login100-form-btn">CreateRole</button>
+            </form>
+        </div>
+    </div>
+</div>
