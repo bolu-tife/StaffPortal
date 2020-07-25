@@ -36,6 +36,8 @@ namespace StaffPortal.Controllers
             statelist.Insert(0, new State { Id = 0, Name = "Select" });
 
             ViewBag.ListofStates = statelist;
+
+            
             return View();
         }
 
