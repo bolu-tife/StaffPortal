@@ -10,8 +10,8 @@ using StaffPortal.Data;
 namespace StaffPortal.Migrations
 {
     [DbContext(typeof(StaffPortalDataContext))]
-    [Migration("20200716091746_GradeandDept")]
-    partial class GradeandDept
+    [Migration("20200726174805_logggss")]
+    partial class logggss
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -154,8 +154,6 @@ namespace StaffPortal.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
-                    b.Property<string>("MiddleName");
-
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
 
@@ -198,7 +196,7 @@ namespace StaffPortal.Migrations
 
                     b.Property<DateTime>("DateCreated");
 
-                    b.Property<int>("DeptCode");
+                    b.Property<string>("DeptCode");
 
                     b.Property<string>("DeptName");
 
@@ -251,6 +249,71 @@ namespace StaffPortal.Migrations
                     b.ToTable("Grades");
                 });
 
+            modelBuilder.Entity("StaffPortal.Entities.Local", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.Property<int?>("StatesId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StatesId");
+
+                    b.ToTable("Locals");
+                });
+
+            modelBuilder.Entity("StaffPortal.Entities.State", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("State");
+                });
+
+            modelBuilder.Entity("StaffPortal.Entities.UserProfile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DepartmentId");
+
+                    b.Property<int>("FacultyId");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<int>("LocalId");
+
+                    b.Property<int>("StateId");
+
+                    b.Property<string>("country");
+
+                    b.Property<string>("email");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("FacultyId");
+
+                    b.HasIndex("LocalId");
+
+                    b.HasIndex("StateId");
+
+                    b.ToTable("UserProfiles");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("StaffPortal.Entities.ApplicationRole")
@@ -301,6 +364,36 @@ namespace StaffPortal.Migrations
                     b.HasOne("StaffPortal.Entities.Faculty", "Faculty")
                         .WithMany()
                         .HasForeignKey("FacultyId");
+                });
+
+            modelBuilder.Entity("StaffPortal.Entities.Local", b =>
+                {
+                    b.HasOne("StaffPortal.Entities.State", "States")
+                        .WithMany("Local")
+                        .HasForeignKey("StatesId");
+                });
+
+            modelBuilder.Entity("StaffPortal.Entities.UserProfile", b =>
+                {
+                    b.HasOne("StaffPortal.Entities.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StaffPortal.Entities.Faculty", "Faculty")
+                        .WithMany()
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StaffPortal.Entities.Local", "Local")
+                        .WithMany()
+                        .HasForeignKey("LocalId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StaffPortal.Entities.State", "State")
+                        .WithMany()
+                        .HasForeignKey("StateId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
