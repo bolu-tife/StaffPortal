@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BookWeb.Controllers
+namespace StaffPortal.Controllers
 {
     //[Authorize(Roles = "ADMINS")]
 

@@ -10,6 +10,8 @@ using StaffPortal.Entities;
 using Microsoft.AspNetCore.Identity;
 using StaffPortal.Enums;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using StaffPortal.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace StaffPortal.Controllers
 {
@@ -18,152 +20,153 @@ namespace StaffPortal.Controllers
         private IUserProfile _userProfile;
         private IFaculty _faculty;
         private IDepartment _department;
-       
-        
+
+        private readonly StaffPortalDataContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-        public UserProfileController(IUserProfile userProfile, IFaculty faculty, IDepartment department, UserManager<ApplicationUser> userManager)
+        //private StaffPortalDataContext context = new StaffPortalDataContext();
+        public UserProfileController(IUserProfile userProfile, IFaculty faculty, IDepartment department, UserManager<ApplicationUser> userManager, StaffPortalDataContext context)
         {
             _userProfile = userProfile;
             _faculty = faculty;
             _department = department;
-            
+            _context = context;
+
             _userManager = userManager;
         }
 
+      
+       
+        [HttpPost]
+        public async Task<IActionResult> Index(ApplicationUser userdetails)
+        {
+            ApplicationUser _userprofile = await _userManager.FindByEmailAsync(userdetails.Email);
+            if (_userprofile != null)
+            {
+                _userprofile.FirstName = userdetails.FirstName;
+                _userprofile.LastName = userdetails.LastName;
+                //_userprofile.FacultyId = userdetails.FacultyId;
+                //_userprofile.DepartmentId = userdetails.DepartmentId;
+                //_userprofile.StateId = userdetails.StateId;
+                //_userprofile.LocalId = userdetails.LocalId;
+            }
+            var x = await _userManager.UpdateAsync(_userprofile);
+            if (x.Succeeded)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                //ApplicationUser appUser = _userManager.FindByIdAsync(userid).Result;
+                return View(userdetails);
+            }
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var model = await _userProfile.GetAll();
-            //var mail = await _userProfile.GetEmail();
-
-            if (model != null)
-                return View(model);
-            return View();
-        }
-        [HttpGet]
-        public async Task<IActionResult> Create()
-        {
-            var faculty = await _faculty.GetAll();
-            var department = await _department.GetAll();
-            //var state = await _state.GetAll();
-
-            var facultyList = faculty.Select(f => new SelectListItem()
+            var userid = _userManager.GetUserId(User);
+            if (userid == null)
             {
-                Value = f.Id.ToString(),
-                Text = f.Name
-            });
-
-            var departmentList = department.Select(d => new SelectListItem()
-            {
-                Value = d.Id.ToString(),
-                Text = d.DeptName
-            });
-
-            //var stateList = state.Select(s => new SelectListItem()
-            //{
-            //    Value = s.Id.ToString(),
-            //    Text = s.Name
-            //});
-
-            ViewBag.faculty = facultyList;
-            ViewBag.department = departmentList;
-            //ViewBag.state = stateList;
-            return View();
-        }
-
-
-
-        [HttpPost]
-        public async Task<IActionResult> Create(UserProfile userProfile)
-        {
-            //userProfile.CreatedBy = _userManager.GetUserName(User);
-
-            var createUserProfile = await _userProfile.AddAsync(userProfile);
-           
-            if (createUserProfile)
-            {
-                Alert("UserProfile created successfully.", NotificationType.success);
-                return RedirectToAction("Index");
+                return RedirectToAction("Login", "Account");
             }
-            Alert("UserProfile not created!", NotificationType.error);
-            return View();
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Edit(int id)
-        {
-            
-            
-
-            var editUserProfile = await _userProfile.GetById(id);
-
-            if (editUserProfile == null)
+            else
             {
-                return RedirectToAction("Index");
+                ApplicationUser appUser =  _userManager.FindByIdAsync(userid).Result;
+                return View(appUser);
             }
-            var faculty = await _faculty.GetAll();
-            
-            var facultyList = faculty.Select(f => new SelectListItem()
-            {
-                Value = f.Id.ToString(),
-                Text = f.Name
-            });
-            var department = await _department.GetAll();
-          
-            var departmentList = department.Select(d => new SelectListItem()
-            {
-                Value = d.Id.ToString(),
-                Text = d.DeptName
-            });
-            //var state = await _state.GetAll();
-
-            //var stateList = state.Select(s => new SelectListItem()
-            //{
-            //    Value = s.Id.ToString(),
-            //    Text = s.Name
-            //});
-
-
-            ViewBag.faculty = facultyList;
-            ViewBag.department = departmentList;
-            //ViewBag.state = stateList;
-            
-            return View(editUserProfile);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(UserProfile userProfile)
+        public async Task<IActionResult> UserIndex(ApplicationUser userdetails)
         {
-            //var editFaculty = await _faculty.GetById(id);
-            var editUserProfile = await _userProfile.Update(userProfile);
-
-            if (editUserProfile && ModelState.IsValid)
+            
+            ApplicationUser _userprofile = await _userManager.FindByEmailAsync(userdetails.Email);
+            if (_userprofile != null)
             {
-                //    editFaculty.Name = faculty.Name;
-                //    context.SaveChanges();
-                Alert("UserProfile edited successfully.", NotificationType.success);
-                return RedirectToAction("Index");
-                //return RedirectToAction("Details", new { id = editFaculty.Id });
+                _userprofile.FirstName = userdetails.FirstName;
+                _userprofile.LastName = userdetails.LastName;
+                //_userprofile.FacultyId = userdetails.FacultyId;
+                //_userprofile.DepartmentId = userdetails.DepartmentId;
+                //_userprofile.StateId = userdetails.StateId;
+                //_userprofile.LocalId = userdetails.LocalId;
             }
-            Alert("UserProfile not edited!", NotificationType.error);
-            return View();
+            var x = await _userManager.UpdateAsync(_userprofile);
+            if (x.Succeeded)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                //ApplicationUser appUser = _userManager.FindByIdAsync(userid).Result;
+                return View(userdetails);
+            }
         }
 
-        public async Task<IActionResult> Delete(int id)
+        [HttpGet]
+        public async Task<IActionResult> UserIndex()
         {
-            var deleteUserProfile = await _userProfile.Delete(id);
-
-            if (deleteUserProfile)
+            var userid = _userManager.GetUserId(User);
+            if (userid == null)
             {
-                Alert("UserProfile deleted successfully.", NotificationType.success);
-                return RedirectToAction("Index");
+                return RedirectToAction("Login", "Account");
             }
-            Alert("UserProfile not deleted!", NotificationType.error);
+            else
+            {
+                //var department = await _department.GetAll();
+                //var faculty = await _faculty.GetAll();
+                
+                //var departmentList = department.Select(d => new SelectListItem()
+                //{
+                //    Value = d.Id.ToString(),
+                //    Text = d.DeptName
+                //});
+
+                //var facultyList = faculty.Select(f => new SelectListItem()
+                //{
+                //    Value = f.Id.ToString(),
+                //    Text = f.Name
+                //});
+
+               
+
+                //ViewBag.department = departmentList;
+                //ViewBag.faculty = facultyList;
+               
+
+                //List<State> statelist = new List<State>();
+                //statelist = (from state in _context.State
+                //             select state).ToList();
+
+                //statelist.Insert(0, new State { Id = 0, Name = "Select" });
+
+                //ViewBag.ListofStates = statelist;
+                ApplicationUser appUser = _userManager.FindByIdAsync(userid).Result;
+                return View(appUser);
+            }
+        }
+
+
+        //public JsonResult GetLocal(int StateId)
+        //{
+        //    List<Local> locallist = new List<Local>();
+        //    locallist = _context.Locals.Where(a => a.States.Id == StateId).ToList();
+
+        //    locallist.Insert(0, new Local { Id = 0, Name = "Please Select State" });
+        //    return Json(new SelectList(locallist, "Id", "Name"));
+
+        //}
+        [HttpGet]
+        public IActionResult UserInfo()
+        {
+
             return View();
         }
-        
+        [HttpGet]
+        public IActionResult UserInfoEdit()
+        {
 
-
-
+            return View();
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

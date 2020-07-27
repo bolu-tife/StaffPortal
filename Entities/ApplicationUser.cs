@@ -11,8 +11,19 @@ namespace StaffPortal.Entities
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-       
-       
+
+        //public NewState NewState { get; set; }
+        //public NewLocal NewLocal { get; set; }
+        //public string Country { get; set; }
+        //public int DepartmentId { get; set; }
+        //public int FacultyId { get; set; }
+        //public int NewStateId { get; set; }
+        //public int NewLocalId { get; set; }
+
+        //public Department Department { get; set; }
+        //public Faculty Faculty { get; set; }
+
+
 
 
         [NotMapped]

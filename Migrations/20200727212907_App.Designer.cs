@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StaffPortal.Data;
 
 namespace StaffPortal.Migrations
 {
     [DbContext(typeof(StaffPortalDataContext))]
-    partial class StaffPortalDataContextModelSnapshot : ModelSnapshot
+    [Migration("20200727212907_App")]
+    partial class App
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -154,6 +156,8 @@ namespace StaffPortal.Migrations
 
                     b.Property<string>("LastName");
 
+                    b.Property<int>("LocalId");
+
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
@@ -172,6 +176,8 @@ namespace StaffPortal.Migrations
 
                     b.Property<string>("SecurityStamp");
 
+                    b.Property<int>("StateId");
+
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
@@ -183,6 +189,8 @@ namespace StaffPortal.Migrations
 
                     b.HasIndex("FacultyId");
 
+                    b.HasIndex("LocalId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
 
@@ -190,6 +198,8 @@ namespace StaffPortal.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("StateId");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -265,41 +275,13 @@ namespace StaffPortal.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("StateId");
+                    b.Property<int?>("StatesId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("StatesId");
 
                     b.ToTable("Locals");
-                });
-
-            modelBuilder.Entity("StaffPortal.Entities.NewLocal", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("LocalName");
-
-                    b.Property<int?>("NewStatesNewStateId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NewStatesNewStateId");
-
-                    b.ToTable("NewLocals");
-                });
-
-            modelBuilder.Entity("StaffPortal.Entities.NewState", b =>
-                {
-                    b.Property<int>("NewStateId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("NewStateName");
-
-                    b.HasKey("NewStateId");
-
-                    b.ToTable("NewState");
                 });
 
             modelBuilder.Entity("StaffPortal.Entities.State", b =>
@@ -307,8 +289,6 @@ namespace StaffPortal.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("LocalId");
 
                     b.Property<string>("Name");
 
@@ -406,6 +386,16 @@ namespace StaffPortal.Migrations
                         .WithMany()
                         .HasForeignKey("FacultyId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StaffPortal.Entities.Local", "Local")
+                        .WithMany()
+                        .HasForeignKey("LocalId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StaffPortal.Entities.State", "State")
+                        .WithMany()
+                        .HasForeignKey("StateId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("StaffPortal.Entities.Department", b =>
@@ -415,11 +405,11 @@ namespace StaffPortal.Migrations
                         .HasForeignKey("FacultyId");
                 });
 
-            modelBuilder.Entity("StaffPortal.Entities.NewLocal", b =>
+            modelBuilder.Entity("StaffPortal.Entities.Local", b =>
                 {
-                    b.HasOne("StaffPortal.Entities.NewState", "NewStates")
-                        .WithMany("NewLocal")
-                        .HasForeignKey("NewStatesNewStateId");
+                    b.HasOne("StaffPortal.Entities.State", "States")
+                        .WithMany("Local")
+                        .HasForeignKey("StatesId");
                 });
 
             modelBuilder.Entity("StaffPortal.Entities.UserProfile", b =>
