@@ -9,7 +9,7 @@
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="StateId"> State</label>
-                <select asp-for="StateId" class="form-control" id="StateId"
+                <select asp-for="StateId" class="form-control" id="StateIdd"
                         asp-items="@(new SelectList(ViewBag.ListofStates, "Id", "Name"))">
                     <option>Select State Name</option>
                 </select>

@@ -85,8 +85,8 @@
 
                                     <ul class="dropdown-menu drp-mnu">
                                         <li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li>
-                                        <li> <a asp-controller="UserProfile" asp-action="UserIndex"><i class="fa fa-user"></i> Profile</a> </li>
-                                        <li> <a asp-controller="Account" asp-action="LogOut"><i class="fa fa-sign-out"></i> Logout</a> </li>
+                                        <li> <a asp-controller="UserProfile" asp-action="Index"><i class="fa fa-user"></i> Profile</a> </li>
+                                        <li> <a asp-controller="Account" asp-action="login"><i class="fa fa-sign-out"></i> Logout</a> </li>
                                     </ul>
                                 </li>
                             </ul>
@@ -121,12 +121,9 @@
                     <li>
                         <a asp-controller="Department" asp-action="Index" class="waves-effect"><i class="ti-user fa-fw"></i>Department</a>
                     </li>
-                    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                    {
-                        <li>
-                            <a asp-controller="Administration" asp-action="ListRole"><i class="fa fa-user-md"></i> Role  </a>
-                        </li>
-                    }
+                    <li>
+                        <a asp-controller="Administration" asp-action="ListRole"><i class="fa fa-user-md"></i> Role  </a>
+                    </li>
                     <li>
                         <a asp-controller="Grade" asp-action="Index" class="waves-effect"><i class="ti-user fa-fw"></i>Grade</a>
                     </li>
