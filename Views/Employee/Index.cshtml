@@ -1,0 +1,120 @@
+﻿@model StaffPortal.Models.Salary;
+@{
+    ViewData["Title"] = "Index";
+}
+<div id="page-wrapper">
+    <div class="forms">
+        <div class="form-title">
+            <h4>Salary :</h4>
+        </div>
+        <div class="form-body">
+            <form asp-action="Index" method="post" class="mt-4">
+
+                <div asp-validation-summary="All" class="text-danger"></div>
+                @*<div class="form-group">
+            <label asp-for="ID">Id</label>
+            <input type="text" asp-for="ID" class="form-control" placeholder="Title" required="">
+            <span asp-validation-for="ID" class="text-danger"></span>
+        </div>*@
+
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="EmployeeName">EmployeeName</label>
+                    <input type="text" asp-for="EmployeeName" class="form-control" placeholder="EmployeeName" required="">
+                    <span asp-validation-for="EmployeeName" class="text-danger"></span>
+                </div>
+
+                @*<div class="form-group">
+            <label asp-for="grade.Level">Level</label>
+            <select asp-for="grade.Level" asp-items="@ViewBag.grade"
+                    class="form-control custom-select" required="">
+                <option value="">Please select one</option>
+            </select>
+            <span asp-validation-for="grade.Level" class="text-danger"></span>
+        </div>*@
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="department">Department</label>
+                    <input type="text" asp-for="department" class="form-control" placeholder="EmployeeName" required="">
+                    <span asp-validation-for="department" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="grade.Level">Level</label>
+                    <input type="text" asp-for="grade.Level" class="form-control" id="name" placeholder="Enter Step" required="">
+                    <span asp-validation-for="grade.Level" class="text-danger"></span>
+                </div>
+
+
+                @*<div class="form-group">
+            <label asp-for="department.DeptName">department</label>
+            <select asp-for="department.DeptName" asp-items="@ViewBag.department"
+                    class="form-control custom-select" required="">
+                <option value="">Please select one</option>
+            </select>
+            <span asp-validation-for="department.DeptName" class="text-danger"></span>
+        </div>*@
+
+
+                <div class="form-group">
+                    <label asp-for="faculty.Name">faculty</label>
+                    <select asp-for="faculty.Name" asp-items="@ViewBag.faculty"
+                            class="form-control custom-select" required="">
+                        <option value="">Please select one</option>
+                    </select>
+                    <span asp-validation-for="faculty.Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="Tax">Tax</label>
+                    <input type="text" disabled class="form-control" value="@Model.Tax" />
+                </div>
+
+                <div class="form-group">
+                    <label for="Tax">Basic Salary</label>
+                    <input type="text" disabled class="form-control" value="@Model.BasicSalary" />
+                </div>
+
+                <div class="form-group">
+                    <label for="Tax">Housing</label>
+                    <input type="text" disabled class="form-control" value="@Model.Housing" />
+                </div>
+
+                <div class="form-group">
+                    <label for="Tax">Medical</label>
+                    <input type="text" disabled class="form-control" value="@Model.Medical" />
+                </div>
+
+                <div class="form-group">
+                    <label for="Tax">Transport</label>
+                    <input type="text" disabled class="form-control" value="@Model.Transport" />
+                </div>
+
+                <div class="form-group">
+                    <label for="Tax">Lunch</label>
+                    <input type="text" disabled class="form-control" value="@Model.Lunch" />
+                </div>
+
+                <div class="form-group">
+                    <label for="NetSalary">Net Salary</label>
+                    <input type="text" disabled class="form-control" value="@Model.NetSalary" />
+                </div>
+
+
+
+
+
+
+
+
+
+
+                <button type="submit" class="btn btn-success mr-2">Submit</button>
+                @*<button type="submit" class="btn btn-dark">Cancel</button>*@
+                <a href="Cancel" type="button" class="btn btn-dark">Cancel</a>
+            </form>
+        </div>
+    </div>
+
+</div>
+
