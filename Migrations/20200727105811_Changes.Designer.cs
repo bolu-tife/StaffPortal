@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StaffPortal.Data;
 
 namespace StaffPortal.Migrations
 {
     [DbContext(typeof(StaffPortalDataContext))]
-    partial class StaffPortalDataContextModelSnapshot : ModelSnapshot
+    [Migration("20200727105811_Changes")]
+    partial class Changes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -312,45 +314,6 @@ namespace StaffPortal.Migrations
                     b.ToTable("UserProfiles");
                 });
 
-            modelBuilder.Entity("StaffPortal.Models.Salary", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<double>("BasicSalary");
-
-                    b.Property<string>("EmployeeName");
-
-                    b.Property<double>("Housing");
-
-                    b.Property<double>("Lunch");
-
-                    b.Property<double>("Medical");
-
-                    b.Property<double>("NetSalary");
-
-                    b.Property<double>("Tax");
-
-                    b.Property<double>("Transport");
-
-                    b.Property<int?>("departmentId");
-
-                    b.Property<int?>("facultyId");
-
-                    b.Property<int?>("gradeId");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("departmentId");
-
-                    b.HasIndex("facultyId");
-
-                    b.HasIndex("gradeId");
-
-                    b.ToTable("Salaries");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("StaffPortal.Entities.ApplicationRole")
@@ -431,21 +394,6 @@ namespace StaffPortal.Migrations
                         .WithMany()
                         .HasForeignKey("StateId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("StaffPortal.Models.Salary", b =>
-                {
-                    b.HasOne("StaffPortal.Entities.Department", "department")
-                        .WithMany()
-                        .HasForeignKey("departmentId");
-
-                    b.HasOne("StaffPortal.Entities.Faculty", "faculty")
-                        .WithMany()
-                        .HasForeignKey("facultyId");
-
-                    b.HasOne("StaffPortal.Entities.Grade", "grade")
-                        .WithMany()
-                        .HasForeignKey("gradeId");
                 });
 #pragma warning restore 612, 618
         }

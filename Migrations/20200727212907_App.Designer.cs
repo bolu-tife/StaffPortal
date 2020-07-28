@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StaffPortal.Data;
 
 namespace StaffPortal.Migrations
 {
     [DbContext(typeof(StaffPortalDataContext))]
-    partial class StaffPortalDataContextModelSnapshot : ModelSnapshot
+    [Migration("20200727212907_App")]
+    partial class App
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -139,14 +141,22 @@ namespace StaffPortal.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<string>("Country");
+
+                    b.Property<int>("DepartmentId");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<int>("FacultyId");
+
                     b.Property<string>("FirstName");
 
                     b.Property<string>("LastName");
+
+                    b.Property<int>("LocalId");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -166,12 +176,20 @@ namespace StaffPortal.Migrations
 
                     b.Property<string>("SecurityStamp");
 
+                    b.Property<int>("StateId");
+
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("FacultyId");
+
+                    b.HasIndex("LocalId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -180,6 +198,8 @@ namespace StaffPortal.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("StateId");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -297,8 +317,6 @@ namespace StaffPortal.Migrations
 
                     b.Property<string>("country");
 
-                    b.Property<string>("email");
-
                     b.HasKey("Id");
 
                     b.HasIndex("DepartmentId");
@@ -310,45 +328,6 @@ namespace StaffPortal.Migrations
                     b.HasIndex("StateId");
 
                     b.ToTable("UserProfiles");
-                });
-
-            modelBuilder.Entity("StaffPortal.Models.Salary", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<double>("BasicSalary");
-
-                    b.Property<string>("EmployeeName");
-
-                    b.Property<double>("Housing");
-
-                    b.Property<double>("Lunch");
-
-                    b.Property<double>("Medical");
-
-                    b.Property<double>("NetSalary");
-
-                    b.Property<double>("Tax");
-
-                    b.Property<double>("Transport");
-
-                    b.Property<int?>("departmentId");
-
-                    b.Property<int?>("facultyId");
-
-                    b.Property<int?>("gradeId");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("departmentId");
-
-                    b.HasIndex("facultyId");
-
-                    b.HasIndex("gradeId");
-
-                    b.ToTable("Salaries");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -396,6 +375,29 @@ namespace StaffPortal.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("StaffPortal.Entities.ApplicationUser", b =>
+                {
+                    b.HasOne("StaffPortal.Entities.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StaffPortal.Entities.Faculty", "Faculty")
+                        .WithMany()
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StaffPortal.Entities.Local", "Local")
+                        .WithMany()
+                        .HasForeignKey("LocalId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StaffPortal.Entities.State", "State")
+                        .WithMany()
+                        .HasForeignKey("StateId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("StaffPortal.Entities.Department", b =>
                 {
                     b.HasOne("StaffPortal.Entities.Faculty", "Faculty")
@@ -431,21 +433,6 @@ namespace StaffPortal.Migrations
                         .WithMany()
                         .HasForeignKey("StateId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("StaffPortal.Models.Salary", b =>
-                {
-                    b.HasOne("StaffPortal.Entities.Department", "department")
-                        .WithMany()
-                        .HasForeignKey("departmentId");
-
-                    b.HasOne("StaffPortal.Entities.Faculty", "faculty")
-                        .WithMany()
-                        .HasForeignKey("facultyId");
-
-                    b.HasOne("StaffPortal.Entities.Grade", "grade")
-                        .WithMany()
-                        .HasForeignKey("gradeId");
                 });
 #pragma warning restore 612, 618
         }

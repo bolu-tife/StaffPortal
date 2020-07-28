@@ -10,8 +10,13 @@ using StaffPortal.Data;
 namespace StaffPortal.Migrations
 {
     [DbContext(typeof(StaffPortalDataContext))]
+<<<<<<< HEAD:Migrations/20200727105811_Changes.Designer.cs
+    [Migration("20200727105811_Changes")]
+    partial class Changes
+=======
     [Migration("20200726174805_logggss")]
     partial class logggss
+>>>>>>> 3e520b144aec568b5be9dbead60797cdcbaac645:Migrations/20200726174805_logggss.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
