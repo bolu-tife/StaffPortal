@@ -30,19 +30,46 @@ namespace StaffPortal.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var grade = await _grade.GetAll();
+           /* var grade = await _grade.GetAll();
             var gradeList = grade.Select(a => new SelectListItem()
             {
                 Value = a.Id.ToString(),
                 Text = a.Level.ToString()                 
             });
-
-            var faculty = await _faculty.GetAll();
-            var facultyList = faculty.Select(g => new SelectListItem()
+            */
+            var gradeName = await _grade.GetAll();
+            var gradeListName = gradeName.Select(g => new SelectListItem()
             {
                 Value = g.Id.ToString(),
-                Text = g.Name
+                Text = g.GradeName
             });
+            var gradeLevel = await _grade.GetAll();
+            var gradeListLevel = gradeLevel.Select(g => new SelectListItem()
+            {
+                Value = g.Id.ToString(),
+                Text = g.Level.ToString()
+            });
+            var gradeStep = await _grade.GetAll();
+            var gradeListStep = gradeStep.Select(g => new SelectListItem()
+            {
+                Value = g.Id.ToString(),
+                Text = g.Step.ToString()
+            });
+
+            ViewBag.gradeName = gradeListName;
+            ViewBag.gradeLevel = gradeListLevel;
+            ViewBag.gradeStep = gradeListStep;
+
+
+            var fac = await _faculty.GetAll();
+            var FacList = fac.Select(f => new SelectListItem()
+            {
+                Value = f.Id.ToString(),
+                Text = f.Name
+            });
+
+
+            ViewBag.fac = FacList;
 
             var dept = await _dept.GetAll();
             var deptList = dept.Select(g => new SelectListItem()
@@ -51,8 +78,8 @@ namespace StaffPortal.Controllers
                 Text = g.DeptName
             });
             ViewBag.dept = deptList;
-            ViewBag.faculty = facultyList;
-            ViewBag.grade = gradeList;
+            //ViewBag.faculty = facultyList;
+            //ViewBag.grade = gradeList;
             
             return View(new Salary());
         }
@@ -60,7 +87,7 @@ namespace StaffPortal.Controllers
         [HttpPost]
         public IActionResult Index(Salary salary)
         {
-                 if(salary.grade.Level == 6)
+            if(ViewBag.gradeLevel == 6)
             {
 
                 salary.BasicSalary = 1000;

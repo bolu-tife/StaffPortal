@@ -14,6 +14,7 @@ namespace StaffPortal.Entities
         public int Id { get; set; }
         public string DeptCode { get; set; }
         public string DeptName { get; set; }
+        public int FacultyId { get; set; }
         public string CreatedBy { get; set; }
         private DateTime? dateCreated = null;
         public DateTime DateCreated

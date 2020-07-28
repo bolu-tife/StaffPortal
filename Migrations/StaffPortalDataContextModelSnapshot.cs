@@ -15,7 +15,7 @@ namespace StaffPortal.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -198,7 +198,7 @@ namespace StaffPortal.Migrations
 
                     b.Property<string>("DeptName");
 
-                    b.Property<int?>("FacultyId");
+                    b.Property<int>("FacultyId");
 
                     b.HasKey("Id");
 
@@ -285,9 +285,9 @@ namespace StaffPortal.Migrations
 
                     b.Property<int>("DepartmentId");
 
-                    b.Property<int>("FacultyId");
-
                     b.Property<string>("FirstName");
+
+                    b.Property<int>("GradeId");
 
                     b.Property<string>("LastName");
 
@@ -303,7 +303,7 @@ namespace StaffPortal.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.HasIndex("FacultyId");
+                    b.HasIndex("GradeId");
 
                     b.HasIndex("LocalId");
 
@@ -320,7 +320,13 @@ namespace StaffPortal.Migrations
 
                     b.Property<double>("BasicSalary");
 
+                    b.Property<int?>("DepartmentId");
+
+                    b.Property<int>("DeptId");
+
                     b.Property<string>("EmployeeName");
+
+                    b.Property<int>("GradeId");
 
                     b.Property<double>("Housing");
 
@@ -334,19 +340,11 @@ namespace StaffPortal.Migrations
 
                     b.Property<double>("Transport");
 
-                    b.Property<int?>("departmentId");
-
-                    b.Property<int?>("facultyId");
-
-                    b.Property<int?>("gradeId");
-
                     b.HasKey("ID");
 
-                    b.HasIndex("departmentId");
+                    b.HasIndex("DepartmentId");
 
-                    b.HasIndex("facultyId");
-
-                    b.HasIndex("gradeId");
+                    b.HasIndex("GradeId");
 
                     b.ToTable("Salaries");
                 });
@@ -400,7 +398,8 @@ namespace StaffPortal.Migrations
                 {
                     b.HasOne("StaffPortal.Entities.Faculty", "Faculty")
                         .WithMany()
-                        .HasForeignKey("FacultyId");
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("StaffPortal.Entities.Local", b =>
@@ -417,9 +416,9 @@ namespace StaffPortal.Migrations
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("StaffPortal.Entities.Faculty", "Faculty")
+                    b.HasOne("StaffPortal.Entities.Grade", "grade")
                         .WithMany()
-                        .HasForeignKey("FacultyId")
+                        .HasForeignKey("GradeId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("StaffPortal.Entities.Local", "Local")
@@ -435,17 +434,14 @@ namespace StaffPortal.Migrations
 
             modelBuilder.Entity("StaffPortal.Models.Salary", b =>
                 {
-                    b.HasOne("StaffPortal.Entities.Department", "department")
+                    b.HasOne("StaffPortal.Entities.Department", "Department")
                         .WithMany()
-                        .HasForeignKey("departmentId");
+                        .HasForeignKey("DepartmentId");
 
-                    b.HasOne("StaffPortal.Entities.Faculty", "faculty")
+                    b.HasOne("StaffPortal.Entities.Grade", "Grade")
                         .WithMany()
-                        .HasForeignKey("facultyId");
-
-                    b.HasOne("StaffPortal.Entities.Grade", "grade")
-                        .WithMany()
-                        .HasForeignKey("gradeId");
+                        .HasForeignKey("GradeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

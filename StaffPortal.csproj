@@ -40,7 +40,4 @@
     <Folder Include="Views\Demo\" />
     <Folder Include="Views\UserProfile\" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Remove="Views\Department\Create.cshtml" />
-  </ItemGroup>
 </Project><!-- <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" /> -->

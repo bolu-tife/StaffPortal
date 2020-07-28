@@ -55,7 +55,7 @@ namespace StaffPortal.Services
         public async Task<IEnumerable<Department>> GetAll() //GetAll
         {
 
-            return await _context.Departments.ToListAsync();
+            return await _context.Departments.Include(f => f.Faculty).ToListAsync();
         }
 
         public async Task<Department> GetById(int Id) //GetById

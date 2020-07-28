@@ -10,11 +10,17 @@ namespace StaffPortal.Models
 
         public string  EmployeeName { get; set; }
 
-        public Department department { get; set; }
+        public Department Department { get; set; }
 
-        public Grade grade { get; set; }
+        public  int DeptId { get; set; }
 
-        public Faculty faculty { get; set; }
+        public Grade Grade { get; set; }
+
+        public int GradeId { get; set; }
+
+        //public Faculty Faculty { get; set; }
+
+        //public int FacultyID { get; set; }
 
         public double BasicSalary { get; set; }
 
@@ -31,7 +37,8 @@ namespace StaffPortal.Models
         public double NetSalary { get; set; }
 
                                            /*
-                                                   public double Housing
+                                   
+        public double Housing
                                                    {
                                                        get
                                                        {
