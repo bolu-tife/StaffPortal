@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace StaffPortal.Controllers
+namespace BookWeb.Controllers
 {
     //[Authorize(Roles = "ADMINS")]
 
@@ -77,7 +77,7 @@ namespace StaffPortal.Controllers
             {
                 if(await _userManager.IsInRoleAsync(user, role.Name))
                 {
-                    model.Users.Add(user.UserName);  
+                    model.Users.Add(user.FullName);  
                 }
                 
             }

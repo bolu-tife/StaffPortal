@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StaffPortal.Data;
 
 namespace StaffPortal.Migrations
 {
     [DbContext(typeof(StaffPortalDataContext))]
-    partial class StaffPortalDataContextModelSnapshot : ModelSnapshot
+    [Migration("20200718153334_State")]
+    partial class State
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -247,7 +249,7 @@ namespace StaffPortal.Migrations
                     b.ToTable("Grades");
                 });
 
-            modelBuilder.Entity("StaffPortal.Entities.Local", b =>
+            modelBuilder.Entity("StaffPortal.Entities.LGA", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -255,13 +257,9 @@ namespace StaffPortal.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("StatesId");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("StatesId");
-
-                    b.ToTable("Locals");
+                    b.ToTable("LGA");
                 });
 
             modelBuilder.Entity("StaffPortal.Entities.State", b =>
@@ -274,7 +272,7 @@ namespace StaffPortal.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("State");
+                    b.ToTable("States");
                 });
 
             modelBuilder.Entity("StaffPortal.Entities.UserProfile", b =>
@@ -289,9 +287,9 @@ namespace StaffPortal.Migrations
 
                     b.Property<string>("FirstName");
 
-                    b.Property<string>("LastName");
+                    b.Property<int>("LGAId");
 
-                    b.Property<int>("LocalId");
+                    b.Property<string>("LastName");
 
                     b.Property<int>("StateId");
 
@@ -305,7 +303,7 @@ namespace StaffPortal.Migrations
 
                     b.HasIndex("FacultyId");
 
-                    b.HasIndex("LocalId");
+                    b.HasIndex("LGAId");
 
                     b.HasIndex("StateId");
 
@@ -364,13 +362,6 @@ namespace StaffPortal.Migrations
                         .HasForeignKey("FacultyId");
                 });
 
-            modelBuilder.Entity("StaffPortal.Entities.Local", b =>
-                {
-                    b.HasOne("StaffPortal.Entities.State", "States")
-                        .WithMany("Local")
-                        .HasForeignKey("StatesId");
-                });
-
             modelBuilder.Entity("StaffPortal.Entities.UserProfile", b =>
                 {
                     b.HasOne("StaffPortal.Entities.Department", "Department")
@@ -383,9 +374,9 @@ namespace StaffPortal.Migrations
                         .HasForeignKey("FacultyId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("StaffPortal.Entities.Local", "Local")
+                    b.HasOne("StaffPortal.Entities.LGA", "LGA")
                         .WithMany()
-                        .HasForeignKey("LocalId")
+                        .HasForeignKey("LGAId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("StaffPortal.Entities.State", "State")
