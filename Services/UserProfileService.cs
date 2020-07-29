@@ -20,84 +20,91 @@ namespace StaffPortal.Services
             _userManager = userManager;
         }
 
-        public void Add(UserProfile userprofile) //Add
-        {
-              _context.Add(userprofile);
-           
-            _context.SaveChanges();
-        }
-        public async Task<bool> AddAsync(UserProfile userprofile) //AddAsync
-        {
-            try
-            {
-                await _context.AddAsync(userprofile);
-               
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-            return true;
-        }
-
-        public async Task<bool> Delete(int Id)//Delete
-        {
-            // find the entity/object
-            var _userprofile = await _context.UserProfiles.FindAsync(Id);
-
-            if(_userprofile != null)
-            {
-                _context.UserProfiles.Remove(_userprofile);
-                _context.SaveChanges();
-                return true;
-            }
-
-            return false;
-        }
-        
-        //public async Task<string> GetEmail() //GetById
+        //public void Add(UserProfile userprofile) //Add
         //{
-        //    _userManager userm;
-        //    ApplicationUser user = await _userManager.FindByEmailAsync( userm.Email);
-        //    return user.Email;
+        //      _context.Add(userprofile);
+
+        //    _context.SaveChanges();
+        //}
+        //public async Task<bool> AddAsync(UserProfile userprofile) //AddAsync
+        //{
+        //    try
+        //    {
+        //        await _context.AddAsync(userprofile);
+
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return false;
+        //    }
+        //    return true;
         //}
 
-        public async Task<IEnumerable<UserProfile>> GetAll() //GetAll
+        //public async Task<bool> Delete(int Id)//Delete
+        //{
+        //    // find the entity/object
+        //    var _userprofile = await _context.UserProfiles.FindAsync(Id);
+
+        //    if(_userprofile != null)
+        //    {
+        //        _context.UserProfiles.Remove(_userprofile);
+        //        _context.SaveChanges();
+        //        return true;
+        //    }
+
+        //    return false;
+        //}
+
+        ////public async Task<string> GetEmail() //GetById
+        ////{
+        ////    _userManager userm;
+        ////    ApplicationUser user = await _userManager.FindByEmailAsync( userm.Email);
+        ////    return user.Email;
+        ////}
+
+        //public async Task<IEnumerable<UserProfile>> GetAll() //GetAll
+        //{
+
+        //    return await _userManager.Include(s => s.NewState).Include(f => f.Faculty).Include(d => d.Department).ToListAsync();
+        //}
+
+        //public async Task<UserProfile> GetById(int Id) //GetById
+        //{
+        //    var _userprofile = await _context.UserProfiles.FindAsync(Id);
+
+        //    return _userprofile;
+        //}
+        public async Task<bool> Update(ApplicationUser Apuser) //Update
         {
 
-            return await _context.UserProfiles.Include(s => s.State).Include(f => f.Faculty).Include(d => d.Department).ToListAsync();
-        }
+            //ApplicationUser _userprofile = await _userManager.FindByIdAsync(Apuser.Id);
+            //ApplicationUser x = await _userManager.FindByEmailAsync(Apuser.Email);
+            ////var _userprofile = await _context.AspNetUsers.FindAsync(Apuser.Id);
+            //if (_userprofile != null)
+            //{
+            //    _userprofile.FirstName = Apuser.FirstName;
+            //    _userprofile.LastName = Apuser.LastName;
+            //    _userprofile.Email = Apuser.Email;
+            //    //_userprofile. = Apuser.Email;
+            //    //_userprofile.FacultyId = Apuser.FacultyId;
+            //    //_userprofile.DepartmentId = Apuser.DepartmentId;
+            //    //_userprofile.StateId = Apuser.StateId;
+            //    //_userprofile.LocalId = Apuser.LocalId;
+            //    //_userprofile.country = Apuser.country;
 
-        public async Task<UserProfile> GetById(int Id) //GetById
-        {
-            var _userprofile = await _context.UserProfiles.FindAsync(Id);
 
-            return _userprofile;
-        }
-        public async Task<bool> Update(UserProfile userprofile) //Update
-        {
-            var _userprofile = await _context.UserProfiles.FindAsync(userprofile.Id);
-            if (_userprofile != null)
-            {
-                _userprofile.FirstName = userprofile.FirstName;
-                _userprofile.LastName = userprofile.LastName;
-                _userprofile.email = userprofile.email;
-                _userprofile.FacultyId = userprofile.FacultyId;
-                _userprofile.DepartmentId = userprofile.DepartmentId;
-                _userprofile.StateId = userprofile.StateId;
-                _userprofile.LocalId = userprofile.LocalId;
-                _userprofile.country = userprofile.country;
-                
-
-                await _context.SaveChangesAsync();
-                return true;
-            }
+            await _context.SaveChangesAsync();
+            //    return true;
+            //}
 
             return false;
 
         }
-       
 
+        public Task<IEnumerable<UserProfile>> GetAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

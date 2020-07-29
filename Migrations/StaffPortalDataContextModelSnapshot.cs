@@ -297,8 +297,6 @@ namespace StaffPortal.Migrations
 
                     b.Property<string>("country");
 
-                    b.Property<string>("email");
-
                     b.HasKey("Id");
 
                     b.HasIndex("DepartmentId");

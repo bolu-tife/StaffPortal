@@ -1,10 +1,6 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using StaffPortal.Entities
-@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
-@model StaffPortal.Entities.ApplicationUser
+﻿@model StaffPortal.Entities.UserProfile
 @{
-    ViewData["Title"] = "User Profile";
+    ViewData["Title"] = "Edit User Profile";
 }
 <!-- ============================================================== -->
 
@@ -22,35 +18,11 @@
 <div class="row">
     <div class="col-md-4 col-xs-12">
         <div class="white-box">
-            <div class="user-bg">
-                <img width="100%" alt="user" src="~/images/big/img1.jpg">
-                <div class="overlay-box">
-                    <div class="user-content">
-                        <a href="javascript:void(0)"><img src="images/users/genu.jpg" class="thumb-lg img-circle" alt="img"></a>
-                        <h4 class="text-white">@UserManager.GetUserName(User)</h4>
-                        <h5 class="text-white">.</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="user-btm-box">
-                <div class="col-md-4 col-sm-4 text-center">
-                    <p class="text-purple"><i class="ti-facebook"></i></p>
-                    <h1>258</h1>
-                </div>
-                <div class="col-md-4 col-sm-4 text-center">
-                    <p class="text-blue"><i class="ti-twitter"></i></p>
-                    <h1>125</h1>
-                </div>
-                <div class="col-md-4 col-sm-4 text-center">
-                    <p class="text-danger"><i class="ti-dribbble"></i></p>
-                    <h1>556</h1>
-                </div>
-            </div>
-            <hr />
+           
 
             <div class="row">
 
-                <!-- <div class="col-md-12 col-xs-4">
+                 <div class="col-md-12 col-xs-4">
                     <div class="white-box">
                         <h3 class="form-group">Salary Structure</h3>
                         <form class="form-horizontal form-material">
@@ -76,123 +48,36 @@
 
 
                     </div>
-                </div> -->
+                </div> 
 
             </div>
         </div>
     </div>
 
     <div class="col-md-8 col-xs-12">
-        <div class="white-box">
-            <form asp-action="Index" method="post" class="form-horizontal form-material">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label class="col-md-12" asp-for="Email"> Email</label>
-                    <div class="col-md-12">
-                        <input type="text" asp-for="Email" class="form-control form-control-line" readonly>
-                    </div>
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-12" asp-for="UserName"> UserName</label>
-                    <div class="col-md-12">
-                        <input type="text" asp-for="UserName" class="form-control form-control-line" placeholder="Enter UserName">
-                    </div>
-                    <span asp-validation-for="UserName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-12" asp-for="FirstName"> FirstName</label>
-                    <div class="col-md-12">
-                        <input type="text" asp-for="FirstName" class="form-control form-control-line" placeholder="Enter FirstName">
-                    </div>
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-12" asp-for="LastName"> LastName</label>
-                    <div class="col-md-12">
-                        <input type="text" asp-for="LastName" class="form-control form-control-line" placeholder="Enter LastName">
-                    </div>
-                    <span asp-validation-for="LastName" class="text-danger"></span>
-                </div>
-
-
-                <!--
+        <div class="col-md-12 col-xs-4">
+            <div class="white-box">
+                <h3 class="form-group">Work Structure</h3>
+                <form class="form-horizontal form-material">
                     <div class="form-group">
-                        <label class="col-md-12" asp-for="Country"> Country</label>
-                        <div class="col-md-12">
-                            <select asp-for="Country" class="form-control form-control-line">
-                                <option value="Nigeria">Nigeria</option>
-                            </select>
-
+                        <label class="col-md-4">Department</label>
+                        <div class="col-md-8">
+                            <input type="text" value="Data from admin db" class="form-control form-control-line" readonly>
                         </div>
-                        <span asp-validation-for="Country" class="text-danger"></span>
                     </div>
-
-                   <div class="form-group">
-                        <label class="col-md-12" asp-for="FacultyId">Faculty</label>
-                        <div class="col-md-12">
-                            <select asp-for="FacultyId" asp-items="ViewBag.faculty"
-                                    class="form-control custom-select" required="">
-                                <option value="">Please select one</option>
-                            </select>
-                        </div>
-                        <span asp-validation-for="FacultyId" class="text-danger"></span>
-
-                    </div>
-
                     <div class="form-group">
-                        <label class="col-md-12" asp-for="DepartmentId">Department</label>
-                        <div class="col-md-12">
-                            <select asp-for="DepartmentId" asp-items="ViewBag.department"
-                                    class="form-control custom-select" required="">
-                                <option value="">Please select one</option>
-                            </select>
+                        <label class="col-md-4">Faculty</label>
+                        <div class="col-md-8">
+                            <input type="text" value="Data from admin db" class="form-control form-control-line" readonly>
                         </div>
-                        <span asp-validation-for="DepartmentId" class="text-danger"></span>
-
                     </div>
-                  <div class="form-group">
-                        <label class="col-md-12" asp-for="StateId"> State</label>
-                        <div class="col-md-12">
-                            <select asp-for="StateId" class="form-control" id="StateId"
-                                    asp-items="(new SelectList(ViewBag.ListofStates, "Id", "Name"))">
-                                <option>Select State Name</option>
-                            </select>
-                        </div>
-                        <span asp-validation-for="StateId" class="text-danger"></span>
-                    </div>
+                   
+                </form>
 
-                    <div class="form-group">
-                        <label asp-for="LocalId"> Local Government</label>
-                        <select asp-for="LocalId" class="form-control" id="LocalId"
-                                asp-items="(new SelectList(string.Empty, "Id", "Name"))"></select>
-                        <span asp-validation-for="LocalId" class="text-danger"></span>
-                    </div>
-    -->
 
-                <button type="submit" class="btn btn-success mr-2">Submit</button>
-            </form>
+            </div>
         </div>
+
     </div>
 </div>
-
-
-<script src="~/Login/vendor/jquery/jquery-3.2.1.min.js"></script>
-<script>
-    $(function () {
-        $("#StateId").change(function () {
-            var url = '@Url.Content("~/")' + "UserProfile/GetLocal";
-            var ddlsource = "#StateId";
-            $.getJSON(url, { id: $(ddlsource).val() }, function (data) {
-                var items = '';
-                $("#LocalId").empty();
-                $.each(data, function (i, row) {
-                    items += "<option value='" + row.value + "'>" + row.text + "</option>";
-                });
-                $("#LocalId").html(items);
-            })
-        });
-    });
-
-</script>
 

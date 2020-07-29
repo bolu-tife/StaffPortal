@@ -20,13 +20,13 @@ namespace StaffPortal.Controllers
         private readonly IAccount _account;
 
         private readonly SignInManager<ApplicationUser> _signInManager;
-        
 
-        public AccountController(IAccount account, SignInManager<ApplicationUser> signInManager)
+        //private readonly UserManager<ApplicationUser> _userManager;
+        public AccountController(IAccount account, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _account = account;
             _signInManager = signInManager;
-          
+            //_userManager = userManager;
 
         }
         public IActionResult Login()
@@ -54,20 +54,20 @@ namespace StaffPortal.Controllers
 
 
         }
-        public async Task<IActionResult> UserProfile()
-        {
+        //public async Task<IActionResult> UserProfile()
+        //{
 
-            var model = await _account.GetAll();
+        //    var model = await _account.GetAll();
 
-            if (model != null)
-                return View(model);
-            return View();
-        }
+        //    if (model != null)
+        //        return View(model);
+        //    return View();
+        //}
         
-        public IActionResult Signup()
-        {
-            return View();
-        }
+        //public IActionResult Signup()
+        //{
+        //    return View();
+        //}
 
        
 
@@ -83,19 +83,53 @@ namespace StaffPortal.Controllers
             var sign = await _account.CreateUser(user, signupmodel.Password);
             if (sign)
             {
-                //Alert("Account Created successfully", NotificationType.success);
+                
                 return RedirectToAction("Index", "Home");
 
             }
             Alert("Account not created!", NotificationType.error);
             return View();
-            //ApplicationUser user = new ApplicationUser();
-
-
+        
 
         }
 
+        //[HttpPost]
+        //public async Task<IActionResult> Index(ApplicationUser userdetails)
+        //{
+        //    ApplicationUser _userprofile = await _userManager.FindByEmailAsync(userdetails.Email);
+        //    if (_userprofile != null)
+        //    {
+        //        _userprofile.FirstName = userdetails.FirstName;
+        //        _userprofile.LastName = userdetails.LastName;
+        //    }
+        //    var x = await _userManager.UpdateAsync(_userprofile);
+        //    if (x.Succeeded)
+        //    {
+        //        return RedirectToAction("Index", "Home");
+        //    }
+        //    else
+        //    {
+        //        //ApplicationUser appUser = _userManager.FindByIdAsync(userid).Result;
+        //        return View(userdetails);
+        //    }
+        //}
 
+
+
+        //[HttpGet]
+        //public IActionResult Index()
+        //{
+        //    var userid = _userManager.GetUserId(User);
+        //    if (userid == null)
+        //    {
+        //        return RedirectToAction("Login", "Account");
+        //    }
+        //    else
+        //    {
+        //        ApplicationUser appUser = _userManager.FindByIdAsync(userid).Result;
+        //        return View(appUser);
+        //    }
+        //}
 
         [HttpGet]
         public async Task<IActionResult> LogOut()

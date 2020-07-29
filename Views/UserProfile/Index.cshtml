@@ -1,8 +1,5 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using StaffPortal.Entities
-@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
-@model IEnumerable<StaffPortal.Entities.UserProfile>
+﻿
+@model StaffPortal.Entities.ApplicationUser
 @{
     ViewData["Title"] = "User Profile";
 }
@@ -19,125 +16,81 @@
     <!-- /.col-lg-12 -->
 </div>
 <!-- row -->
-<div class="row">
-    <div class="col-md-4 col-xs-12">
-        <div class="white-box">
-            <div class="user-bg">
-                <img width="100%" alt="user" src="~/images/big/img1.jpg">
-                <div class="overlay-box">
-                    <div class="user-content">
-                        <a href="javascript:void(0)"><img src="images/users/genu.jpg" class="thumb-lg img-circle" alt="img"></a>
-                        <h4 class="text-white">@UserManager.GetUserName(User)</h4>
-                        <h5 class="text-white">.</h5>
-                    </div>
-                </div>
+
+    <div class="table-responsive">
+        <form asp-action="Index" method="post" class="mt-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserName"> UserName</label>
+                <input type="text" asp-for="UserName" class="form-control" placeholder="Enter Faculty Name">
+                <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
-            <div class="user-btm-box">
-                <div class="col-md-4 col-sm-4 text-center">
-                    <p class="text-purple"><i class="ti-facebook"></i></p>
-                    <h1>258</h1>
-                </div>
-                <div class="col-md-4 col-sm-4 text-center">
-                    <p class="text-blue"><i class="ti-twitter"></i></p>
-                    <h1>125</h1>
-                </div>
-                <div class="col-md-4 col-sm-4 text-center">
-                    <p class="text-danger"><i class="ti-dribbble"></i></p>
-                    <h1>556</h1>
-                </div>
+            <div class="form-group">
+                <label asp-for="FirstName"> FirstName</label>
+                <input type="text" asp-for="FirstName" class="form-control" placeholder="Enter Faculty Name" required="">
+                <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
-            <hr />
-
-             <div class="row"> 
-
-            <div class="col-md-12 col-xs-4">
-                <div class="white-box">
-                    <h3 class="form-group">Salary Structure</h3>
-                    <form class="form-horizontal form-material">
-                        <div class="form-group">
-                            <label class="col-md-4">Grade Name</label>
-                            <div class="col-md-8">
-                                <input type="text" value="Data from admin db" class="form-control form-control-line" readonly>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4">Level</label>
-                            <div class="col-md-8">
-                                <input type="text" value="Data from admin db" class="form-control form-control-line" readonly>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4">Step</label>
-                            <div class="col-md-8">
-                                <input type="text" value="Data from admin db" class="form-control form-control-line" readonly>
-                            </div>
-                        </div>
-                    </form>
-
-
-                </div>
+            <div class="form-group">
+                <label asp-for="LastName"> LastName</label>
+                <input type="text" asp-for="LastName" class="form-control" placeholder="Enter Faculty Name" required="">
+                <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
 
-        </div>
-        </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber"> PhoneNumber</label>
+                <input type="text" asp-for="PhoneNumber" class="form-control" placeholder="Enter Faculty Name">
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"> Email</label>
+                <input type="text" asp-for="Email" class="form-control"  readonly>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <!--  <div class="form-group">
+                    <label asp-for="SecurityStamp"> SecurityStamp</label>
+                    <input type="text" asp-for="SecurityStamp" class="form-control" placeholder="Enter Faculty Name" required="">
+                    <span asp-validation-for="SecurityStamp" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="NormalizedEmail"> NormalizedEmail</label>
+                    <input type="text" asp-for="NormalizedEmail" class="form-control" placeholder="Enter Faculty Name" required="">
+                    <span asp-validation-for="NormalizedEmail" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NormalizedUserName"> SecurityStamp</label>
+                    <input type="text" asp-for="NormalizedUserName" class="form-control" placeholder="Enter Faculty Name" required="">
+                    <span asp-validation-for="NormalizedUserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EmailConfirmed"> EmailConfirmed</label>
+                    <input type="text" asp-for="EmailConfirmed" class="form-control" placeholder="Enter Faculty Name" required="">
+                    <span asp-validation-for="EmailConfirmed" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PasswordHash"> PasswordHash</label>
+                    <input type="text" asp-for="PasswordHash" class="form-control" placeholder="Enter Faculty Name" required="">
+                    <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ConcurrencyStamp"> SecurityStamp</label>
+                    <input type="text" asp-for="ConcurrencyStamp" class="form-control" placeholder="Enter Faculty Name" required="">
+                    <span asp-validation-for="ConcurrencyStamp" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SecurityStamp"> SecurityStamp</label>
+                    <input type="text" asp-for="SecurityStamp" class="form-control" placeholder="Enter Faculty Name" required="">
+                    <span asp-validation-for="SecurityStamp" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SecurityStamp"> SecurityStamp</label>
+                    <input type="text" asp-for="SecurityStamp" class="form-control" placeholder="Enter Faculty Name" required="">
+                    <span asp-validation-for="SecurityStamp" class="text-danger"></span>
+                </div>
+    -->
+            <button type="submit" class="btn btn-success mr-2">Submit</button>
+            <a href="Cancel" type="button" class="btn btn-dark">Cancel</a>
+        </form>
     </div>
+
     
-    <div class="col-md-8 col-xs-12">
-        <div class="white-box">
-            <form class="form-horizontal form-material">
-                <div class="form-group">
-                    <label class="col-md-12">FirstName</label>
-                    <div class="col-md-12">
-                        <input type="text" value="@UserManager.GetUserName(User)" class="form-control form-control-line" readonly>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-12">LastName</label>
-                    <div class="col-md-12">
-                        <input type="text" value="Data from admin db" class="form-control form-control-line" readonly>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="example-email" class="col-md-12">Email</label>
-                    <div class="col-md-12">
-                        <input type="email" value="Data from admin db" class="form-control form-control-line" name="example-email" id="example-email">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-12">Local Government</label>
-                    <div class="col-md-12">
-                        <input type="text" value="Data from admin db" class="form-control form-control-line" readonly>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-12">State</label>
-                    <div class="col-md-12">
-                        <input type="text" value="Data from admin db" class="form-control form-control-line" readonly>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-12">Country</label>
-                    <div class="col-md-12">
-                        <input type="text" value="Data from admin db" class="form-control form-control-line" readonly>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-12">Department</label>
-                    <div class="col-md-12">
-                        <input type="text" value="Data from admin db" class="form-control form-control-line" readonly>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-12">Faculty</label>
-                    <div class="col-md-12">
-                        <input type="text" value="@UserManager.GetUserName(User)" class="form-control form-control-line" readonly>
-                    </div>
-                </div>
-
-            </form>
-        </div>
-    </div>
-</div>
-    
-
-
