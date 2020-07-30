@@ -9,7 +9,6 @@ using StaffPortal.Interface;
 using StaffPortal.Entities;
 using StaffPortal.Enums;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace StaffPortal.Controllers
 {
@@ -17,14 +16,12 @@ namespace StaffPortal.Controllers
 
     {
         private IDepartment _department;
-        private IFaculty _faculty;
 
         private readonly UserManager<ApplicationUser> _userManager;
-        public DepartmentController(IDepartment department,IFaculty faculty, UserManager<ApplicationUser> userManager)
+        public DepartmentController(IDepartment department, UserManager<ApplicationUser> userManager)
         {
             _department = department;
             _userManager = userManager;
-            _faculty = faculty;
         }
 
         public async Task<IActionResult> Index()
@@ -36,18 +33,8 @@ namespace StaffPortal.Controllers
             return View();
         }
         [HttpGet]
-        public async Task <IActionResult> Create()
+        public IActionResult Create()
         {
-            var fac = await _faculty.GetAll();
-            var FacList = fac.Select(f => new SelectListItem()
-            {
-                Value = f.Id.ToString(),
-                Text = f.Name
-            });
-
-
-            ViewBag.fac = FacList;
-
 
             return View();
         }
@@ -67,12 +54,12 @@ namespace StaffPortal.Controllers
 
             if (createAepartment)
             {
-                Alert("Department created successfully😃.", NotificationType.success);
+                Alert("Aepartment created successfully😃.", NotificationType.success);
                 return RedirectToAction("Index");
             }
             else
             {
-                Alert("Department not created😔!", NotificationType.error);
+                Alert("Aepartment not created😔!", NotificationType.error);
             }
 
 
@@ -88,16 +75,6 @@ namespace StaffPortal.Controllers
             {
                 return RedirectToAction("Index");
             }
-
-             var fac = await _faculty.GetAll();
-            var FacList = fac.Select(f => new SelectListItem()
-            {
-                Value = f.Id.ToString(),
-                Text = f.Name
-            });
-
-
-            ViewBag.fac = FacList;
             return View(editDepartment);
         }
 
@@ -110,12 +87,12 @@ namespace StaffPortal.Controllers
 
             if (editAepartment && ModelState.IsValid)
             {
-                Alert("Department edited successfully😃.", NotificationType.success);
+                Alert("Aepartment edited successfully😃.", NotificationType.success);
                 return RedirectToAction("Index");
             }
             else
             {
-                Alert("Department not edited😔.", NotificationType.error);
+                Alert("Aepartment not edited😔.", NotificationType.error);
             }
             return View();
         }

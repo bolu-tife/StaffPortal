@@ -16,15 +16,12 @@ namespace StaffPortal.Entities
         public Local Local { get; set; }
         public string country { get; set; }
         public int DepartmentId { get; set; }
+        public int FacultyId { get; set; }
         public int StateId { get; set; }
         public int LocalId { get; set; }
-        public int GradeId { get; set; }
+
         public Department Department { get; set; }
-        /*
-          public Faculty Faculty{get; set;}
-          public int FacultyId {get; set; }
-         */
-        public Grade grade { get; set; }
+        public Faculty Faculty { get; set; }
 
         
 

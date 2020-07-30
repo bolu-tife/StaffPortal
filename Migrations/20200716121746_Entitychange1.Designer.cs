@@ -3,19 +3,21 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StaffPortal.Data;
 
 namespace StaffPortal.Migrations
 {
     [DbContext(typeof(StaffPortalDataContext))]
-    partial class StaffPortalDataContextModelSnapshot : ModelSnapshot
+    [Migration("20200716121746_Entitychange1")]
+    partial class Entitychange1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -152,6 +154,8 @@ namespace StaffPortal.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
+                    b.Property<string>("MiddleName");
+
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
 
@@ -247,131 +251,6 @@ namespace StaffPortal.Migrations
                     b.ToTable("Grades");
                 });
 
-            modelBuilder.Entity("StaffPortal.Entities.Local", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name");
-
-                    b.Property<int?>("StatesId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StatesId");
-
-                    b.ToTable("Locals");
-                });
-
-            modelBuilder.Entity("StaffPortal.Entities.State", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("State");
-                });
-
-            modelBuilder.Entity("StaffPortal.Entities.UserProfile", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("DepartmentId");
-
-                    b.Property<int>("FacultyId");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<int>("LocalId");
-
-                    b.Property<int>("StateId");
-
-                    b.Property<string>("country");
-
-                    b.Property<string>("email");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DepartmentId");
-
-                    b.HasIndex("FacultyId");
-
-                    b.HasIndex("LocalId");
-
-                    b.HasIndex("StateId");
-
-                    b.ToTable("UserProfiles");
-                });
-
-<<<<<<< HEAD
-            modelBuilder.Entity("StaffPortal.Models.Salary", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ApplicationUserId");
-
-                    b.Property<string>("ApplicationUserId1");
-
-                    b.Property<double>("BasicSalary");
-
-                    b.Property<int>("GradeId");
-
-                    b.Property<double>("Housing");
-
-                    b.Property<string>("HousingItemType");
-
-                    b.Property<double>("HousingPercent");
-
-                    b.Property<double>("Lunch");
-
-                    b.Property<string>("LunchItemType");
-
-                    b.Property<double>("LunchPercent");
-
-                    b.Property<double>("Medical");
-
-                    b.Property<string>("MedicalItemType");
-
-                    b.Property<double>("MedicalPercent");
-
-                    b.Property<double>("NetSalary");
-
-                    b.Property<string>("PayItemType");
-
-                    b.Property<double>("Tax");
-
-                    b.Property<string>("TaxItemType");
-
-                    b.Property<double>("TaxPercent");
-
-                    b.Property<double>("Transport");
-
-                    b.Property<string>("TransportItemType");
-
-                    b.Property<double>("TransportPercent");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("ApplicationUserId1");
-
-                    b.HasIndex("GradeId");
-
-                    b.ToTable("Salaries");
-                });
-
-=======
->>>>>>> 61a5d3834b28469f6a29f0b819480ae1346cc0a4
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("StaffPortal.Entities.ApplicationRole")
@@ -423,51 +302,6 @@ namespace StaffPortal.Migrations
                         .WithMany()
                         .HasForeignKey("FacultyId");
                 });
-
-            modelBuilder.Entity("StaffPortal.Entities.Local", b =>
-                {
-                    b.HasOne("StaffPortal.Entities.State", "States")
-                        .WithMany("Local")
-                        .HasForeignKey("StatesId");
-                });
-
-            modelBuilder.Entity("StaffPortal.Entities.UserProfile", b =>
-                {
-                    b.HasOne("StaffPortal.Entities.Department", "Department")
-                        .WithMany()
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("StaffPortal.Entities.Faculty", "Faculty")
-                        .WithMany()
-                        .HasForeignKey("FacultyId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("StaffPortal.Entities.Local", "Local")
-                        .WithMany()
-                        .HasForeignKey("LocalId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("StaffPortal.Entities.State", "State")
-                        .WithMany()
-                        .HasForeignKey("StateId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-<<<<<<< HEAD
-
-            modelBuilder.Entity("StaffPortal.Models.Salary", b =>
-                {
-                    b.HasOne("StaffPortal.Entities.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId1");
-
-                    b.HasOne("StaffPortal.Entities.Grade", "Grade")
-                        .WithMany()
-                        .HasForeignKey("GradeId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-=======
->>>>>>> 61a5d3834b28469f6a29f0b819480ae1346cc0a4
 #pragma warning restore 612, 618
         }
     }

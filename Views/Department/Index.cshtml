@@ -23,6 +23,7 @@
             <a asp-controller="Department" asp-action="Create" class="btn float-right hidden-sm-down btn-success"><i class="mdi mdi-plus-circle"></i>New Department</a>
             <br />
 
+<<<<<<< HEAD
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -46,6 +47,29 @@
                                 <td>@department.Faculty.Name</td>
                                 <td>@department.CreatedBy  </td>
                                 <td>@department.DateCreated    </td>
+=======
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Code</th>
+                                    <th>Created By</th>
+                                    <th>Date Created</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var department in Model)
+                                {
+                                <tr>
+                                    <td>@department.Id</td>
+
+                                    <td>@department.DeptName  </td>
+                                    <td>@department.DeptCode </td>
+                                    <td>@department.CreatedBy  </td>
+                                    <td>@department.DateCreated    </td>
+>>>>>>> 61a5d3834b28469f6a29f0b819480ae1346cc0a4
 
                                 <td>
 

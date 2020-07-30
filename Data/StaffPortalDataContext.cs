@@ -2,7 +2,6 @@
 using StaffPortal.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using StaffPortal.Models;
 
 namespace StaffPortal.Data
 {
@@ -17,8 +16,12 @@ namespace StaffPortal.Data
         public virtual DbSet<State> State { get; set; }
         public virtual DbSet<Local> Locals { get; set; }
         public virtual DbSet<UserProfile> UserProfiles { get; set; }
+<<<<<<< HEAD
         public virtual DbSet<Salary> Salaries { get; set; }
 
+=======
+       
+>>>>>>> 61a5d3834b28469f6a29f0b819480ae1346cc0a4
 
 
 
