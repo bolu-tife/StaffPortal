@@ -17,7 +17,7 @@ namespace StaffPortal.Data
         public virtual DbSet<State> State { get; set; }
         public virtual DbSet<Local> Locals { get; set; }
         public virtual DbSet<UserProfile> UserProfiles { get; set; }
-        public virtual DbSet<Salary>Salaries { get; set; }
+        public virtual DbSet<Salary> Salaries { get; set; }
 
 
 

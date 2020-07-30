@@ -10,8 +10,8 @@ using StaffPortal.Data;
 namespace StaffPortal.Migrations
 {
     [DbContext(typeof(StaffPortalDataContext))]
-    [Migration("20200728121309_Starting_Over")]
-    partial class Starting_Over
+    [Migration("20200730130401_UpdatedSalaryStructure")]
+    partial class UpdatedSalaryStructure
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -320,15 +320,11 @@ namespace StaffPortal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ApplicationUserId");
+
+                    b.Property<string>("ApplicationUserId1");
+
                     b.Property<double>("BasicSalary");
-
-                    b.Property<int?>("DepartmentId");
-
-                    b.Property<int>("DeptId");
-
-                    b.Property<string>("EmployeeName");
-
-                    b.Property<int>("FacultyID");
 
                     b.Property<int>("GradeId");
 
@@ -340,15 +336,15 @@ namespace StaffPortal.Migrations
 
                     b.Property<double>("NetSalary");
 
+                    b.Property<string>("PayItemType");
+
                     b.Property<double>("Tax");
 
                     b.Property<double>("Transport");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("DepartmentId");
-
-                    b.HasIndex("FacultyID");
+                    b.HasIndex("ApplicationUserId1");
 
                     b.HasIndex("GradeId");
 
@@ -440,14 +436,9 @@ namespace StaffPortal.Migrations
 
             modelBuilder.Entity("StaffPortal.Models.Salary", b =>
                 {
-                    b.HasOne("StaffPortal.Entities.Department", "Department")
+                    b.HasOne("StaffPortal.Entities.ApplicationUser", "ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("DepartmentId");
-
-                    b.HasOne("StaffPortal.Entities.Faculty", "Faculty")
-                        .WithMany()
-                        .HasForeignKey("FacultyID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ApplicationUserId1");
 
                     b.HasOne("StaffPortal.Entities.Grade", "Grade")
                         .WithMany()

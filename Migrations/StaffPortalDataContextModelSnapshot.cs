@@ -318,31 +318,51 @@ namespace StaffPortal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ApplicationUserId");
+
+                    b.Property<string>("ApplicationUserId1");
+
                     b.Property<double>("BasicSalary");
-
-                    b.Property<int?>("DepartmentId");
-
-                    b.Property<int>("DeptId");
-
-                    b.Property<string>("EmployeeName");
 
                     b.Property<int>("GradeId");
 
                     b.Property<double>("Housing");
 
+                    b.Property<string>("HousingItemType");
+
+                    b.Property<double>("HousingPercent");
+
                     b.Property<double>("Lunch");
+
+                    b.Property<string>("LunchItemType");
+
+                    b.Property<double>("LunchPercent");
 
                     b.Property<double>("Medical");
 
+                    b.Property<string>("MedicalItemType");
+
+                    b.Property<double>("MedicalPercent");
+
                     b.Property<double>("NetSalary");
+
+                    b.Property<string>("PayItemType");
 
                     b.Property<double>("Tax");
 
+                    b.Property<string>("TaxItemType");
+
+                    b.Property<double>("TaxPercent");
+
                     b.Property<double>("Transport");
+
+                    b.Property<string>("TransportItemType");
+
+                    b.Property<double>("TransportPercent");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("DepartmentId");
+                    b.HasIndex("ApplicationUserId1");
 
                     b.HasIndex("GradeId");
 
@@ -434,9 +454,9 @@ namespace StaffPortal.Migrations
 
             modelBuilder.Entity("StaffPortal.Models.Salary", b =>
                 {
-                    b.HasOne("StaffPortal.Entities.Department", "Department")
+                    b.HasOne("StaffPortal.Entities.ApplicationUser", "ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("DepartmentId");
+                        .HasForeignKey("ApplicationUserId1");
 
                     b.HasOne("StaffPortal.Entities.Grade", "Grade")
                         .WithMany()

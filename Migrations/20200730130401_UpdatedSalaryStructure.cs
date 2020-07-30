@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace StaffPortal.Migrations
 {
-    public partial class Starting_Over : Migration
+    public partial class UpdatedSalaryStructure : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -225,6 +225,41 @@ namespace StaffPortal.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Salaries",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    GradeId = table.Column<int>(nullable: false),
+                    BasicSalary = table.Column<double>(nullable: false),
+                    Housing = table.Column<double>(nullable: false),
+                    Tax = table.Column<double>(nullable: false),
+                    Lunch = table.Column<double>(nullable: false),
+                    Transport = table.Column<double>(nullable: false),
+                    Medical = table.Column<double>(nullable: false),
+                    NetSalary = table.Column<double>(nullable: false),
+                    ApplicationUserId1 = table.Column<string>(nullable: true),
+                    ApplicationUserId = table.Column<int>(nullable: false),
+                    PayItemType = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Salaries", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Salaries_AspNetUsers_ApplicationUserId1",
+                        column: x => x.ApplicationUserId1,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Salaries_Grades_GradeId",
+                        column: x => x.GradeId,
+                        principalTable: "Grades",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Locals",
                 columns: table => new
                 {
@@ -242,48 +277,6 @@ namespace StaffPortal.Migrations
                         principalTable: "State",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Salaries",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    EmployeeName = table.Column<string>(nullable: true),
-                    DepartmentId = table.Column<int>(nullable: true),
-                    DeptId = table.Column<int>(nullable: false),
-                    GradeId = table.Column<int>(nullable: false),
-                    FacultyID = table.Column<int>(nullable: false),
-                    BasicSalary = table.Column<double>(nullable: false),
-                    Housing = table.Column<double>(nullable: false),
-                    Tax = table.Column<double>(nullable: false),
-                    Lunch = table.Column<double>(nullable: false),
-                    Transport = table.Column<double>(nullable: false),
-                    Medical = table.Column<double>(nullable: false),
-                    NetSalary = table.Column<double>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Salaries", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Salaries_Departments_DepartmentId",
-                        column: x => x.DepartmentId,
-                        principalTable: "Departments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Salaries_Faculties_FacultyID",
-                        column: x => x.FacultyID,
-                        principalTable: "Faculties",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Salaries_Grades_GradeId",
-                        column: x => x.GradeId,
-                        principalTable: "Grades",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -380,14 +373,9 @@ namespace StaffPortal.Migrations
                 column: "StatesId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Salaries_DepartmentId",
+                name: "IX_Salaries_ApplicationUserId1",
                 table: "Salaries",
-                column: "DepartmentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Salaries_FacultyID",
-                table: "Salaries",
-                column: "FacultyID");
+                column: "ApplicationUserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Salaries_GradeId",
