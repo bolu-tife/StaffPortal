@@ -1,90 +1,90 @@
 ﻿@model //StaffPortal.Entities.UserProfile
-
-@{
+{
 }
-    <script src="~/Lib/jquery/dist/jquery.js"></script>
+<!--  <script src="~/Lib/jquery/dist/jquery.js"></script>
 
-    <form asp-controller="Demo" asp-action="Index" method="post" class="form-horizontal" role="form">
-        <div class="form-group">
+  <form asp-controller="Demo" asp-action="Index" method="post" class="form-horizontal" role="form">
+      <div class="form-group">
 
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="StateId"> State</label>
-                <select asp-for="StateId" class="form-control" id="StateIdd"
-                        asp-items="@(new SelectList(ViewBag.ListofStates, "Id", "Name"))">
-                    <option>Select State Name</option>
-                </select>
-                <span asp-validation-for="StateId" class="text-danger"></span>
-            </div>
+          <div asp-validation-summary="All" class="text-danger"></div>
+          <div class="form-group">
+              <label asp-for="StateId"> State</label>
+              <select asp-for="StateId" class="form-control" id="StateIdd"
+                      asp-items="@(new SelectList(ViewBag.ListofStates, "Id", "Name"))">
+                  <option>Select State Name</option>
+              </select>
+              <span asp-validation-for="StateId" class="text-danger"></span>
+          </div>
 
-            <div class="form-group">
-                <label asp-for="LocalId"> Local Government</label>
-                <select asp-for="LocalId" class="form-control" id="LocalId"
-                        asp-items="@(new SelectList(string.Empty, "Id", "Name"))"></select>
-                <span asp-validation-for="LocalId" class="text-danger"></span>
-            </div>
-
-
-            <button type="submit" class="btn btn-success mr-2">Submit</button>
-        </div>
-    </form>
-
-    
-    <script src="~/Login/vendor/jquery/jquery-3.2.1.min.js"></script>
-    <script>
-    $(function () {
-        $("#StateId").change(function () {
-            var url = '@Url.Content("~/")' + "Demo/GetLocal";
-            var ddlsource = "#StateId";
-            $.getJSON(url, { id: $(ddlsource).val() }, function (data) {
-                var items = '';
-                $("#LocalId").empty();
-                $.each(data, function (i, row) {
-                    items += "<option value='" + row.value + "'>" + row.text + "</option>";
-                });
-                $("#LocalId").html(items);
-            })
-        });
-    });
-
-    </script>
-
-    <!--
-        <script src="~/Scripts/jquery-1.10.2.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#StateIdd').change(function () {
-                    var url = '@Url.Content("~/")' + "Demo/GetLocal";
-                    var ddlsource = "#StateIdd";
-                    $.getJSON(url, { StateId: $(ddlsource).val() }, function (data) {
-                        var items = '';
-                        $("#LgaId").empty();
-                        $.each(data, function (i, local) {
-                            items += "<option value='" + local["Id"] + "'>" + local["Name"] + "</option >";
-                        });
-                        $('#LgaId').html(items);
-                    });
-                });
-        </script>
+          <div class="form-group">
+              <label asp-for="LocalId"> Local Government</label>
+              <select asp-for="LocalId" class="form-control" id="LocalId"
+                      asp-items="@(new SelectList(string.Empty, "Id", "Name"))"></select>
+              <span asp-validation-for="LocalId" class="text-danger"></span>
+          </div>
 
 
-        <script type="text/javascript">
-            $(function () {
-                $('#StateIdd').change(function () {
-                    var url = '@Url.Content("~/")' + "Demo/GetLocal";
-                    var ddlsource = "#StateIdd";
-                    $.getJSON(url, { Id: $(ddlsource).val() }, function (data) {
-                        var items = '';
-                        $("#LgaId").empty();
-                        $.each(data, function (i, row) {
-                            items += "<option value='" + row.Id + "'>" + row.Name + "</option>";
-                        });
-                        $('#LgaId').html(items);
-                    })
-                });
-            });
-        </script>
-        -->
-}
+          <button type="submit" class="btn btn-success mr-2">Submit</button>
+      </div>
+  </form>
 
 
+  <script src="~/Login/vendor/jquery/jquery-3.2.1.min.js"></script>
+  <script>
+  $(function () {
+      $("#StateId").change(function () {
+          var url = '@Url.Content("~/")' + "Demo/GetLocal";
+          var ddlsource = "#StateId";
+          $.getJSON(url, { id: $(ddlsource).val() }, function (data) {
+              var items = '';
+              $("#LocalId").empty();
+              $.each(data, function (i, row) {
+                  items += "<option value='" + row.value + "'>" + row.text + "</option>";
+              });
+              $("#LocalId").html(items);
+          })
+      });
+  });
+
+  </script>
+
+  <!--
+      <script src="~/Scripts/jquery-1.10.2.js"></script>
+      <script type="text/javascript">
+          $(document).ready(function () {
+              $('#StateIdd').change(function () {
+                  var url = '@Url.Content("~/")' + "Demo/GetLocal";
+                  var ddlsource = "#StateIdd";
+                  $.getJSON(url, { StateId: $(ddlsource).val() }, function (data) {
+                      var items = '';
+                      $("#LgaId").empty();
+                      $.each(data, function (i, local) {
+                          items += "<option value='" + local["Id"] + "'>" + local["Name"] + "</option >";
+                      });
+                      $('#LgaId').html(items);
+                  });
+              });
+      </script>
+
+
+      <script type="text/javascript">
+          $(function () {
+              $('#StateIdd').change(function () {
+                  var url = '@Url.Content("~/")' + "Demo/GetLocal";
+                  var ddlsource = "#StateIdd";
+                  $.getJSON(url, { Id: $(ddlsource).val() }, function (data) {
+                      var items = '';
+                      $("#LgaId").empty();
+                      $.each(data, function (i, row) {
+                          items += "<option value='" + row.Id + "'>" + row.Name + "</option>";
+                      });
+                      $('#LgaId').html(items);
+                  })
+              });
+          });
+      </script>
+      -->
+
+
+
+-->
