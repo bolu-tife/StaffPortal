@@ -72,11 +72,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="FacultyId">Faculty</label>
-                        <select class="form-control" asp-for="FacultyId" asp-items="@ViewBag.faculty">
+                        <label asp-for="Department.FacultyId">Faculty</label>
+                        <select class="form-control" asp-for="Department.FacultyId" asp-items="@ViewBag.faculty">
                             <option>Choose Faculty</option>
                         </select>
-                        <span asp-validation-for="FacultyId" class="text-danger"></span>
+                        <span asp-validation-for="Department.FacultyId" class="text-danger"></span>
                     </div>
 
 
@@ -91,10 +91,11 @@
 
 
 <script src="~/js/jquery-3.5.1.js"></script>
+<script src="~/Login/vendor/jquery/jquery-3.2.1.min.js"></script>
 <script>
     $(function () {
         $("#NewStateId").change(function () {
-            var url = '@Url.Content("~/")' + "User/GetLGA";
+            var url = '@Url.Content("~/")' + "UserProfile/GetLGA";
             var ddlsource = "#NewStateId";
             $.getJSON(url, { id: $(ddlsource).val() }, function (data) {
                 var items = '';

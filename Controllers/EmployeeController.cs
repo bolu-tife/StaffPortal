@@ -7,43 +7,36 @@ using Microsoft.AspNetCore.Mvc;
 using StaffPortal.Interface;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using StaffPortal.Data;
-using StaffPortal.Entities;
-using Microsoft.AspNetCore.Identity;
 
 namespace StaffPortal.Controllers
 {
     public class EmployeeController : BaseController
     {
         private StaffPortalDataContext _context;
-        //private readonly UserManager<ApplicationUser> _userManager;
-        //UserManager<ApplicationUser> userManager,
-        //            _userManager = userManager;
 
 
-        private IAccount _account;
         private IGrade _grade;
-        private readonly IFaculty _faculty;
-        private readonly IDepartment _dept;
+        private IFaculty _faculty;
+        private IDepartment _dept;
 
 
-        public EmployeeController( IGrade grade, IFaculty faculty, IDepartment department, IAccount account, StaffPortalDataContext context)
+        public EmployeeController(IGrade grade, IFaculty faculty, IDepartment department, StaffPortalDataContext context)
         {
             _grade = grade;
             _faculty = faculty;
             _dept = department;
             _context = context;
-            _account = account;
         }
 
         public async Task<IActionResult> Index()
         {
-            var accountName = await _account.GetAll();
-            var userListName = accountName.Select(g => new SelectListItem()
-            {
-                Value = g.Id.ToString(),
-                Text = g.Email
-            });
-           
+            /* var grade = await _grade.GetAll();
+             var gradeList = grade.Select(a => new SelectListItem()
+             {
+                 Value = a.Id.ToString(),
+                 Text = a.Level.ToString()                 
+             });
+             */
             var gradeName = await _grade.GetAll();
             var gradeListName = gradeName.Select(g => new SelectListItem()
             {
@@ -63,13 +56,11 @@ namespace StaffPortal.Controllers
                 Text = g.Step.ToString()
             });
 
-            ViewBag.accountName = userListName;
             ViewBag.gradeName = gradeListName;
             ViewBag.gradeLevel = gradeListLevel;
             ViewBag.gradeStep = gradeListStep;
 
 
-          /*
             var fac = await _faculty.GetAll();
             var FacList = fac.Select(f => new SelectListItem()
             {
@@ -87,8 +78,8 @@ namespace StaffPortal.Controllers
                 Text = g.DeptName
             });
             ViewBag.dept = deptList;
-            ViewBag.faculty = FacList;
-            */
+            //ViewBag.faculty = facultyList;
+            //ViewBag.grade = gradeList;
 
             return View(new Salary());
         }
@@ -96,85 +87,46 @@ namespace StaffPortal.Controllers
         [HttpPost]
         public IActionResult Index(Salary salary)
         {
-            var level = ViewBag.gradeLevel;
-
-
-            if (level == 6)
+            if (ViewBag.gradeLevel == 6)
             {
-                //BASIC SALARY
-                salary.BasicSalary = 5000;
 
-                //For Tax
+                salary.BasicSalary = 1000;
                 salary.Tax = 0.1 * salary.BasicSalary;
-                salary.TaxPercent = 10.0;
-                salary.TaxItemType = "Deduction";
-
-                //For Housing
                 salary.Housing = 0.1 * salary.BasicSalary;
-                salary.HousingPercent = 10;
-                salary.HousingItemType = "Allowance";
-
-                //For Lunch
                 salary.Lunch = 0.1 * salary.BasicSalary;
-                salary.LunchPercent = 10;
-                salary.LunchItemType = "Allowance";
-
-                //For Transport
                 salary.Transport = 0.1 * salary.BasicSalary;
-                salary.TransportPercent = 10;
-                salary.TransportItemType = "Allowance";
-
-                //For Medical
                 salary.Medical = 0.1 * salary.BasicSalary;
-                salary.MedicalPercent = 10;
-                salary.MedicalItemType = "Allowance";
-
-                //NET SALARY
                 salary.NetSalary = salary.BasicSalary + salary.Housing + salary.Lunch
                     + salary.Transport + salary.Medical - salary.Tax;
-               }
+                ////var sal = 2000;
+                ////float _house = 10 / 100 * sal;
+                ////float _lunch = 10 / 100 * 2000;
+                ////salary.BasicSalary = sal;
+                ////salary.Tax = 20;
+                //////var _tax = salary.Tax;
+
+                ////salary.Housing = _house;
+                ////salary.Lunch = _lunch;
+
+                ////salary.Transport = 10 / 100 * sal;
+                ////var _trans = salary.Transport;
+                ////salary.Medical = 10 / 100 * sal;
+                ////var _med = salary.Medical;
+                ////var net = _house + _lunch + _med + _trans ;
+                ////salary.NetSalary = net; 
+            }
             else
             {
                 salary.BasicSalary = 1000;
-                //For Tax
-                salary.Tax = 0.1 * salary.BasicSalary;
-                salary.TaxPercent = 10.0;
-                salary.TaxItemType = "Deduction";
-
-                //For Housing
-                salary.Housing = 0.1 * salary.BasicSalary;
-                salary.HousingPercent = 10;
-                salary.HousingItemType = "Allowance";
-
-                //For Lunch
-                salary.Lunch = 0.1 * salary.BasicSalary;
-                salary.LunchPercent = 10;
-                salary.LunchItemType = "Allowance";
-
-                //For Transport
-                salary.Transport = 0.1 * salary.BasicSalary;
-                salary.TransportPercent = 10;
-                salary.TransportItemType = "Allowance";
-
-                //For Medical
-                salary.Medical = 0.1 * salary.BasicSalary;
-                salary.MedicalPercent = 10;
-                salary.MedicalItemType = "Allowance";
-
-                //NET SALARY
+                salary.Tax = 0.5 * salary.BasicSalary;
+                salary.Housing = 0.5 * salary.BasicSalary;
+                salary.Lunch = 0.5 * salary.BasicSalary;
+                salary.Transport = 0.5 * salary.BasicSalary;
+                salary.Medical = 0.5 * salary.BasicSalary;
                 salary.NetSalary = salary.BasicSalary + salary.Housing + salary.Lunch
                     + salary.Transport + salary.Medical - salary.Tax;
 
-                /*        salary.Tax = 0.5* salary.BasicSalary;
-                        salary.Housing = 0.5 * salary.BasicSalary;
-                        salary.Lunch = 0.5 * salary.BasicSalary;
-                        salary.Transport = 0.5 * salary.BasicSalary;
-                        salary.Medical = 0.5 * salary.BasicSalary;
-                        salary.NetSalary = salary.BasicSalary + salary.Housing + salary.Lunch
-                            + salary.Transport + salary.Medical - salary.Tax;
-        */
             }
-            //_context.Add(salary.PayItemType);
             _context.Add(salary);
             _context.SaveChanges();
 

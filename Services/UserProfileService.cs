@@ -61,7 +61,7 @@ namespace StaffPortal.Services
         public async Task<IEnumerable<UserProfile>> GetAll()
         {
 
-            return await _context.UserProfiles.Include(f => f.Faculty).Include(d => d.Department).ToListAsync();
+            return await _context.UserProfiles.Include(f => f.Department.Faculty).Include(d => d.Department).ToListAsync();
         }
 
         public async Task<UserProfile> GetById(int Id)
@@ -79,7 +79,7 @@ namespace StaffPortal.Services
                 _userprofile.LastName = userprofile.LastName;
                 _userprofile.Email = userprofile.Email;
 
-                _userprofile.FacultyId = userprofile.FacultyId;
+                _userprofile.Department.FacultyId = userprofile.Department.FacultyId;
                 _userprofile.DepartmentId = userprofile.DepartmentId;
 
                 _userprofile.NewStates = userprofile.NewStates;

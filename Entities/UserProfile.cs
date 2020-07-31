@@ -15,7 +15,7 @@ namespace StaffPortal.Entities
         
         
         public int DepartmentId { get; set; }
-        public int FacultyId { get; set; }
+        //public int FacultyId { get; set; }
       
 
         public string NewStates { get; set; }
@@ -23,7 +23,7 @@ namespace StaffPortal.Entities
         public string Country { get; set; }
 
         public Department Department { get; set; }
-        public Faculty Faculty { get; set; }
+        //public Faculty Faculty { get; set; }
 
         public string CreatedBy { get; set; }
         private DateTime? dateCreated = null;
@@ -31,9 +31,7 @@ namespace StaffPortal.Entities
         {
             get
             {
-                return dateCreated.HasValue
-                   ? dateCreated.Value
-                   : DateTime.Now;
+                return dateCreated ?? DateTime.Now;
             }
 
             set { dateCreated = value; }

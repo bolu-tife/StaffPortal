@@ -15,7 +15,7 @@ namespace StaffPortal.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -198,7 +198,7 @@ namespace StaffPortal.Migrations
 
                     b.Property<string>("DeptName");
 
-                    b.Property<int?>("FacultyId");
+                    b.Property<int>("FacultyId");
 
                     b.HasKey("Id");
 
@@ -247,6 +247,23 @@ namespace StaffPortal.Migrations
                     b.ToTable("Grades");
                 });
 
+            modelBuilder.Entity("StaffPortal.Entities.LGA", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.Property<int?>("NewStateId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NewStateId");
+
+                    b.ToTable("LGAs");
+                });
+
             modelBuilder.Entity("StaffPortal.Entities.Local", b =>
                 {
                     b.Property<int>("Id")
@@ -262,6 +279,19 @@ namespace StaffPortal.Migrations
                     b.HasIndex("StatesId");
 
                     b.ToTable("Locals");
+                });
+
+            modelBuilder.Entity("StaffPortal.Entities.NewState", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NewStates");
                 });
 
             modelBuilder.Entity("StaffPortal.Entities.State", b =>
@@ -283,192 +313,175 @@ namespace StaffPortal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Country");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("DateCreated");
+
                     b.Property<int>("DepartmentId");
 
-                    b.Property<int>("FacultyId");
+                    b.Property<string>("Email");
 
                     b.Property<string>("FirstName");
 
+                    b.Property<string>("LGAs");
+
                     b.Property<string>("LastName");
 
-                    b.Property<int>("LocalId");
-
-                    b.Property<int>("StateId");
-
-                    b.Property<string>("country");
-
-                    b.Property<string>("email");
+                    b.Property<string>("NewStates");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DepartmentId");
 
-                    b.HasIndex("FacultyId");
-
-                    b.HasIndex("LocalId");
-
-                    b.HasIndex("StateId");
-
                     b.ToTable("UserProfiles");
                 });
 
-//<<<<<<< HEAD
-//            modelBuilder.Entity("StaffPortal.Models.Salary", b =>
-//                {
-//                    b.Property<int>("ID")
-//                        .ValueGeneratedOnAdd()
-//                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            modelBuilder.Entity("StaffPortal.Models.Salary", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-//                    b.Property<int>("ApplicationUserId");
+                    b.Property<int>("ApplicationUserId");
 
-//                    b.Property<string>("ApplicationUserId1");
+                    b.Property<string>("ApplicationUserId1");
 
-//                    b.Property<double>("BasicSalary");
+                    b.Property<double>("BasicSalary");
 
-//                    b.Property<int>("GradeId");
+                    b.Property<int>("GradeId");
 
-//                    b.Property<double>("Housing");
+                    b.Property<double>("Housing");
 
-//                    b.Property<string>("HousingItemType");
+                    b.Property<string>("HousingItemType");
 
-//                    b.Property<double>("HousingPercent");
+                    b.Property<double>("HousingPercent");
 
-//                    b.Property<double>("Lunch");
+                    b.Property<double>("Lunch");
 
-//                    b.Property<string>("LunchItemType");
+                    b.Property<string>("LunchItemType");
 
-//                    b.Property<double>("LunchPercent");
+                    b.Property<double>("LunchPercent");
 
-//                    b.Property<double>("Medical");
+                    b.Property<double>("Medical");
 
-//                    b.Property<string>("MedicalItemType");
+                    b.Property<string>("MedicalItemType");
 
-//                    b.Property<double>("MedicalPercent");
+                    b.Property<double>("MedicalPercent");
 
-//                    b.Property<double>("NetSalary");
+                    b.Property<double>("NetSalary");
 
-//                    b.Property<string>("PayItemType");
+                    b.Property<string>("PayItemType");
 
-//                    b.Property<double>("Tax");
+                    b.Property<double>("Tax");
 
-//                    b.Property<string>("TaxItemType");
+                    b.Property<string>("TaxItemType");
 
-//                    b.Property<double>("TaxPercent");
+                    b.Property<double>("TaxPercent");
 
-//                    b.Property<double>("Transport");
+                    b.Property<double>("Transport");
 
-//                    b.Property<string>("TransportItemType");
+                    b.Property<string>("TransportItemType");
 
-//                    b.Property<double>("TransportPercent");
+                    b.Property<double>("TransportPercent");
 
-//                    b.HasKey("ID");
+                    b.HasKey("ID");
 
-//                    b.HasIndex("ApplicationUserId1");
+                    b.HasIndex("ApplicationUserId1");
 
-//                    b.HasIndex("GradeId");
+                    b.HasIndex("GradeId");
 
-//                    b.ToTable("Salaries");
-//                });
+                    b.ToTable("Salaries");
+                });
 
-//=======
-//>>>>>>> 61a5d3834b28469f6a29f0b819480ae1346cc0a4
-//            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-//                {
-//                    b.HasOne("StaffPortal.Entities.ApplicationRole")
-//                        .WithMany()
-//                        .HasForeignKey("RoleId")
-//                        .OnDelete(DeleteBehavior.Cascade);
-//                });
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("StaffPortal.Entities.ApplicationRole")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
 
-//            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-//                {
-//                    b.HasOne("StaffPortal.Entities.ApplicationUser")
-//                        .WithMany()
-//                        .HasForeignKey("UserId")
-//                        .OnDelete(DeleteBehavior.Cascade);
-//                });
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("StaffPortal.Entities.ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
 
-//            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-//                {
-//                    b.HasOne("StaffPortal.Entities.ApplicationUser")
-//                        .WithMany()
-//                        .HasForeignKey("UserId")
-//                        .OnDelete(DeleteBehavior.Cascade);
-//                });
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("StaffPortal.Entities.ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
 
-//            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-//                {
-//                    b.HasOne("StaffPortal.Entities.ApplicationRole")
-//                        .WithMany()
-//                        .HasForeignKey("RoleId")
-//                        .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("StaffPortal.Entities.ApplicationRole")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-//                    b.HasOne("StaffPortal.Entities.ApplicationUser")
-//                        .WithMany()
-//                        .HasForeignKey("UserId")
-//                        .OnDelete(DeleteBehavior.Cascade);
-//                });
+                    b.HasOne("StaffPortal.Entities.ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
 
-//            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-//                {
-//                    b.HasOne("StaffPortal.Entities.ApplicationUser")
-//                        .WithMany()
-//                        .HasForeignKey("UserId")
-//                        .OnDelete(DeleteBehavior.Cascade);
-//                });
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("StaffPortal.Entities.ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
 
-//            modelBuilder.Entity("StaffPortal.Entities.Department", b =>
-//                {
-//                    b.HasOne("StaffPortal.Entities.Faculty", "Faculty")
-//                        .WithMany()
-//                        .HasForeignKey("FacultyId");
-//                });
+            modelBuilder.Entity("StaffPortal.Entities.Department", b =>
+                {
+                    b.HasOne("StaffPortal.Entities.Faculty", "Faculty")
+                        .WithMany()
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
 
-//            modelBuilder.Entity("StaffPortal.Entities.Local", b =>
-//                {
-//                    b.HasOne("StaffPortal.Entities.State", "States")
-//                        .WithMany("Local")
-//                        .HasForeignKey("StatesId");
-//                });
+            modelBuilder.Entity("StaffPortal.Entities.LGA", b =>
+                {
+                    b.HasOne("StaffPortal.Entities.NewState", "NewState")
+                        .WithMany("LGA")
+                        .HasForeignKey("NewStateId");
+                });
 
-//            modelBuilder.Entity("StaffPortal.Entities.UserProfile", b =>
-//                {
-//                    b.HasOne("StaffPortal.Entities.Department", "Department")
-//                        .WithMany()
-//                        .HasForeignKey("DepartmentId")
-//                        .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity("StaffPortal.Entities.Local", b =>
+                {
+                    b.HasOne("StaffPortal.Entities.State", "States")
+                        .WithMany("Local")
+                        .HasForeignKey("StatesId");
+                });
 
-//                    b.HasOne("StaffPortal.Entities.Faculty", "Faculty")
-//                        .WithMany()
-//                        .HasForeignKey("FacultyId")
-//                        .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity("StaffPortal.Entities.UserProfile", b =>
+                {
+                    b.HasOne("StaffPortal.Entities.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
 
-//                    b.HasOne("StaffPortal.Entities.Local", "Local")
-//                        .WithMany()
-//                        .HasForeignKey("LocalId")
-//                        .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity("StaffPortal.Models.Salary", b =>
+                {
+                    b.HasOne("StaffPortal.Entities.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId1");
 
-//                    b.HasOne("StaffPortal.Entities.State", "State")
-//                        .WithMany()
-//                        .HasForeignKey("StateId")
-//                        .OnDelete(DeleteBehavior.Cascade);
-//                });
-//<<<<<<< HEAD
-
-//            modelBuilder.Entity("StaffPortal.Models.Salary", b =>
-//                {
-//                    b.HasOne("StaffPortal.Entities.ApplicationUser", "ApplicationUser")
-//                        .WithMany()
-//                        .HasForeignKey("ApplicationUserId1");
-
-//                    b.HasOne("StaffPortal.Entities.Grade", "Grade")
-//                        .WithMany()
-//                        .HasForeignKey("GradeId")
-//                        .OnDelete(DeleteBehavior.Cascade);
-//                });
-//=======
-//>>>>>>> 61a5d3834b28469f6a29f0b819480ae1346cc0a4
-//#pragma warning restore 612, 618
+                    b.HasOne("StaffPortal.Entities.Grade", "Grade")
+                        .WithMany()
+                        .HasForeignKey("GradeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+#pragma warning restore 612, 618
         }
     }
 }

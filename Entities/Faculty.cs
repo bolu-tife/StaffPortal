@@ -17,9 +17,7 @@ namespace StaffPortal.Entities
         {
             get
             {
-                return dateCreated.HasValue
-                   ? dateCreated.Value
-                   : DateTime.Now;
+                return dateCreated ?? DateTime.Now;
             }
 
             set { dateCreated = value; }

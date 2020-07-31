@@ -72,11 +72,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="FacultyId">Faculty</label>
-                        <select class="form-control" asp-for="FacultyId" asp-items="@ViewBag.faculty">
+                        <label asp-for="Department.FacultyId">Faculty</label>
+                        <select class="form-control" asp-for="Department.FacultyId" asp-items="@ViewBag.faculty">
                             <option>Choose Faculty</option>
                         </select>
-                        <span asp-validation-for="FacultyId" class="text-danger"></span>
+                        <span asp-validation-for="Department.FacultyId" class="text-danger"></span>
                     </div>
 
 

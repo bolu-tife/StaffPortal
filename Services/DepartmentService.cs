@@ -18,8 +18,8 @@ namespace StaffPortal.Services
 
         public void Add(Department department) //Add
         {
-              _context.Add(department);
-           
+            _context.Add(department);
+
             _context.SaveChanges();
         }
         public async Task<bool> AddAsync(Department department) //AddAsync
@@ -27,7 +27,7 @@ namespace StaffPortal.Services
             try
             {
                 await _context.AddAsync(department);
-               
+
                 await _context.SaveChangesAsync();
             }
             catch (Exception)
@@ -42,7 +42,7 @@ namespace StaffPortal.Services
             // find the entity/object
             var dept = await _context.Departments.FindAsync(Id);
 
-            if(dept != null)
+            if (dept != null)
             {
                 _context.Departments.Remove(dept);
                 _context.SaveChanges();
@@ -55,7 +55,7 @@ namespace StaffPortal.Services
         public async Task<IEnumerable<Department>> GetAll() //GetAll
         {
 
-            return await _context.Departments.ToListAsync();
+            return await _context.Departments.Include(f => f.Faculty).ToListAsync();
         }
 
         public async Task<Department> GetById(int Id) //GetById
@@ -68,12 +68,12 @@ namespace StaffPortal.Services
         public async Task<bool> Update(Department department) //Update
         {
             var dept = await _context.Departments.FindAsync(department.Id);
-            if(dept != null)
+            if (dept != null)
             {
                 dept.DeptName = department.DeptName;
                 dept.DeptCode = department.DeptCode;
 
-               await  _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
                 return true;
             }
 
