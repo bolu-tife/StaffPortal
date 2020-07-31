@@ -10,6 +10,7 @@ using StaffPortal.Entities;
 using Microsoft.AspNetCore.Identity;
 using StaffPortal.Enums;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using StaffPortal.Data;
 
 namespace StaffPortal.Controllers
 {
@@ -18,33 +19,38 @@ namespace StaffPortal.Controllers
         private IUserProfile _userProfile;
         private IFaculty _faculty;
         private IDepartment _department;
-       
-        
+        private StaffPortalDataContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-        public UserProfileController(IUserProfile userProfile, IFaculty faculty, IDepartment department, UserManager<ApplicationUser> userManager)
+
+        public UserProfileController(IUserProfile userProfile, IFaculty faculty, IDepartment department, StaffPortalDataContext context, UserManager<ApplicationUser> userManager)
         {
             _userProfile = userProfile;
             _faculty = faculty;
             _department = department;
-            
+            _context = context;
             _userManager = userManager;
         }
-
+        
         public async Task<IActionResult> Index()
         {
             var model = await _userProfile.GetAll();
-            //var mail = await _userProfile.GetEmail();
 
             if (model != null)
+            {
+                ViewBag.state = _context.NewStates.ToList();
                 return View(model);
+            }
             return View();
         }
+
+        
+
         [HttpGet]
         public async Task<IActionResult> Create()
         {
             var faculty = await _faculty.GetAll();
             var department = await _department.GetAll();
-            //var state = await _state.GetAll();
+           
 
             var facultyList = faculty.Select(f => new SelectListItem()
             {
@@ -58,24 +64,18 @@ namespace StaffPortal.Controllers
                 Text = d.DeptName
             });
 
-            //var stateList = state.Select(s => new SelectListItem()
-            //{
-            //    Value = s.Id.ToString(),
-            //    Text = s.Name
-            //});
-
             ViewBag.faculty = facultyList;
             ViewBag.department = departmentList;
-            //ViewBag.state = stateList;
+            ViewBag.state = _context.NewStates.ToList();
+           
             return View();
         }
 
-
-
+       
         [HttpPost]
         public async Task<IActionResult> Create(UserProfile userProfile)
         {
-            //userProfile.CreatedBy = _userManager.GetUserName(User);
+            userProfile.CreatedBy = _userManager.GetUserName(User);
 
             var createUserProfile = await _userProfile.AddAsync(userProfile);
            
@@ -88,6 +88,7 @@ namespace StaffPortal.Controllers
             return View();
         }
 
+        
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -114,39 +115,37 @@ namespace StaffPortal.Controllers
                 Value = d.Id.ToString(),
                 Text = d.DeptName
             });
-            //var state = await _state.GetAll();
-
-            //var stateList = state.Select(s => new SelectListItem()
-            //{
-            //    Value = s.Id.ToString(),
-            //    Text = s.Name
-            //});
+          
 
 
             ViewBag.faculty = facultyList;
             ViewBag.department = departmentList;
-            //ViewBag.state = stateList;
-            
+            ViewBag.state = _context.NewStates.ToList();
+
             return View(editUserProfile);
         }
+
+        
 
         [HttpPost]
         public async Task<IActionResult> Edit(UserProfile userProfile)
         {
-            //var editFaculty = await _faculty.GetById(id);
+            
             var editUserProfile = await _userProfile.Update(userProfile);
 
             if (editUserProfile && ModelState.IsValid)
             {
-                //    editFaculty.Name = faculty.Name;
-                //    context.SaveChanges();
+                
                 Alert("UserProfile edited successfully.", NotificationType.success);
                 return RedirectToAction("Index");
-                //return RedirectToAction("Details", new { id = editFaculty.Id });
+                
             }
             Alert("UserProfile not edited!", NotificationType.error);
             return View();
         }
+
+
+        
 
         public async Task<IActionResult> Delete(int id)
         {
@@ -160,9 +159,20 @@ namespace StaffPortal.Controllers
             Alert("UserProfile not deleted!", NotificationType.error);
             return View();
         }
-        
 
 
+        public IActionResult Cancel()
+        {
+            return RedirectToAction("Index", "User");
+        }
+
+        public JsonResult GetLGA(int stateid)
+        {
+            List<LGA> list = new List<LGA>();
+            list = _context.LGAs.Where(a => a.NewState.Id == stateid).ToList();
+            list.Insert(0, new LGA { Id = 0, Name = "Select Local Government" });
+            return Json(new SelectList(list, "Id", "Name"));
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

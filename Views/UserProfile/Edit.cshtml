@@ -1,0 +1,110 @@
+﻿@model StaffPortal.Entities.UserProfile
+@{
+    ViewData["Title"] = "Faculty";
+}
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">UserProfile</h3>
+    </div>
+    <!--   <div class="col-md-7 align-self-center">
+         <a href="https://wrappixel.com/templates/adminpro/" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down"> Upgrade to Pro</a>
+      </div>-->
+</div>
+<div class="row">
+    <!-- column -->
+    <div class="col-sm-12">
+        <div class="white-box">
+            <h3>Faculty</h3>
+
+            <div class="table-responsive">
+                <form asp-action="Edit" method="post" class="mt-4">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="FirstName"> FirstName</label>
+                        <input type="text" asp-for="FirstName" class="form-control" placeholder="Enter FirstName" required="">
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName"> LastName</label>
+                        <input type="text" asp-for="LastName" class="form-control" placeholder="Enter LastName" required="">
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email"> Email</label>
+                        <input type="text" asp-for="Email" class="form-control" placeholder="Enter Email" required="">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Country">Country</label>
+                        <select asp-for="Country" class="form-control">
+                            <option value="Nigeria">Nigeria</option>
+                        </select>
+
+                        <span asp-validation-for="Country" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label asp-for="NewStates"> State</label>
+                        <select asp-for="NewStates" class="form-control" id="NewStateId"
+                                asp-items="@(new SelectList(ViewBag.state, "Id", "Name"))">
+                            <option>Select State Name</option>
+                        </select>
+                        <span asp-validation-for="NewStates" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label asp-for="LGAs"> Local Government</label>
+                        <select class="form-control" id="LGAId" asp-for="LGAs" asp-items="@(new SelectList(string.Empty, "Id", "Name"))"></select>
+                        <span asp-validation-for="LGAs" class="text-danger"></span>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label asp-for="DepartmentId">Department</label>
+                        <select class="form-control" asp-for="DepartmentId" asp-items="@ViewBag.department">
+                            <option>Choose Department</option>
+                        </select>
+                        <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="FacultyId">Faculty</label>
+                        <select class="form-control" asp-for="FacultyId" asp-items="@ViewBag.faculty">
+                            <option>Choose Faculty</option>
+                        </select>
+                        <span asp-validation-for="FacultyId" class="text-danger"></span>
+                    </div>
+
+
+
+                    <button type="submit" class="btn btn-success mr-2">Submit</button>
+                    <a href="Cancel" type="button" class="btn btn-dark">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/js/jquery-3.5.1.js"></script>
+<script>
+    $(function () {
+        $("#NewStateId").change(function () {
+            var url = '@Url.Content("~/")' + "User/GetLGA";
+            var ddlsource = "#NewStateId";
+            $.getJSON(url, { id: $(ddlsource).val() }, function (data) {
+                var items = '';
+                $("#LGAId").empty();
+                $.each(data, function (i, row) {
+                    items += "<option value='" + row.value + "'>" + row.text + "</option>";
+                });
+                $("#LGAId").html(items);
+            })
+        });
+    });
+
+</script>

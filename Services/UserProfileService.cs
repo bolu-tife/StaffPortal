@@ -13,19 +13,19 @@ namespace StaffPortal.Services
     public class UserProfileService : IUserProfile
     {
         private StaffPortalDataContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
-        public UserProfileService(StaffPortalDataContext context, UserManager<ApplicationUser> userManager)
+        
+        public UserProfileService(StaffPortalDataContext context)
         {
             _context = context;
-            _userManager = userManager;
         }
 
         public void Add(UserProfile userprofile) //Add
         {
-              _context.Add(userprofile);
+            _context.Add(userprofile);
            
             _context.SaveChanges();
         }
+
         public async Task<bool> AddAsync(UserProfile userprofile) //AddAsync
         {
             try
@@ -41,9 +41,10 @@ namespace StaffPortal.Services
             return true;
         }
 
+
         public async Task<bool> Delete(int Id)//Delete
         {
-            // find the entity/object
+           
             var _userprofile = await _context.UserProfiles.FindAsync(Id);
 
             if(_userprofile != null)
@@ -56,20 +57,14 @@ namespace StaffPortal.Services
             return false;
         }
         
-        //public async Task<string> GetEmail() //GetById
-        //{
-        //    _userManager userm;
-        //    ApplicationUser user = await _userManager.FindByEmailAsync( userm.Email);
-        //    return user.Email;
-        //}
-
-        public async Task<IEnumerable<UserProfile>> GetAll() //GetAll
+       
+        public async Task<IEnumerable<UserProfile>> GetAll()
         {
 
-            return await _context.UserProfiles.Include(s => s.State).Include(f => f.Faculty).Include(d => d.Department).ToListAsync();
+            return await _context.UserProfiles.Include(f => f.Faculty).Include(d => d.Department).ToListAsync();
         }
 
-        public async Task<UserProfile> GetById(int Id) //GetById
+        public async Task<UserProfile> GetById(int Id)
         {
             var _userprofile = await _context.UserProfiles.FindAsync(Id);
 
@@ -82,12 +77,14 @@ namespace StaffPortal.Services
             {
                 _userprofile.FirstName = userprofile.FirstName;
                 _userprofile.LastName = userprofile.LastName;
-                _userprofile.email = userprofile.email;
+                _userprofile.Email = userprofile.Email;
+
                 _userprofile.FacultyId = userprofile.FacultyId;
                 _userprofile.DepartmentId = userprofile.DepartmentId;
-                _userprofile.StateId = userprofile.StateId;
-                _userprofile.LocalId = userprofile.LocalId;
-                _userprofile.country = userprofile.country;
+
+                _userprofile.NewStates = userprofile.NewStates;
+                _userprofile.LGAs = userprofile.LGAs;
+                _userprofile.Country = userprofile.Country;
                 
 
                 await _context.SaveChangesAsync();
