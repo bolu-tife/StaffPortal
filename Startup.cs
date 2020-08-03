@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StaffPortal.Inteface;
 
 namespace StaffPortal
 {
@@ -57,6 +58,8 @@ namespace StaffPortal
             services.AddScoped<IFaculty, FacultyService>();
             services.AddScoped<IDepartment, DepartmentService>();
             services.AddScoped<IGrade, GradeService>();
+            services.AddScoped<ISalary, SalaryService>();
+
             services.AddScoped<IUserProfile, UserProfileService>();
             //services.AddScoped<IState, StateService>();
             //services.AddScoped<ILocal, LocalService>();
