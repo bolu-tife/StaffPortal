@@ -21,13 +21,14 @@ namespace StaffPortal.Controllers
         private IGrade _grade;
         private IAccount _account;
         private ISalary _sal;
-
-        public SalaryController(IGrade grade, IAccount account, ISalary sal,  StaffPortalDataContext context)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public SalaryController(IGrade grade, IAccount account, ISalary sal,  StaffPortalDataContext context, UserManager<ApplicationUser> userManager)
         {
             _grade = grade;
             _account = account;
             _sal = sal;
             _context = context;
+            _userManager = userManager;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -38,6 +39,28 @@ namespace StaffPortal.Controllers
                 return View(model);
             }
             return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> PersonalSalary()
+        {
+
+            var user = _userManager.GetUserName(User);
+            var x = await _userManager.FindByNameAsync(user);
+
+            var editsal = _sal.GetIdByEmail(x.Email);
+
+            var usersal = await _sal.GetById(editsal);
+
+            if (usersal == null)
+            {
+                return RedirectToAction("UserError");
+            }
+            else
+            {
+                return View(usersal);
+            }
+
+
         }
 
         [HttpGet]
@@ -68,10 +91,11 @@ namespace StaffPortal.Controllers
                 Value = g.Id.ToString(),
                 Text = g.Step.ToString()
             });
-            ViewBag.accountName = accountListName;
+            //ViewBag.accountName = accountListName;
             ViewBag.gradeName = gradeListName;
             ViewBag.gradeLevel = gradeListLevel;
             ViewBag.gradeStep = gradeListStep;
+            ViewBag.users = _context.Users.ToList();
 
             return View(new Salary());
         }
@@ -106,17 +130,28 @@ namespace StaffPortal.Controllers
             _context.Add(salary);
              _context.SaveChanges();
 
-           return View(salary);
-        
+           //return View(salary);
+            //var createUserProfile = await _userProfile.AddAsync(userProfile);
+
+            if (salary != null)
+            {
+                Alert("UserProfile created successfully.", NotificationType.success);
+                return RedirectToAction("Index");
+            }
+            Alert("UserProfile not created!", NotificationType.error);
+            return View(salary);
+
         }
 
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var editGrade = await _sal.GetById(id);
 
-            if (editGrade == null)
+            var editSalary = await _sal.GetById(id);
+
+
+            if (editSalary == null)
             {
                 return RedirectToAction("Index");
             }
@@ -152,7 +187,7 @@ namespace StaffPortal.Controllers
             ViewBag.gradeStep = gradeListStep;
 
             
-            return View(editGrade);
+            return View(editSalary);
         }
 
 

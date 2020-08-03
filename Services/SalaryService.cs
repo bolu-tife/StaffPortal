@@ -16,28 +16,43 @@ namespace StaffPortal.Services
         {
             _context = context;
         }
-/*
-        public void Add(Salary s)
+        /*
+                public void Add(Salary s)
+                {
+
+                    _context.Add(s);
+                    _context.SaveChanges();
+                }
+                public async Task<bool> AddAsync(Salary salary)
+                {
+                    try
+                    {
+
+                        await _context.AddAsync(salary);
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
+                    return true;
+                }
+                */
+        public int GetIdByEmail(string Email)
         {
-           
-            _context.Add(s);
-            _context.SaveChanges();
-        }
-        public async Task<bool> AddAsync(Salary salary)
-        {
+
             try
             {
-              
-                await _context.AddAsync(salary);
-                await _context.SaveChangesAsync();
+                var _user = _context.Salaries.First(u => u.Email == Email);
+
+                return _user.ID;
             }
             catch (Exception)
-            {
-                return false;
-            }
-            return true;
+            { return 0; }
+
+
         }
-        */
+
         public async Task<bool> Delete(int Id)
         {
             // find the entity/object

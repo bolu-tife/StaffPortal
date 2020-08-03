@@ -130,12 +130,12 @@ namespace StaffPortal.Controllers
         {
 
 
-            var user = _userManager.GetUserName(User);
-            var x = await _userManager.FindByNameAsync(user);
+            //var user = _userManager.GetUserName(User);
+            //var x = await _userManager.FindByNameAsync(user);
 
-            var userid = _userProfile.GetIdByEmail(x.Email);
+            //var userid = _userProfile.GetIdByEmail(x.Email);
 
-            var editUserProfile = await _userProfile.GetById(userid);
+            var editUserProfile = await _userProfile.GetById(id);
 
             //var editUserProfile = await _userProfile.GetById(id);
 

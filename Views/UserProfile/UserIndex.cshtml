@@ -41,6 +41,8 @@
 
 <div class="col-md-8 col-xs-12">
     <div class="white-box">
+        <a asp-controller="Salary" asp-action="PersonalSalary" asp-route-id="Id" class="btn float-right hidden-sm-down btn-success"><i class="mdi mdi-plus-circle"></i>Salary Structure</a>
+
         <form asp-action="Index" method="post" class="form-horizontal form-material">
             <div asp-validation-summary="All" class="text-danger"></div>
 
@@ -108,76 +110,76 @@
 
             <!--
 
-             <div class="form-group">
-                <label class="col-md-12" asp-for="FirstName"> FirstName</label>
-                <div class="col-md-12">
-                    <input type="text" asp-for="FirstName" class="form-control form-control-line" placeholder="Enter FirstName">
+                 <div class="form-group">
+                    <label class="col-md-12" asp-for="FirstName"> FirstName</label>
+                    <div class="col-md-12">
+                        <input type="text" asp-for="FirstName" class="form-control form-control-line" placeholder="Enter FirstName">
+                    </div>
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
                 </div>
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="col-md-12" asp-for="LastName"> LastName</label>
-                <div class="col-md-12">
-                    <input type="text" asp-for="LastName" class="form-control form-control-line" placeholder="Enter LastName">
+                <div class="form-group">
+                    <label class="col-md-12" asp-for="LastName"> LastName</label>
+                    <div class="col-md-12">
+                        <input type="text" asp-for="LastName" class="form-control form-control-line" placeholder="Enter LastName">
+                    </div>
+                    <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-                    <div class="form-group">
-                        <label class="col-md-12" asp-for="Country"> Country</label>
-                        <div class="col-md-12">
-                            <select asp-for="Country" class="form-control form-control-line">
-                                <option value="Nigeria">Nigeria</option>
-                            </select>
+                        <div class="form-group">
+                            <label class="col-md-12" asp-for="Country"> Country</label>
+                            <div class="col-md-12">
+                                <select asp-for="Country" class="form-control form-control-line">
+                                    <option value="Nigeria">Nigeria</option>
+                                </select>
+
+                            </div>
+                            <span asp-validation-for="Country" class="text-danger"></span>
+                        </div>
+
+                       <div class="form-group">
+                            <label class="col-md-12" asp-for="FacultyId">Faculty</label>
+                            <div class="col-md-12">
+                                <select asp-for="FacultyId" asp-items="ViewBag.faculty"
+                                        class="form-control custom-select" required="">
+                                    <option value="">Please select one</option>
+                                </select>
+                            </div>
+                            <span asp-validation-for="FacultyId" class="text-danger"></span>
 
                         </div>
-                        <span asp-validation-for="Country" class="text-danger"></span>
-                    </div>
 
-                   <div class="form-group">
-                        <label class="col-md-12" asp-for="FacultyId">Faculty</label>
-                        <div class="col-md-12">
-                            <select asp-for="FacultyId" asp-items="ViewBag.faculty"
-                                    class="form-control custom-select" required="">
-                                <option value="">Please select one</option>
-                            </select>
+                        <div class="form-group">
+                            <label class="col-md-12" asp-for="DepartmentId">Department</label>
+                            <div class="col-md-12">
+                                <select asp-for="DepartmentId" asp-items="ViewBag.department"
+                                        class="form-control custom-select" required="">
+                                    <option value="">Please select one</option>
+                                </select>
+                            </div>
+                            <span asp-validation-for="DepartmentId" class="text-danger"></span>
+
                         </div>
-                        <span asp-validation-for="FacultyId" class="text-danger"></span>
-
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-md-12" asp-for="DepartmentId">Department</label>
-                        <div class="col-md-12">
-                            <select asp-for="DepartmentId" asp-items="ViewBag.department"
-                                    class="form-control custom-select" required="">
-                                <option value="">Please select one</option>
-                            </select>
+                      <div class="form-group">
+                            <label class="col-md-12" asp-for="StateId"> State</label>
+                            <div class="col-md-12">
+                                <select asp-for="StateId" class="form-control" id="StateId"
+                                        asp-items="(new SelectList(ViewBag.ListofStates, "Id", "Name"))">
+                                    <option>Select State Name</option>
+                                </select>
+                            </div>
+                            <span asp-validation-for="StateId" class="text-danger"></span>
                         </div>
-                        <span asp-validation-for="DepartmentId" class="text-danger"></span>
 
-                    </div>
-                  <div class="form-group">
-                        <label class="col-md-12" asp-for="StateId"> State</label>
-                        <div class="col-md-12">
-                            <select asp-for="StateId" class="form-control" id="StateId"
-                                    asp-items="(new SelectList(ViewBag.ListofStates, "Id", "Name"))">
-                                <option>Select State Name</option>
-                            </select>
+                        <div class="form-group">
+                            <label asp-for="LocalId"> Local Government</label>
+                            <select asp-for="LocalId" class="form-control" id="LocalId"
+                                    asp-items="(new SelectList(string.Empty, "Id", "Name"))"></select>
+                            <span asp-validation-for="LocalId" class="text-danger"></span>
                         </div>
-                        <span asp-validation-for="StateId" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="LocalId"> Local Government</label>
-                        <select asp-for="LocalId" class="form-control" id="LocalId"
-                                asp-items="(new SelectList(string.Empty, "Id", "Name"))"></select>
-                        <span asp-validation-for="LocalId" class="text-danger"></span>
-                    </div>
-    -->
+        -->
             <a asp-controller="UserProfile" asp-action="EditUser" asp-route-id="Id" class="btn float-right hidden-sm-down btn-success"><i class="mdi mdi-plus-circle"></i>Edit Profile</a>
 
-           </form>
-        </div>
+        </form>
+    </div>
 </div>
 
 

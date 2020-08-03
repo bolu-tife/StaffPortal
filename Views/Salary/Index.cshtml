@@ -37,7 +37,7 @@
                     {
                     <tr>
                         <td>@s.ID</td>
-                        <td>@s.ApplicationUserId</td>
+                        <td>@s.Email</td>
                         <td>@s.Grade.GradeName</td>
                         <td>@s.Grade.Level</td>
                         <td>@s.Grade.Step</td>
@@ -47,7 +47,7 @@
                         <td>@s.Medical</td>
                         <td>@s.Transport</td>
                         <td>@s.NetSalary</td>
-                        <td><a asp-action="Edit" asp-route-id="@s.ID" alt="Edit"><i class="ti-pencil" aria-hidden="true"></i></a> </td>
+                       <!-- <td><a asp-action="Edit" asp-route-id="@s.ID" alt="Edit"><i class="ti-pencil" aria-hidden="true"></i></a> </td> -->
                         <td><a onclick="return confirm('Are you sure you want to delete this record');" asp-action="Delete" asp-route-id="@s.ID"><i class="ti-trash" aria-hidden="true"></i></a> </td>
 
 
