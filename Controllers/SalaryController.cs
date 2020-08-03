@@ -114,9 +114,9 @@ namespace StaffPortal.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var editGrade = await _grade.GetById(id);
+            var editSalary = await _sal.GetById(id);
 
-            if (editGrade == null)
+            if (editSalary == null)
             {
                 return RedirectToAction("Index");
             }
@@ -152,7 +152,7 @@ namespace StaffPortal.Controllers
             ViewBag.gradeStep = gradeListStep;
 
             
-            return View(editGrade);
+            return View(editSalary);
         }
 
 
