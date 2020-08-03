@@ -114,7 +114,7 @@ namespace StaffPortal.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var editGrade = await _grade.GetById(id);
+            var editGrade = await _sal.GetById(id);
 
             if (editGrade == null)
             {
