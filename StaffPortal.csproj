@@ -35,8 +35,8 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Views\Faculty\" />
+    <Folder Include="Views\Salary\" />
     <Folder Include="wwwroot\sweetAlert\" />
     <Folder Include="Views\Account\" />
-    <Folder Include="Views\UserProfile\" />
   </ItemGroup>
 </Project><!-- <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" /> -->

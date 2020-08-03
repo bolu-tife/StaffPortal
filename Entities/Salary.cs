@@ -1,11 +1,16 @@
-using StaffPortal.Entities;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace StaffPortal.Models
+namespace StaffPortal.Entities
 {
     public class Salary
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         public Grade Grade { get; set; }
@@ -15,6 +20,8 @@ namespace StaffPortal.Models
         public double BasicSalary { get; set; }
 
         public double Housing { get; set; }
+
+        public string ApplicationUserId { get; set; }
 
         public double HousingPercent { get; set; }
 
@@ -48,9 +55,6 @@ namespace StaffPortal.Models
 
         public ApplicationUser ApplicationUser { get; set; }
 
-        public int ApplicationUserId { get; set; }
-
-        public string PayItemType { get; set; }
-
+       
     }
 }
