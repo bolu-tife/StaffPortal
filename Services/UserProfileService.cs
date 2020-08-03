@@ -7,15 +7,17 @@ using Microsoft.EntityFrameworkCore;
 using StaffPortal.Interface;
 using Microsoft.AspNetCore.Identity;
 using StaffPortal.Models;
+using System.Linq;
 
 namespace StaffPortal.Services
 {
     public class UserProfileService : IUserProfile
     {
         private StaffPortalDataContext _context;
-        
-        public UserProfileService(StaffPortalDataContext context)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public UserProfileService(StaffPortalDataContext context, UserManager<ApplicationUser> userManager)
         {
+            _userManager = userManager;
             _context = context;
         }
 
@@ -61,7 +63,8 @@ namespace StaffPortal.Services
         public async Task<IEnumerable<UserProfile>> GetAll()
         {
 
-            return await _context.UserProfiles.Include(f => f.Department.Faculty).Include(d => d.Department).ToListAsync();
+            return await _context.UserProfiles.Include(d => d.Department).Include(l => l.LGA).Include(s => s.NewState).ToListAsync();
+            //return await _context.UserProfiles.Include(d => d.Department).ToListAsync();
         }
 
         public async Task<UserProfile> GetById(int Id)
@@ -70,6 +73,43 @@ namespace StaffPortal.Services
 
             return _userprofile;
         }
+
+        public int GetIdByEmail(string Email)
+        {
+            //var _user = await _userManager.FindByIdAsync(userid);
+
+            //return await _context.UserProfiles.First(u => u.Email == _user.Email);
+            try
+            {
+                var _user = _context.UserProfiles.First(u => u.Email == Email);
+                
+                return _user.Id;
+            }
+            catch (Exception)
+            { return 0; }
+
+
+        }
+
+
+        //public async Task<IEnumerable<Local>> GetLocalByStateIdAsync(int id)
+        //{
+           
+        //    try
+        //    {
+        //        return await _context.Locals.Where(u => u.States.Id == id);
+        //        //var _user =await _userManager.FindByEmailAsync(Email);
+
+        //        //var id = _context.UserProfiles.First(u => u.Email == _user.Email).Id;
+        //        //return _user.Id;
+        //    }
+        //    catch (Exception)
+        //    { return 0; }
+
+
+        //}
+
+
         public async Task<bool> Update(UserProfile userprofile) //Update
         {
             var _userprofile = await _context.UserProfiles.FindAsync(userprofile.Id);
@@ -77,9 +117,9 @@ namespace StaffPortal.Services
             {
                 _userprofile.FirstName = userprofile.FirstName;
                 _userprofile.LastName = userprofile.LastName;
-                _userprofile.Email = userprofile.Email;
+                //_userprofile.Email = userprofile.Email;
 
-                _userprofile.Department.FacultyId = userprofile.Department.FacultyId;
+                //_userprofile.Department.FacultyId = userprofile.Department.FacultyId;
                 _userprofile.DepartmentId = userprofile.DepartmentId;
 
                 _userprofile.NewStates = userprofile.NewStates;
@@ -94,7 +134,32 @@ namespace StaffPortal.Services
             return false;
 
         }
-       
+
+        public async Task<bool> UpdateUser(UserProfile userprofile) //Update
+        {
+            var _userprofile = await _context.UserProfiles.FindAsync(userprofile.Id);
+            if (_userprofile != null)
+            {
+                _userprofile.FirstName = userprofile.FirstName;
+                _userprofile.LastName = userprofile.LastName;
+                //_userprofile.Email = userprofile.Email;
+
+                //_userprofile.Department.FacultyId = userprofile.Department.FacultyId;
+                _userprofile.DepartmentId = userprofile.DepartmentId;
+
+                _userprofile.NewStates = userprofile.NewStates;
+                _userprofile.LGAs = userprofile.LGAs;
+                _userprofile.Country = userprofile.Country;
+
+
+                await _context.SaveChangesAsync();
+                return true;
+            }
+
+            return false;
+
+        }
+
 
     }
 }
