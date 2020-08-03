@@ -1,6 +1,6 @@
 ﻿@model StaffPortal.Entities.UserProfile
 @{
-    ViewData["Title"] = "UserProfile";
+    ViewData["Title"] = "Faculty";
 }
 <!-- ============================================================== -->
 <div class="row page-titles">
@@ -18,36 +18,21 @@
             <h3>Employee Profile</h3>
 
             <div class="table-responsive">
-                <form asp-action="Edit" method="post" class="mt-4">
+                <form asp-action="EditUser" method="post" class="mt-4">
                     <div asp-validation-summary="All" class="text-danger"></div>
-                    <!-- <div class="form-group ">
-         <label asp-for="Email">Employees</label>
-         <select class="form-control" asp-for="Email" asp-items="(new SelectList(ViewBag.users, "Id", "Email"))">
-             <option>Choose Option</option>
-         </select>
-         <span asp-validation-for="Email" class="text-danger"></span>
-     </div>
-     -->
-                    <div class="form-group">
-                        <label asp-for="Email"> Employee</label>
-                        <input type="text" asp-for="Email" class="form-control" readonly>
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
+
+
                     <div class="form-group">
                         <label asp-for="FirstName"> FirstName</label>
-                        <input type="text" asp-for="FirstName" class="form-control" placeholder="Enter FirstName" >
+                        <input type="text" asp-for="FirstName" class="form-control" placeholder="Enter FirstName" required="">
                         <span asp-validation-for="FirstName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="LastName"> LastName</label>
-                        <input type="text" asp-for="LastName" class="form-control" placeholder="Enter LastName" >
+                        <input type="text" asp-for="LastName" class="form-control" placeholder="Enter LastName" required="">
                         <span asp-validation-for="LastName" class="text-danger"></span>
                     </div>
-                    <!-- <div class="form-group">
-         <label asp-for="Email"> Email</label>
-         <input type="text" asp-for="Email" class="form-control" placeholder="Enter Email" required="">
-         <span asp-validation-for="Email" class="text-danger"></span>
-     </div> -->
+
                     <div class="form-group">
                         <label asp-for="Country">Country</label>
                         <select asp-for="Country" class="form-control">
@@ -97,7 +82,6 @@
 </div>
 
 
-
 <script src="~/js/jquery-3.2.1.min.js"></script>
 
 
@@ -122,4 +106,7 @@
 
 
 </script>
+
+
+
 
