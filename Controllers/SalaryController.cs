@@ -21,13 +21,16 @@ namespace StaffPortal.Controllers
         private IGrade _grade;
         private IAccount _account;
         private ISalary _sal;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public SalaryController(IGrade grade, IAccount account, ISalary sal,  StaffPortalDataContext context)
+
+        public SalaryController(IGrade grade, IAccount account, ISalary sal, UserManager<ApplicationUser> userManager, StaffPortalDataContext context)
         {
             _grade = grade;
             _account = account;
             _sal = sal;
             _context = context;
+            _userManager = userManager;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
