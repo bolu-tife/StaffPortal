@@ -69,6 +69,13 @@ namespace StaffPortal.Controllers
 
         }
 
+
+        [HttpGet]
+        public IActionResult UserError()
+        {
+            return View();
+        }
+
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -110,29 +117,57 @@ namespace StaffPortal.Controllers
         public IActionResult Create(Salary salary)
         {
             //FOR TAX
-            salary.Tax = salary.TaxPercent * salary.BasicSalary;
-            salary.TaxItemType = "Deduction";
-
+            salary.NetSalary = salary.BasicSalary;
+            salary.Tax =  salary.TaxPercent * salary.BasicSalary;
+            //salary.TaxItemType = "Deduction";
+            if (salary.TaxItemType == "Allowance")
+            {
+                salary.NetSalary += salary.Tax;
+            }
+            else if(salary.TaxItemType == "Deduction")
+                salary.NetSalary -= salary.Tax;
             //FOR HOUSING
             salary.Housing = salary.HousingPercent * salary.BasicSalary;
-            salary.HousingItemType = "Allowance";
+            //salary.HousingItemType = "Allowance";
+
+            if (salary.HousingItemType == "Allowance")
+            {
+                salary.NetSalary += salary.Housing;
+            }
+            else if (salary.HousingItemType == "Deduction")
+                salary.NetSalary -= salary.Housing;
 
             //FOR LUNCH
-            salary.Lunch = salary.LunchPercent * salary.BasicSalary;
-            salary.LunchItemType = "Allowance";
+            salary.Lunch =  salary.LunchPercent * salary.BasicSalary;
+            //salary.LunchItemType = "Allowance";
+            if (salary.LunchItemType == "Allowance")
+                salary.NetSalary += salary.Lunch;
+           else if (salary.LunchItemType == "Deduction")
+                salary.NetSalary -= salary.Lunch;
 
             //FOR TRANSPORT
             salary.Transport = salary.TransportPercent * salary.BasicSalary;
-            salary.TransportItemType = "Allowance";
+            //salary.TransportItemType = "Allowance";
+            if (salary.TransportItemType == "Allowance")
+                salary.NetSalary += salary.Transport;
+            else if (salary.TransportItemType == "Deduction")
+                salary.NetSalary -= salary.Transport;
 
             //FOR MEDICAL
             salary.Medical = salary.MedicalPercent * salary.BasicSalary;
-            salary.MedicalItemType = "Allowance";
-
+            //salary.MedicalItemType = "Allowance";
+            if (salary.MedicalItemType == "Allowance")
+                salary.NetSalary += salary.Medical;
+            else if (salary.MedicalItemType == "Deduction")
+                salary.NetSalary -= salary.Medical;
             //TOTAL SALARY
-            salary.NetSalary = salary.BasicSalary + salary.Housing + salary.Lunch
-                + salary.Transport + salary.Medical - salary.Tax;
 
+
+            //salary.NetSalary = salary.BasicSalary + salary.Housing + salary.Lunch
+            //    + salary.Transport + salary.Medical - salary.Tax;
+
+            //salary.NetSalary = salary.BasicSalary + salary.Housing + salary.Lunch
+            //    + salary.Transport + salary.Medical ;
             _context.Add(salary);
              _context.SaveChanges();
 

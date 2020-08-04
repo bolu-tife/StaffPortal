@@ -44,19 +44,19 @@
 
 
                     <div class="form-group">
-                        <label asp-for="NewStates"> State</label>
-                        <select asp-for="NewStates" class="form-control" id="NewStatesId"
+                        <label asp-for="NewStateId"> State</label>
+                        <select asp-for="NewStateId" class="form-control" id="NewStatesId"
                                 asp-items="@(new SelectList(ViewBag.state, "Id", "Name"))">
                             <option>Select State Name</option>
                         </select>
-                        <span asp-validation-for="NewStates" class="text-danger"></span>
+                        <span asp-validation-for="NewStateId" class="text-danger"></span>
                     </div>
 
 
                     <div class="form-group">
-                        <label asp-for="LGAs"> Local Government</label>
-                        <select class="form-control" id="LGAId" asp-for="LGAs" asp-items="@(new SelectList(string.Empty, "Id", "Name"))"></select>
-                        <span asp-validation-for="LGAs" class="text-danger"></span>
+                        <label asp-for="LGAId"> Local Government</label>
+                        <select class="form-control" id="LGAId" asp-for="LGAId" asp-items="@(new SelectList(string.Empty, "Id", "Name"))"></select>
+                        <span asp-validation-for="LGAId" class="text-danger"></span>
                     </div>
 
 

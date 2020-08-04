@@ -111,6 +111,8 @@ namespace StaffPortal.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(UserProfile userProfile)
         {
+            //userProfile.NewStates = "state";
+            //userProfile.LGAs = "Lga";
             userProfile.CreatedBy = _userManager.GetUserName(User);
 
             var createUserProfile = await _userProfile.AddAsync(userProfile);
