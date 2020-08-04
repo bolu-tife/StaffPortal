@@ -182,7 +182,58 @@ namespace StaffPortal.Controllers
             return RedirectToAction("EditRole", new { Id = roleId });
 
         }
+        
+//[HttpPost]
+        public async Task<IActionResult> Delete(string Id)
+        {
+            var user = await roleManager.FindByIdAsync(Id);
+            //if(user == null)
+            //{
+            //    ViewBag.ErrorMessage = $"Role with Id = {Id} cannot be found";
+            //    return View("");
+            //}
+            //else
+            //{
+                var result = await roleManager.DeleteAsync(user);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListRole");
+                }
+                foreach(var errors in result.Errors)
+                {
+                    ModelState.AddModelError("", errors.Description);
+                }
+                return View("ListRole");
+           // }
+        }
 
+        /*
+           public async Task<IActionResult> Delete()
+        {
+            // ViewBag.roleId = roleId;
+            string roleId = "afb20bb1-2607-4ba7-9d50-56992fc28bc2";
+            var user = await roleManager.FindByIdAsync(roleId);
+            if(user == null)
+            {
+                ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
+                return View("");
+            }
+            else
+            {
+                var result = await roleManager.DeleteAsync(user);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListRole");
+                }
+                foreach(var errors in result.Errors)
+                {
+                    ModelState.AddModelError("", errors.Description);
+                }
+                return View("ListRole");
+            }
+        }
+
+             */
         public IActionResult Cancel()
         {
             return RedirectToAction("ListRole", "Administration");

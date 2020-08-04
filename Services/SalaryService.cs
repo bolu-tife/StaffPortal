@@ -70,7 +70,7 @@ namespace StaffPortal.Services
 
         public async Task<IEnumerable<Salary>> GetAll()
         {
-            return await _context.Salaries.Include(g=>g.Grade).Include(u => u.ApplicationUser).ToListAsync();
+            return await _context.Salaries.Include(g=>g.Grade)/*.Include(u => u.ApplicationUser)*/.ToListAsync();
         }
 
         public async Task<Salary> GetById(int Id)
