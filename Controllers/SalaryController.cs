@@ -54,10 +54,10 @@ namespace StaffPortal.Controllers
 
             var usersal = await _sal.GetById(editsal);
 
-            var grade = _context.Grades.First(n => n.Id == usersal.GradeId);
-            usersal.GradeName = grade.GradeName;
-            usersal.GradeLevel = grade.Level;
-            usersal.GradeStep = grade.Step;
+            //var grade = _context.Grades.First(n => n.Id == usersal.GradeId);
+            //usersal.GradeName = grade.GradeName;
+            //usersal.GradeLevel = grade.Level;
+            //usersal.GradeStep = grade.Step;
 
             if (usersal == null)
             {
@@ -108,8 +108,9 @@ namespace StaffPortal.Controllers
             });
             //ViewBag.accountName = accountListName;
             ViewBag.gradeName = gradeListName;
-            ViewBag.gradeLevel = gradeListLevel;
-            ViewBag.gradeStep = gradeListStep;
+            //ViewBag.gradeLevel = gradeListLevel;
+            //ViewBag.gradeStep = gradeListStep;
+
             ViewBag.users = _context.Users.ToList();
 
             return View(new Salary());
@@ -164,6 +165,10 @@ namespace StaffPortal.Controllers
                 salary.NetSalary -= salary.Medical;
             //TOTAL SALARY
 
+            var grade = _context.Grades.First(n => n.Id == salary.GradeId);
+            salary.GradeName = grade.GradeName;
+            salary.GradeLevel = grade.Level;
+            salary.GradeStep = grade.Step;
 
             //salary.NetSalary = salary.BasicSalary + salary.Housing + salary.Lunch
             //    + salary.Transport + salary.Medical - salary.Tax;
@@ -237,6 +242,10 @@ namespace StaffPortal.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Salary s)
         {
+            var grade = _context.Grades.First(n => n.Id == s.GradeId);
+            s.GradeName = grade.GradeName;
+            s.GradeLevel = grade.Level;
+            s.GradeStep = grade.Step;
 
             var editSalary = await _sal.Update(s);
             if (editSalary && ModelState.IsValid)

@@ -56,12 +56,12 @@ namespace StaffPortal.Controllers
             var editUserProfile = _userProfile.GetIdByEmail(x.Email);
 
             var userprof = await _userProfile.GetById(editUserProfile);
-            var y = _userProfile.FindNameByStateId(userprof.NewStateId);
-            userprof.NewStates = y;
-            var z = _userProfile.FindNameByLocalId(userprof.LGAId);
-            userprof.LGAs = z;
-            var w = _userProfile.FindNameByDepartmentId(userprof.DepartmentId);
-            userprof.DepartmentName = w;
+            //var y = _userProfile.FindNameByStateId(userprof.NewStateId);
+            //userprof.NewStates = y;
+            //var z = _userProfile.FindNameByLocalId(userprof.LGAId);
+            //userprof.LGAs = z;
+            //var w = _userProfile.FindNameByDepartmentId(userprof.DepartmentId);
+            //userprof.DepartmentName = w;
 
             //var
             if (userprof == null)
@@ -122,6 +122,12 @@ namespace StaffPortal.Controllers
             //userProfile.LGAs = "Lga";
             userProfile.CreatedBy = _userManager.GetUserName(User);
 
+            userProfile.NewStates = _userProfile.FindNameByStateId(userProfile.NewStateId);
+
+            userProfile.LGAs = _userProfile.FindNameByLocalId(userProfile.LGAId);
+
+            userProfile.DepartmentName = _userProfile.FindNameByDepartmentId(userProfile.DepartmentId);
+            userProfile.FacultyName = _userProfile.FindFacultyNameByDepartmentId(userProfile.DepartmentId);
             var createUserProfile = await _userProfile.AddAsync(userProfile);
            
             if (createUserProfile)
@@ -176,7 +182,12 @@ namespace StaffPortal.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(UserProfile userProfile)
         {
-            
+            userProfile.NewStates = _userProfile.FindNameByStateId(userProfile.NewStateId);
+
+            userProfile.LGAs = _userProfile.FindNameByLocalId(userProfile.LGAId);
+
+            userProfile.DepartmentName = _userProfile.FindNameByDepartmentId(userProfile.DepartmentId);
+            userProfile.FacultyName = _userProfile.FindFacultyNameByDepartmentId(userProfile.DepartmentId);
             var editUserProfile = await _userProfile.UpdateUser(userProfile);
 
             if (editUserProfile && ModelState.IsValid)
@@ -235,6 +246,12 @@ namespace StaffPortal.Controllers
             var x = await _userManager.FindByNameAsync(user);
 
             userProfile.Id = _userProfile.GetIdByEmail(x.Email);
+            userProfile.NewStates = _userProfile.FindNameByStateId(userProfile.NewStateId);
+
+            userProfile.LGAs = _userProfile.FindNameByLocalId(userProfile.LGAId);
+
+            userProfile.DepartmentName = _userProfile.FindNameByDepartmentId(userProfile.DepartmentId);
+            userProfile.FacultyName = _userProfile.FindFacultyNameByDepartmentId(userProfile.DepartmentId);
             var editUserProfile = await _userProfile.UpdateUser(userProfile);
 
             if (editUserProfile)
@@ -267,7 +284,7 @@ namespace StaffPortal.Controllers
 
         public IActionResult Cancel()
         {
-            return RedirectToAction("Index", "User");
+            return RedirectToAction("Index", "UserProfile");
         }
 
         public JsonResult GetLGA(int id)
@@ -293,6 +310,8 @@ namespace StaffPortal.Controllers
             //    Text = l.Name
             //}));
         }
+
+       
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

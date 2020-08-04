@@ -16,6 +16,7 @@ namespace StaffPortal.Interface
         string FindNameByStateId(int id);
         string FindNameByLocalId(int id);
         string FindNameByDepartmentId(int id);
+        string FindFacultyNameByDepartmentId(int id);
         Task<UserProfile> GetById(int Id);
         Task<bool> Delete(int Id);
     }

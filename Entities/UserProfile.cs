@@ -16,7 +16,7 @@ namespace StaffPortal.Entities
         
         public int DepartmentId { get; set; }
         public string DepartmentName { get; set; }
-
+        public string FacultyName { get; set; }
 
         public string NewStates { get; set; }
         public string LGAs { get; set; }

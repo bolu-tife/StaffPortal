@@ -35,8 +35,8 @@
                                     <td>
                                         <div class="form-group">
                                             <label class="col-md-4"> Email</label>
-                                            <div class="col-md-4">
-                                                <input type="text" asp-for="Email" class="form-control form-control-line" readonly>
+                                            <div class="col-md-6">
+                                                <input type="text" asp-for="Email" class="form-control " disabled>
                                             </div>
 
                                         </div>
@@ -51,8 +51,8 @@
                                     <td>
                                         <div class="form-group">
                                             <label class="col-md-4"> Grade</label>
-                                            <div class="col-md-4">
-                                                <input type="text" asp-for="GradeName" class="form-control form-control-line" readonly>
+                                            <div class="col-md-6">
+                                                <input type="text" asp-for="GradeName" class="form-control " disabled>
                                             </div>
 
                                         </div>
@@ -62,17 +62,19 @@
                                     <td>
                                         <div class="form-group">
                                             <label class="col-md-4"> Level</label>
-                                            <div class="col-md-4">
-                                                <input type="text" asp-for="GradeLevel" class="form-control form-control-line" readonly>
+                                            <div class="col-md-6">
+                                                <input type="text" asp-for="GradeLevel" class="form-control " disabled>
                                             </div>
 
                                         </div>
                                     </td>
                                     <td>
+
+
                                         <div class="form-group">
                                             <label class="col-md-4"> Step</label>
-                                            <div class="col-md-4">
-                                                <input type="text" asp-for="GradeStep" class="form-control form-control-line" readonly>
+                                            <div class="col-md-6">
+                                                <input type="text" asp-for="GradeStep" class="form-control " disabled>
                                             </div>
 
                                         </div>
@@ -86,15 +88,16 @@
                     <br />
                     <div class="form-group">
                         <label for="Tax">Basic Salary</label>
-                        <input type="text" disabled class="form-control" value="@Model.BasicSalary" />
+                        <input type="text" disabled class="form-control " value="@Model.BasicSalary" />
                     </div>
+                    <br />
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>PayItem</th>
-                                <th>Amount</th>
-                                <th>%</th>
-                                <th>PayItem Type</th>
+                                <th style="text-align:center;">Amount</th>
+                                <th style="text-align:center;">%</th>
+                                <th style="text-align:center;">PayItem Type</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -211,6 +214,7 @@
                     @*<button type="submit" class="btn btn-success mr-2">Submit</button>
         <button type="submit" class="btn btn-dark">Cancel</button>
                     <a href="Cancel" type="button" class="btn btn-dark">Cancel</a> *@
+                    
                 </form>
             </div>
         </div>

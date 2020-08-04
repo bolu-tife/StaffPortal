@@ -26,8 +26,8 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th></th>
-                                    <th></th>
+                                    <th class=" col-md-6"></thclass=">
+                                    <th class=" col-md-6" ></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,7 +39,7 @@
                                                 <option>Choose Option</option>
                                             </select>
                                         </div> -->
-                                        <div class="form-group ">
+                                        <div class="form-group">
                                             <label asp-for="Email">Employees</label>
                                             <select class="form-control" asp-for="Email" id="Userid" asp-items="@(new SelectList(ViewBag.users, "Email", "Email"))">
                                                 <option>Choose Option</option>
@@ -48,7 +48,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="form-group mb-4">
+                                        <div class="form-group ">
                                             <label for="exampleFormControlSelect1">Grade</label>
                                             <select class="form-control" id="exampleFormControlSelect1" asp-for="GradeId" asp-items="@ViewBag.gradeName">
                                                 <option>Choose Option</option>
@@ -88,10 +88,10 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>PayItem</th>
+                                <th class="col-sm-2" style="text-align:center;">PayItem</th>
                              @*   <th>Amount</th>*@
-                                <th>%</th>
-                                <th>PayItem Type</th> 
+                                <th class="col-md-4" style="text-align:center;">%</th>
+                                <th class="col-md-4" style="text-align:center;">PayItem Type</th> 
                             </tr>
                         </thead>
                         <tbody>
@@ -107,8 +107,8 @@
                                     </div>
                                 </td> *@
                                 <td>
-                                    <div class="form-group">
-                                        <input type="text" asp-for="TaxPercent" class="form-control" id="name" placeholder="Enter TaxPercent" required="">
+                                    <div class="form-group ">
+                                        <input type="text" asp-for="TaxPercent" class="form-control " id="name" placeholder="Enter TaxPercent" required="">
                                         <span asp-validation-for="TaxPercent" class="text-danger"></span>
                                     </div>
                                 </td>
@@ -116,8 +116,9 @@
                                   @*  <div class="form-group">
                                         <input type="text" class="form-control" value="@Model.TaxItemType" />
                                     </div> *@
-                                    <div class="form-group">
-                                        <select  class="form-control" asp-for="@Model.TaxItemType" >
+                                    <div class="form-group ">
+                                        <select class="form-control" asp-for="@Model.TaxItemType">
+                                            
                                             <option value="Allowance">Allowance</option>
                                             <option class="others" value="Deduction">Deduction</option>
                                         </select>
@@ -146,6 +147,7 @@
                                     </div> *@
                                     <div class="form-group">
                                         <select class="form-control" asp-for="@Model.HousingItemType">
+                                           
                                             <option value="Allowance">Allowance</option>
                                             <option value="Deduction">Deduction</option>
                                         </select>
@@ -176,6 +178,7 @@
                                     </div> *@
                                     <div class="form-group">
                                         <select class="form-control" asp-for="@Model.LunchItemType">
+                                            
                                             <option value="Allowance">Allowance</option>
                                             <option value="Deduction">Deduction</option>
                                         </select>
@@ -205,6 +208,7 @@
                                     </div>*@
                                     <div class="form-group">
                                         <select class="form-control" asp-for="@Model.TransportItemType">
+                                            
                                             <option value="Allowance">Allowance</option>
                                             <option value="Deduction">Deduction</option>
                                         </select>
@@ -233,6 +237,7 @@
                                     </div> *@
                                     <div class="form-group">
                                         <select class="form-control" asp-for="@Model.MedicalItemType">
+                                           
                                             <option value="Allowance">Allowance</option>
                                             <option value="Deduction">Deduction</option>
                                         </select>
@@ -249,7 +254,7 @@
                     </div> *@
                     <button type="submit" class="btn btn-success mr-2">Submit</button>
                     @*<button type="submit" class="btn btn-dark">Cancel</button>*@
-                    <a href="Cancel" type="button" class="btn btn-dark">Cancel</a>
+                <a asp-action="Cancel" type="button" class="btn btn-dark">Cancel</a>
                 </form>
             </div>
         </div>

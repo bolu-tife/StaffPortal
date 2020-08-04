@@ -106,6 +106,9 @@ namespace StaffPortal.Services
 
                 s.MedicalItemType = salary.MedicalItemType;
                 s.MedicalPercent = salary.MedicalPercent;
+                s.GradeLevel = salary.GradeLevel;
+                s.GradeName = salary.GradeName;
+                s.GradeStep = salary.GradeStep;
 
                 s.NetSalary = s.BasicSalary;
                 s.Tax = s.TaxPercent * s.BasicSalary;
