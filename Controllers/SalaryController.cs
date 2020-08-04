@@ -22,9 +22,13 @@ namespace StaffPortal.Controllers
         private IAccount _account;
         private ISalary _sal;
         private readonly UserManager<ApplicationUser> _userManager;
+<<<<<<< HEAD
 
 
         public SalaryController(IGrade grade, IAccount account, ISalary sal, UserManager<ApplicationUser> userManager, StaffPortalDataContext context)
+=======
+        public SalaryController(IGrade grade, IAccount account, ISalary sal,  StaffPortalDataContext context, UserManager<ApplicationUser> userManager)
+>>>>>>> 1f0c874161292079aa43ae65f750dc5b8556f93c
         {
             _grade = grade;
             _account = account;
@@ -41,6 +45,28 @@ namespace StaffPortal.Controllers
                 return View(model);
             }
             return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> PersonalSalary()
+        {
+
+            var user = _userManager.GetUserName(User);
+            var x = await _userManager.FindByNameAsync(user);
+
+            var editsal = _sal.GetIdByEmail(x.Email);
+
+            var usersal = await _sal.GetById(editsal);
+
+            if (usersal == null)
+            {
+                return RedirectToAction("UserError");
+            }
+            else
+            {
+                return View(usersal);
+            }
+
+
         }
 
         [HttpGet]
@@ -71,10 +97,11 @@ namespace StaffPortal.Controllers
                 Value = g.Id.ToString(),
                 Text = g.Step.ToString()
             });
-            ViewBag.accountName = accountListName;
+            //ViewBag.accountName = accountListName;
             ViewBag.gradeName = gradeListName;
             ViewBag.gradeLevel = gradeListLevel;
             ViewBag.gradeStep = gradeListStep;
+            ViewBag.users = _context.Users.ToList();
 
             return View(new Salary());
         }
@@ -109,15 +136,26 @@ namespace StaffPortal.Controllers
             _context.Add(salary);
              _context.SaveChanges();
 
-           return View(salary);
-        
+           //return View(salary);
+            //var createUserProfile = await _userProfile.AddAsync(userProfile);
+
+            if (salary != null)
+            {
+                Alert("UserProfile created successfully.", NotificationType.success);
+                return RedirectToAction("Index");
+            }
+            Alert("UserProfile not created!", NotificationType.error);
+            return View(salary);
+
         }
 
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
+
             var editSalary = await _sal.GetById(id);
+
 
             if (editSalary == null)
             {

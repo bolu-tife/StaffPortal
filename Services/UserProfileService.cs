@@ -76,9 +76,7 @@ namespace StaffPortal.Services
 
         public int GetIdByEmail(string Email)
         {
-            //var _user = await _userManager.FindByIdAsync(userid);
-
-            //return await _context.UserProfiles.First(u => u.Email == _user.Email);
+            
             try
             {
                 var _user = _context.UserProfiles.First(u => u.Email == Email);

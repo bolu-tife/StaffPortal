@@ -55,6 +55,8 @@ namespace StaffPortal.Entities
 
         public ApplicationUser ApplicationUser { get; set; }
 
+        public string Email { get; set; }
+
        
     }
 }

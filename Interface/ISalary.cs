@@ -13,6 +13,7 @@ namespace StaffPortal.Inteface
         Task<bool> Update(Salary dept);
         Task<IEnumerable<Salary>> GetAll();
         Task<Salary> GetById(int Id);
+        int GetIdByEmail(string email);
         Task<bool> Delete(int Id);
     }
 }
