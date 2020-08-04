@@ -22,13 +22,13 @@ namespace StaffPortal.Controllers
         private IAccount _account;
         private ISalary _sal;
         private readonly UserManager<ApplicationUser> _userManager;
-<<<<<<< HEAD
+
 
 
         public SalaryController(IGrade grade, IAccount account, ISalary sal, UserManager<ApplicationUser> userManager, StaffPortalDataContext context)
-=======
-        public SalaryController(IGrade grade, IAccount account, ISalary sal,  StaffPortalDataContext context, UserManager<ApplicationUser> userManager)
->>>>>>> 1f0c874161292079aa43ae65f750dc5b8556f93c
+
+        //public SalaryController(IGrade grade, IAccount account, ISalary sal,  StaffPortalDataContext context, UserManager<ApplicationUser> userManager)
+
         {
             _grade = grade;
             _account = account;
