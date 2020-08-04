@@ -9,9 +9,11 @@ using StaffPortal.Interface;
 using StaffPortal.Entities;
 using StaffPortal.Enums;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StaffPortal.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class GradeController : BaseController
     {
         private IGrade _grade;

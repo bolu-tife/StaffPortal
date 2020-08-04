@@ -29,8 +29,8 @@ namespace StaffPortal.Entities
         public LGA LGA { get; set; }
         public Department Department { get; set; }
         
-        public Salary Salary { get; set; }
-        public int SalaryID { get; set; }
+        //public Salary Salary { get; set; }
+        //public int SalaryID { get; set; }
 
         public string CreatedBy { get; set; }
         private DateTime? dateCreated = null;

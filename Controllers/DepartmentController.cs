@@ -10,9 +10,11 @@ using StaffPortal.Entities;
 using StaffPortal.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StaffPortal.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class DepartmentController : BaseController
 
     {

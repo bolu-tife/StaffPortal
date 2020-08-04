@@ -12,9 +12,11 @@ using StaffPortal.Enums;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using StaffPortal.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StaffPortal.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UserProfileController : BaseController
     {
         private IUserProfile _userProfile;

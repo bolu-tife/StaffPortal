@@ -14,7 +14,7 @@ using StaffPortal.Data;
 
 namespace StaffPortal.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class SalaryController : BaseController
     {
         private StaffPortalDataContext _context;

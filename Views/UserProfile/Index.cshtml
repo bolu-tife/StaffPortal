@@ -44,29 +44,26 @@
 
                         @foreach (var UserProfile in Model)
                         {
-                            <tr>
+                        <tr>
 
 
 
-                                <td>@UserProfile.Id</td>
+                            <td>@UserProfile.Id</td>
 
-                                <td>@UserProfile.FirstName  </td>
-                                <td>@UserProfile.LastName </td>
-                                <td>@UserProfile.Email </td>
-                                <td>@UserProfile.Country </td>
-                                <td>@UserProfile.NewState.Name </td>
-                                <td>@UserProfile.LGA.Name </td>
-                               
-                                <td>@UserProfile.Department.DeptName </td>
-                                <td>@UserProfile.CreatedBy  </td>
-                                <td>@UserProfile.DateCreated    </td>
+                            <td>@UserProfile.FirstName  </td>
+                            <td>@UserProfile.LastName </td>
+                            <td>@UserProfile.Email </td>
+                            <td>@UserProfile.Country </td>
+                            <td>@UserProfile.NewState.Name </td>
+                            <td>@UserProfile.LGA.Name</td>
+                            <td>@UserProfile.Department.DeptName </td>
+                            <td>@UserProfile.CreatedBy  </td>
+                            <td>@UserProfile.DateCreated    </td>
 
-                                <td>
+                            <td><a asp-action="Edit" asp-route-id="@UserProfile.Id" alt="Edit"><i class="ti-pencil" aria-hidden="true"></i></a> </td>
+                            <td><a onclick="return confirm('Are you sure you want to delete this record');" asp-action="Delete" asp-route-id="@UserProfile.Id"><i class="ti-trash" aria-hidden="true"></i></a> </td>
 
-                                <td><a asp-action="Edit" asp-route-id="@UserProfile.Id" alt="Edit"><i class="ti-pencil" aria-hidden="true"></i></a> </td>
-                                <td><a onclick="return confirm('Are you sure you want to delete this record');" asp-action="Delete" asp-route-id="@UserProfile.Id"><i class="ti-trash" aria-hidden="true"></i></a> </td>
-
-                            </tr>
+                        </tr>
                         }
                     </tbody>
                 </table>
