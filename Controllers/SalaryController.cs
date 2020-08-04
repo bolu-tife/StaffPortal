@@ -26,9 +26,6 @@ namespace StaffPortal.Controllers
 
 
         public SalaryController(IGrade grade, IAccount account, ISalary sal, UserManager<ApplicationUser> userManager, StaffPortalDataContext context)
-
-        //public SalaryController(IGrade grade, IAccount account, ISalary sal,  StaffPortalDataContext context, UserManager<ApplicationUser> userManager)
-
         {
             _grade = grade;
             _account = account;
@@ -56,6 +53,11 @@ namespace StaffPortal.Controllers
             var editsal = _sal.GetIdByEmail(x.Email);
 
             var usersal = await _sal.GetById(editsal);
+
+            //var grade = _context.Grades.First(n => n.Id == usersal.GradeId);
+            //usersal.GradeName = grade.GradeName;
+            //usersal.GradeLevel = grade.Level;
+            //usersal.GradeStep = grade.Step;
 
             if (usersal == null)
             {
@@ -106,8 +108,9 @@ namespace StaffPortal.Controllers
             });
             //ViewBag.accountName = accountListName;
             ViewBag.gradeName = gradeListName;
-            ViewBag.gradeLevel = gradeListLevel;
-            ViewBag.gradeStep = gradeListStep;
+            //ViewBag.gradeLevel = gradeListLevel;
+            //ViewBag.gradeStep = gradeListStep;
+
             ViewBag.users = _context.Users.ToList();
 
             return View(new Salary());
@@ -118,16 +121,16 @@ namespace StaffPortal.Controllers
         {
             //FOR TAX
             salary.NetSalary = salary.BasicSalary;
-            salary.Tax =  salary.TaxPercent * salary.BasicSalary;
+            salary.Tax = salary.TaxPercent * salary.BasicSalary / 100;
             //salary.TaxItemType = "Deduction";
             if (salary.TaxItemType == "Allowance")
             {
                 salary.NetSalary += salary.Tax;
             }
-            else if(salary.TaxItemType == "Deduction")
+            else if (salary.TaxItemType == "Deduction")
                 salary.NetSalary -= salary.Tax;
             //FOR HOUSING
-            salary.Housing = salary.HousingPercent * salary.BasicSalary;
+            salary.Housing = salary.HousingPercent * salary.BasicSalary / 100;
             //salary.HousingItemType = "Allowance";
 
             if (salary.HousingItemType == "Allowance")
@@ -138,15 +141,15 @@ namespace StaffPortal.Controllers
                 salary.NetSalary -= salary.Housing;
 
             //FOR LUNCH
-            salary.Lunch =  salary.LunchPercent * salary.BasicSalary;
+            salary.Lunch = salary.LunchPercent * salary.BasicSalary / 100;
             //salary.LunchItemType = "Allowance";
             if (salary.LunchItemType == "Allowance")
                 salary.NetSalary += salary.Lunch;
-           else if (salary.LunchItemType == "Deduction")
+            else if (salary.LunchItemType == "Deduction")
                 salary.NetSalary -= salary.Lunch;
 
             //FOR TRANSPORT
-            salary.Transport = salary.TransportPercent * salary.BasicSalary;
+            salary.Transport = salary.TransportPercent * salary.BasicSalary / 100;
             //salary.TransportItemType = "Allowance";
             if (salary.TransportItemType == "Allowance")
                 salary.NetSalary += salary.Transport;
@@ -154,7 +157,7 @@ namespace StaffPortal.Controllers
                 salary.NetSalary -= salary.Transport;
 
             //FOR MEDICAL
-            salary.Medical = salary.MedicalPercent * salary.BasicSalary;
+            salary.Medical = salary.MedicalPercent * salary.BasicSalary / 100;
             //salary.MedicalItemType = "Allowance";
             if (salary.MedicalItemType == "Allowance")
                 salary.NetSalary += salary.Medical;
@@ -162,6 +165,10 @@ namespace StaffPortal.Controllers
                 salary.NetSalary -= salary.Medical;
             //TOTAL SALARY
 
+            var grade = _context.Grades.First(n => n.Id == salary.GradeId);
+            salary.GradeName = grade.GradeName;
+            salary.GradeLevel = grade.Level;
+            salary.GradeStep = grade.Step;
 
             //salary.NetSalary = salary.BasicSalary + salary.Housing + salary.Lunch
             //    + salary.Transport + salary.Medical - salary.Tax;
@@ -169,9 +176,9 @@ namespace StaffPortal.Controllers
             //salary.NetSalary = salary.BasicSalary + salary.Housing + salary.Lunch
             //    + salary.Transport + salary.Medical ;
             _context.Add(salary);
-             _context.SaveChanges();
+            _context.SaveChanges();
 
-           //return View(salary);
+            //return View(salary);
             //var createUserProfile = await _userProfile.AddAsync(userProfile);
 
             if (salary != null)
@@ -227,7 +234,7 @@ namespace StaffPortal.Controllers
             ViewBag.gradeLevel = gradeListLevel;
             ViewBag.gradeStep = gradeListStep;
 
-            
+
             return View(editSalary);
         }
 
@@ -235,6 +242,10 @@ namespace StaffPortal.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Salary s)
         {
+            var grade = _context.Grades.First(n => n.Id == s.GradeId);
+            s.GradeName = grade.GradeName;
+            s.GradeLevel = grade.Level;
+            s.GradeStep = grade.Step;
 
             var editSalary = await _sal.Update(s);
             if (editSalary && ModelState.IsValid)

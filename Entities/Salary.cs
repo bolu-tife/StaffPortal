@@ -56,7 +56,9 @@ namespace StaffPortal.Entities
         public ApplicationUser ApplicationUser { get; set; }
 
         public string Email { get; set; }
+        public string GradeName { get; set; }
+        public int GradeLevel { get; set; }
+        public int GradeStep { get; set; }
 
-       
     }
 }

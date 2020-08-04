@@ -68,6 +68,12 @@ namespace StaffPortal.Services
             return false;
         }
 
+        //public string FindGradeByGradeId(int id)
+        //{
+        //    var name = _context.NewStates.First(n => n.Id == id);
+        //    return name.Name;
+        //}
+
         public async Task<IEnumerable<Salary>> GetAll()
         {
             return await _context.Salaries.Include(g=>g.Grade)/*.Include(u => u.ApplicationUser)*/.ToListAsync();
@@ -100,6 +106,9 @@ namespace StaffPortal.Services
 
                 s.MedicalItemType = salary.MedicalItemType;
                 s.MedicalPercent = salary.MedicalPercent;
+                s.GradeLevel = salary.GradeLevel;
+                s.GradeName = salary.GradeName;
+                s.GradeStep = salary.GradeStep;
 
                 s.NetSalary = s.BasicSalary;
                 s.Tax = s.TaxPercent * s.BasicSalary;

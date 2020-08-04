@@ -32,6 +32,7 @@ namespace StaffPortal.Services
         {
             try
             {
+
                 await _context.AddAsync(userprofile);
                
                 await _context.SaveChangesAsync();
@@ -67,6 +68,28 @@ namespace StaffPortal.Services
             //return await _context.UserProfiles.Include(d => d.Department).ToListAsync();
         }
 
+        public string FindNameByStateId(int id)
+        {
+            var name = _context.NewStates.First(n => n.Id == id);
+            return name.Name;
+        }
+
+        public string FindNameByLocalId(int id)
+        {
+            var name = _context.LGAs.First(n => n.Id == id);
+            return name.Name;
+        }
+
+        public string FindNameByDepartmentId(int id)
+        {
+            var name = _context.Departments.First(n => n.Id == id);
+            return name.DeptName;
+        }
+        public string FindFacultyNameByDepartmentId(int id)
+        {
+            var name = _context.Departments.First(n => n.Id == id);
+            return _context.Faculties.First(f => f.Id == name.FacultyId).Name;
+        }
         public async Task<UserProfile> GetById(int Id)
         {
             var _userprofile = await _context.UserProfiles.FindAsync(Id);
@@ -119,6 +142,10 @@ namespace StaffPortal.Services
 
                 //_userprofile.Department.FacultyId = userprofile.Department.FacultyId;
                 _userprofile.DepartmentId = userprofile.DepartmentId;
+                _userprofile.DepartmentName = userprofile.DepartmentName;
+                _userprofile.FacultyName = userprofile.FacultyName;
+                _userprofile.LGAs = userprofile.LGAs;
+                _userprofile.NewStates = userprofile.NewStates;
 
                 _userprofile.NewStateId = userprofile.NewStateId;
                 _userprofile.LGAId = userprofile.LGAId;
@@ -144,6 +171,10 @@ namespace StaffPortal.Services
 
                 //_userprofile.Department.FacultyId = userprofile.Department.FacultyId;
                 _userprofile.DepartmentId = userprofile.DepartmentId;
+                _userprofile.DepartmentName = userprofile.DepartmentName;
+                _userprofile.FacultyName = userprofile.FacultyName;
+                _userprofile.LGAs = userprofile.LGAs;
+                _userprofile.NewStates = userprofile.NewStates;
 
                 _userprofile.NewStateId = userprofile.NewStateId;
                 _userprofile.LGAId = userprofile.LGAId;
