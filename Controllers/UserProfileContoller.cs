@@ -56,7 +56,14 @@ namespace StaffPortal.Controllers
             var editUserProfile = _userProfile.GetIdByEmail(x.Email);
 
             var userprof = await _userProfile.GetById(editUserProfile);
-          
+            var y = _userProfile.FindNameByStateId(userprof.NewStateId);
+            userprof.NewStates = y;
+            var z = _userProfile.FindNameByLocalId(userprof.LGAId);
+            userprof.LGAs = z;
+            var w = _userProfile.FindNameByDepartmentId(userprof.DepartmentId);
+            userprof.DepartmentName = w;
+
+            //var
             if (userprof == null)
             {
                 return RedirectToAction("UserError");

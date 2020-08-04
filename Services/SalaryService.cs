@@ -68,6 +68,12 @@ namespace StaffPortal.Services
             return false;
         }
 
+        //public string FindGradeByGradeId(int id)
+        //{
+        //    var name = _context.NewStates.First(n => n.Id == id);
+        //    return name.Name;
+        //}
+
         public async Task<IEnumerable<Salary>> GetAll()
         {
             return await _context.Salaries.Include(g=>g.Grade)/*.Include(u => u.ApplicationUser)*/.ToListAsync();

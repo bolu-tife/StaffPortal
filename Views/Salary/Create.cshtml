@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Salary";
 }
+
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
         <h3 class="text-themecolor">Salary</h3>
@@ -118,7 +119,7 @@
                                     <div class="form-group">
                                         <select  class="form-control" asp-for="@Model.TaxItemType" >
                                             <option value="Allowance">Allowance</option>
-                                            <option value="Deduction">Deduction</option>
+                                            <option class="others" value="Deduction">Deduction</option>
                                         </select>
                                     </div>
                                 </td> 

@@ -67,6 +67,24 @@ namespace StaffPortal.Services
             //return await _context.UserProfiles.Include(d => d.Department).ToListAsync();
         }
 
+        public string FindNameByStateId(int id)
+        {
+            var name = _context.NewStates.First(n => n.Id == id);
+            return name.Name;
+        }
+
+        public string FindNameByLocalId(int id)
+        {
+            var name = _context.LGAs.First(n => n.Id == id);
+            return name.Name;
+        }
+
+        public string FindNameByDepartmentId(int id)
+        {
+            var name = _context.Departments.First(n => n.Id == id);
+            return name.DeptName;
+        }
+
         public async Task<UserProfile> GetById(int Id)
         {
             var _userprofile = await _context.UserProfiles.FindAsync(Id);

@@ -22,13 +22,10 @@ namespace StaffPortal.Controllers
         private IAccount _account;
         private ISalary _sal;
         private readonly UserManager<ApplicationUser> _userManager;
-<<<<<<< HEAD
+
 
 
         public SalaryController(IGrade grade, IAccount account, ISalary sal, UserManager<ApplicationUser> userManager, StaffPortalDataContext context)
-=======
-        public SalaryController(IGrade grade, IAccount account, ISalary sal,  StaffPortalDataContext context, UserManager<ApplicationUser> userManager)
->>>>>>> 1f0c874161292079aa43ae65f750dc5b8556f93c
         {
             _grade = grade;
             _account = account;
@@ -56,6 +53,11 @@ namespace StaffPortal.Controllers
             var editsal = _sal.GetIdByEmail(x.Email);
 
             var usersal = await _sal.GetById(editsal);
+
+            var grade = _context.Grades.First(n => n.Id == usersal.GradeId);
+            usersal.GradeName = grade.GradeName;
+            usersal.GradeLevel = grade.Level;
+            usersal.GradeStep = grade.Step;
 
             if (usersal == null)
             {
@@ -118,7 +120,7 @@ namespace StaffPortal.Controllers
         {
             //FOR TAX
             salary.NetSalary = salary.BasicSalary;
-            salary.Tax =  salary.TaxPercent * salary.BasicSalary;
+            salary.Tax =  salary.TaxPercent * salary.BasicSalary / 100;
             //salary.TaxItemType = "Deduction";
             if (salary.TaxItemType == "Allowance")
             {
@@ -127,7 +129,7 @@ namespace StaffPortal.Controllers
             else if(salary.TaxItemType == "Deduction")
                 salary.NetSalary -= salary.Tax;
             //FOR HOUSING
-            salary.Housing = salary.HousingPercent * salary.BasicSalary;
+            salary.Housing = salary.HousingPercent * salary.BasicSalary / 100;
             //salary.HousingItemType = "Allowance";
 
             if (salary.HousingItemType == "Allowance")
@@ -138,7 +140,7 @@ namespace StaffPortal.Controllers
                 salary.NetSalary -= salary.Housing;
 
             //FOR LUNCH
-            salary.Lunch =  salary.LunchPercent * salary.BasicSalary;
+            salary.Lunch =  salary.LunchPercent * salary.BasicSalary / 100;
             //salary.LunchItemType = "Allowance";
             if (salary.LunchItemType == "Allowance")
                 salary.NetSalary += salary.Lunch;
@@ -146,7 +148,7 @@ namespace StaffPortal.Controllers
                 salary.NetSalary -= salary.Lunch;
 
             //FOR TRANSPORT
-            salary.Transport = salary.TransportPercent * salary.BasicSalary;
+            salary.Transport = salary.TransportPercent * salary.BasicSalary / 100; 
             //salary.TransportItemType = "Allowance";
             if (salary.TransportItemType == "Allowance")
                 salary.NetSalary += salary.Transport;
@@ -154,7 +156,7 @@ namespace StaffPortal.Controllers
                 salary.NetSalary -= salary.Transport;
 
             //FOR MEDICAL
-            salary.Medical = salary.MedicalPercent * salary.BasicSalary;
+            salary.Medical = salary.MedicalPercent * salary.BasicSalary / 100;
             //salary.MedicalItemType = "Allowance";
             if (salary.MedicalItemType == "Allowance")
                 salary.NetSalary += salary.Medical;

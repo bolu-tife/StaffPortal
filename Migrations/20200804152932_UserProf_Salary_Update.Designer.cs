@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StaffPortal.Data;
 
 namespace StaffPortal.Migrations
 {
     [DbContext(typeof(StaffPortalDataContext))]
-    partial class StaffPortalDataContextModelSnapshot : ModelSnapshot
+    [Migration("20200804152932_UserProf_Salary_Update")]
+    partial class UserProf_Salary_Update
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -291,12 +293,6 @@ namespace StaffPortal.Migrations
 
                     b.Property<int>("GradeId");
 
-                    b.Property<int>("GradeLevel");
-
-                    b.Property<string>("GradeName");
-
-                    b.Property<int>("GradeStep");
-
                     b.Property<double>("Housing");
 
                     b.Property<string>("HousingItemType");
@@ -352,15 +348,11 @@ namespace StaffPortal.Migrations
 
                     b.Property<int>("DepartmentId");
 
-                    b.Property<string>("DepartmentName");
-
                     b.Property<string>("Email");
 
                     b.Property<string>("FirstName");
 
                     b.Property<int>("LGAId");
-
-                    b.Property<string>("LGAs");
 
                     b.Property<string>("LastName");
 
