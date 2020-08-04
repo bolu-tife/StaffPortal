@@ -120,8 +120,8 @@ namespace StaffPortal.Services
                 //_userprofile.Department.FacultyId = userprofile.Department.FacultyId;
                 _userprofile.DepartmentId = userprofile.DepartmentId;
 
-                _userprofile.NewStates = userprofile.NewStates;
-                _userprofile.LGAs = userprofile.LGAs;
+                _userprofile.NewStateId = userprofile.NewStateId;
+                _userprofile.LGAId = userprofile.LGAId;
                 _userprofile.Country = userprofile.Country;
                 
 
@@ -145,8 +145,8 @@ namespace StaffPortal.Services
                 //_userprofile.Department.FacultyId = userprofile.Department.FacultyId;
                 _userprofile.DepartmentId = userprofile.DepartmentId;
 
-                _userprofile.NewStates = userprofile.NewStates;
-                _userprofile.LGAs = userprofile.LGAs;
+                _userprofile.NewStateId = userprofile.NewStateId;
+                _userprofile.LGAId = userprofile.LGAId;
                 _userprofile.Country = userprofile.Country;
 
 

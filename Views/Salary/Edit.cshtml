@@ -33,10 +33,9 @@
                                 <tr>
                                     <td>
                                         <div class="form-group mb-4">
-                                            <label for="exampleFormControlSelect1">Employees</label>
-                                            <select class="form-control" id="exampleFormControlSelect1" asp-for="ApplicationUser" asp-items="@ViewBag.accountName">
-                                                <option>Choose Option</option>
-                                            </select>
+                                            <label asp-for="Email"> Employee</label>
+                                            <input type="text" asp-for="Email" class="form-control" readonly>
+                                            <span asp-validation-for="Email" class="text-danger"></span>
                                         </div>
                                     </td>
                                     <td>
@@ -48,7 +47,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
+                  @**             <tr>
                                     <td>
                                         <div class="form-group mb-4">
                                             <label for="exampleFormControlSelect1">Level</label>
@@ -65,7 +64,7 @@
                                             </select>
                                         </div>
 
-
+*@
                                     </td>
                                 </tr>
                             </tbody>
@@ -90,16 +89,28 @@
                                 <td>
                                     <label for="Tax">Tax</label>
                                 </td>
-                               
+                                @*     <td>
+
+                <div class="form-group">
+                    <input type="text" asp-for="Tax" disabled class="form-control" id="name" >
+                    <span asp-validation-for="Tax" class="text-danger"></span>
+                </div>
+            </td> *@
                                 <td>
                                     <div class="form-group">
-                                        <input type="text" asp-for="TaxPercent" class="form-control" id="name" placeholder="Enter LunchPercent" required="">
+                                        <input type="text" asp-for="TaxPercent" class="form-control" id="name" placeholder="Enter TaxPercent" required="">
                                         <span asp-validation-for="TaxPercent" class="text-danger"></span>
                                     </div>
                                 </td>
                                 <td>
+                                    @*  <div class="form-group">
+                    <input type="text" class="form-control" value="@Model.TaxItemType" />
+                </div> *@
                                     <div class="form-group">
-                                        <input type="text" disabled class="form-control" value="@Model.TaxItemType" />
+                                        <select class="form-control" asp-for="@Model.TaxItemType">
+                                            <option value="Allowance">Allowance</option>
+                                            <option value="Deduction">Deduction</option>
+                                        </select>
                                     </div>
                                 </td>
                             </tr>
@@ -107,16 +118,27 @@
                                 <td>
                                     <label for="Housing">Housing</label>
                                 </td>
+                                @*     <td>
+                <div class="form-group">
+                    <input type="text" asp-for="Housing" disabled class ="form-control" id="name" >
+                    <span asp-validation-for="Housing" class="text-danger"></span>
+                </div>
+            </td> *@
                                 <td>
                                     <div class="form-group">
-                                        <input type="text" asp-for="Housing" disabled class="form-control" id="name">
-                                        <span asp-validation-for="Housing" class="text-danger"></span>
+                                        <input type="text" asp-for="HousingPercent" class="form-control" id="name" placeholder="Enter Housing" required="">
+                                        <span asp-validation-for="HousingPercent" class="text-danger"></span>
                                     </div>
                                 </td>
-                               
                                 <td>
+                                    @*  <div class="form-group">
+                    <input type="text" disabled class="form-control" value="@Model.HousingItemType" />
+                </div> *@
                                     <div class="form-group">
-                                        <input type="text" disabled class="form-control" value="@Model.HousingItemType" />
+                                        <select class="form-control" asp-for="@Model.HousingItemType">
+                                            <option value="Allowance">Allowance</option>
+                                            <option value="Deduction">Deduction</option>
+                                        </select>
                                     </div>
                                 </td>
 
@@ -125,8 +147,13 @@
                             <tr>
                                 <td>
                                     <label for="Lunch">Lunch</label>
-                                </td>
-                                
+                                    @*       </td>
+                <td>
+                    <div class="form-group">
+                        <input type="text" asp-for="Lunch" disabled class="form-control" id="name" >
+                        <span asp-validation-for="Lunch" class="text-danger"></span>
+                    </div>
+                </td> *@
                                 <td>
                                     <div class="form-group">
                                         <input type="text" asp-for="LunchPercent" class="form-control" id="name" placeholder="Enter LunchPercent" required="">
@@ -134,8 +161,14 @@
                                     </div>
                                 </td>
                                 <td>
+                                    @*  <div class="form-group">
+                    <input type="text" disabled class="form-control" value="@Model.LunchItemType" />
+                </div> *@
                                     <div class="form-group">
-                                        <input type="text" disabled class="form-control" value="@Model.LunchItemType" />
+                                        <select class="form-control" asp-for="@Model.LunchItemType">
+                                            <option value="Allowance">Allowance</option>
+                                            <option value="Deduction">Deduction</option>
+                                        </select>
                                     </div>
                                 </td>
                             </tr>
@@ -144,7 +177,12 @@
                                 <td>
                                     <label for="Transport">Transport</label>
                                 </td>
-                              
+                                @*    <td>
+                <div class="form-group">
+                    <input type="text" asp-for="Transport" disabled class="form-control" id="name">
+                    <span asp-validation-for="Transport" class="text-danger"></span>
+                </div>
+            </td> *@
                                 <td>
                                     <div class="form-group">
                                         <input type="text" asp-for="TransportPercent" class="form-control" id="name" placeholder="Enter Transport" required="">
@@ -152,8 +190,14 @@
                                     </div>
                                 </td>
                                 <td>
+                                    @*<div class="form-group">
+                    <input type="text" disabled class="form-control" value="@Model.TransportItemType" />
+                </div>*@
                                     <div class="form-group">
-                                        <input type="text" disabled class="form-control" value="@Model.TransportItemType" />
+                                        <select class="form-control" asp-for="@Model.TransportItemType">
+                                            <option value="Allowance">Allowance</option>
+                                            <option value="Deduction">Deduction</option>
+                                        </select>
                                     </div>
                                 </td>
                             </tr>
@@ -161,7 +205,12 @@
                                 <td>
                                     <label for="Medical">Medical</label>
                                 </td>
-                                
+                                @*     <td>
+                <div class="form-group">
+                    <input type="text" asp-for="Medical" disabled class="form-control" id="name" >
+                    <span asp-validation-for="Medical" class="text-danger"></span>
+                </div>
+            </td> *@
                                 <td>
                                     <div class="form-group">
                                         <input type="text" asp-for="MedicalPercent" class="form-control" id="name" placeholder="Enter Medical" required="">
@@ -169,12 +218,19 @@
                                     </div>
                                 </td>
                                 <td>
+                                    @*  <div class="form-group">
+                    <input type="text" disabled class="form-control" value="@Model.MedicalItemType" />
+                </div> *@
                                     <div class="form-group">
-                                        <input type="text" disabled class="form-control" value="@Model.MedicalItemType" />
+                                        <select class="form-control" asp-for="@Model.MedicalItemType">
+                                            <option value="Allowance">Allowance</option>
+                                            <option value="Deduction">Deduction</option>
+                                        </select>
                                     </div>
                                 </td>
                             </tr>
-                    </table>
+                            </tbody>
+</table>
                     <br />
                    
                     <button type="submit" class="btn btn-success mr-2">Submit</button>
