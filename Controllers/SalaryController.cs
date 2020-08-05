@@ -14,7 +14,7 @@ using StaffPortal.Data;
 
 namespace StaffPortal.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class SalaryController : BaseController
     {
         private StaffPortalDataContext _context;
@@ -33,6 +33,8 @@ namespace StaffPortal.Controllers
             _context = context;
             _userManager = userManager;
         }
+
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -77,7 +79,7 @@ namespace StaffPortal.Controllers
         {
             return View();
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -115,7 +117,7 @@ namespace StaffPortal.Controllers
 
             return View(new Salary());
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Create(Salary salary)
         {
@@ -191,7 +193,7 @@ namespace StaffPortal.Controllers
 
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -238,7 +240,7 @@ namespace StaffPortal.Controllers
             return View(editSalary);
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Edit(Salary s)
         {
@@ -259,7 +261,7 @@ namespace StaffPortal.Controllers
             }
             return View();
         }
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var deleteSalary = await _sal.Delete(id);

@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace StaffPortal.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class UserProfileController : BaseController
     {
         private IUserProfile _userProfile;
@@ -35,7 +35,7 @@ namespace StaffPortal.Controllers
             _context = context;
             _userManager = userManager;
         }
-        
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             var model = await _userProfile.GetAll();
@@ -84,7 +84,7 @@ namespace StaffPortal.Controllers
             return View();
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -116,7 +116,7 @@ namespace StaffPortal.Controllers
             return View();
         }
 
-       
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(UserProfile userProfile)
         {
@@ -141,7 +141,7 @@ namespace StaffPortal.Controllers
             return View();
         }
 
-        
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -179,8 +179,8 @@ namespace StaffPortal.Controllers
             return View(editUserProfile);
         }
 
-        
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Edit(UserProfile userProfile)
         {
@@ -269,7 +269,7 @@ namespace StaffPortal.Controllers
 
 
 
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var deleteUserProfile = await _userProfile.Delete(id);
