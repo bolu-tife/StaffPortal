@@ -110,51 +110,84 @@ namespace StaffPortal.Services
                 s.GradeName = salary.GradeName;
                 s.GradeStep = salary.GradeStep;
 
-                s.NetSalary = s.BasicSalary;
-                s.Tax = s.TaxPercent * s.BasicSalary;
+                //s.NetSalary = s.BasicSalary;
+                s.Tax = s.TaxPercent * s.BasicSalary / 100; ;
+                s.TotAllowance = 0.0;
+                s.TotDeduction = 0.0;
                 //salary.TaxItemType = "Deduction";
                 if (s.TaxItemType == "Allowance")
                 {
-                    s.NetSalary += s.Tax;
+                    //s.NetSalary += s.Tax;
+                    s.TotAllowance += s.Tax;
                 }
                 else if (s.TaxItemType == "Deduction")
-                    s.NetSalary -= salary.Tax;
+                {
+                    //s.NetSalary -= salary.Tax;
+                    s.TotDeduction -= s.Tax;
+                }
+            
                 //FOR HOUSING
-                s.Housing = s.HousingPercent * s.BasicSalary;
+                s.Housing = s.HousingPercent * s.BasicSalary / 100; ;
                 //salary.HousingItemType = "Allowance";
 
                 if (s.HousingItemType == "Allowance")
                 {
-                    s.NetSalary += s.Housing;
+                    //s.NetSalary += s.Housing;
+                    s.TotAllowance += s.Housing;
                 }
                 else if (s.HousingItemType == "Deduction")
-                    s.NetSalary -= s.Housing;
+                {
+                    //s.NetSalary -= s.Housing;
+                    s.TotDeduction -= s.Housing;
+                }
+                    
 
                 //FOR LUNCH
-                s.Lunch = s.LunchPercent * s.BasicSalary;
+                s.Lunch = s.LunchPercent * s.BasicSalary / 100; ;
                 //salary.LunchItemType = "Allowance";
                 if (s.LunchItemType == "Allowance")
-                    s.NetSalary += s.Lunch;
+                {
+                    //s.NetSalary += s.Lunch;
+                    s.TotAllowance += s.Lunch;
+                }
                 else if (s.LunchItemType == "Deduction")
-                    s.NetSalary -= s.Lunch;
+                {
+                    //s.NetSalary -= s.Lunch;
+                    s.TotDeduction -= s.Lunch;
+                }
+                    
 
                 //FOR TRANSPORT
-                s.Transport = s.TransportPercent * s.BasicSalary;
+                s.Transport = s.TransportPercent * s.BasicSalary / 100; ;
                 //s.TransportItemType = "Allowance";
                 if (s.TransportItemType == "Allowance")
-                    s.NetSalary += s.Transport;
+                {
+
+                    //s.NetSalary += s.Transport;
+                    s.TotAllowance += s.Transport;
+                }
                 else if (s.TransportItemType == "Deduction")
-                    s.NetSalary -= s.Transport;
+                {
+                    //s.NetSalary -= s.Transport;
+                    s.TotDeduction -= s.Transport;
+                }
 
                 //FOR MEDICAL
-                s.Medical = s.MedicalPercent * s.BasicSalary;
+                s.Medical = s.MedicalPercent * s.BasicSalary / 100; ;
                 //s.MedicalItemType = "Allowance";
                 if (s.MedicalItemType == "Allowance")
-                    s.NetSalary += s.Medical;
+                {
+                    //s.NetSalary += s.Medical;
+                    s.TotAllowance += s.Medical;
+                }
                 else if (s.MedicalItemType == "Deduction")
-                    s.NetSalary -= s.Medical;
+                {
 
+                    //s.NetSalary -= s.Medical;
+                    s.TotDeduction -= s.Medical;
+                }
 
+                s.NetSalary = s.BasicSalary + s.TotAllowance + s.TotDeduction;
                 //s.TaxPayItem = s.PayItem;
                 //s.PayItemType = s.PayItem;
                 //s.Amount = s.Amount;

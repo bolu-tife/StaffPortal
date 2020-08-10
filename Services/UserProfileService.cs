@@ -59,8 +59,29 @@ namespace StaffPortal.Services
 
             return false;
         }
-        
-       
+
+        //var JoinResult = (from p in dt.AsEnumerable()
+        //                  join t in dtTax.AsEnumerable()
+        //                  on p.Field<int>("Tax Id") equals t.Field<int>("Tax Id")
+        //                  select new
+        //                  {
+        //                      ProductName = p.Field<string>("Product Name"),
+        //                      BrandName = p.Field<string>("Brand Name"),
+        //                      ProductCategory = t.Field<string>("Product Category"),
+        //                      TaxCharge = t.Field<int>("Charge")
+
+
+        //                  }).ToList();
+
+        //public IEnumerable<UserProfile> GetUserAll( int deptId)
+        //{
+            //var JoinResult = _context.UserProfiles.AsEnumerable().Join(UserProfile, you_context.Faculties.AsEnumerable()) on
+            //                    u.
+        //    var results = (from f in Faculty
+        //                   join d in UserProfile on f.Id equals d.FacultyId
+        //                   where d.Id == deptId  
+        //       Select new { f.Id, f.Name }).ToList();
+        //}
         public async Task<IEnumerable<UserProfile>> GetAll()
         {
 
