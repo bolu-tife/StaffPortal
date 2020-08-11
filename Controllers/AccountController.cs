@@ -83,8 +83,9 @@ namespace StaffPortal.Controllers
             var sign = await _account.CreateUser(user, signupmodel.Password);
             if (sign)
             {
-                //Alert("Account Created successfully", NotificationType.success);
-                return RedirectToAction("Index", "Home");
+                Alert("Account Created successfully", NotificationType.success);
+                return RedirectToAction("Login", "Account");
+                //return RedirectToAction("Index", "Home");
 
             }
             Alert("Account not created!", NotificationType.error);
