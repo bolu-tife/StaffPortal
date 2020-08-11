@@ -300,6 +300,7 @@ namespace StaffPortal.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var deleteSalary = await _sal.Delete(id);
+
             if (deleteSalary)
             {
                 Alert("Salary Details Deleted successfully.", NotificationType.success);

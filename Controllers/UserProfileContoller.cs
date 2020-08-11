@@ -14,6 +14,7 @@ using StaffPortal.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore.Storage;
+using StaffPortal.Inteface;
 
 namespace StaffPortal.Controllers
 {
@@ -25,9 +26,10 @@ namespace StaffPortal.Controllers
         private ILocal _local;
         private IDepartment _department;
         private StaffPortalDataContext _context;
+        private ISalary _sal;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public UserProfileController(IUserProfile userProfile, IFaculty faculty, ILocal local, IDepartment department, StaffPortalDataContext context, UserManager<ApplicationUser> userManager)
+        public UserProfileController(IUserProfile userProfile, IFaculty faculty, ILocal local, IDepartment department, ISalary sal, StaffPortalDataContext context, UserManager<ApplicationUser> userManager)
         {
             _userProfile = userProfile;
             _faculty = faculty;
@@ -35,6 +37,8 @@ namespace StaffPortal.Controllers
             _department = department;
             _context = context;
             _userManager = userManager;
+            _sal = sal;
+
         }
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
@@ -281,6 +285,7 @@ namespace StaffPortal.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var deleteUserProfile = await _userProfile.Delete(id);
+            
 
             if (deleteUserProfile)
             {

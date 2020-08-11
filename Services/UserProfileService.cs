@@ -49,8 +49,28 @@ namespace StaffPortal.Services
         {
            
             var _userprofile = await _context.UserProfiles.FindAsync(Id);
+            
+            var useremail = _userprofile.Email;
 
-            if(_userprofile != null)
+            var _usersal = _context.Salaries.First(u => u.Email == useremail);
+            //var deleteSalary = await _sal.Delete(_usersal.ID);
+            var s = await _context.Salaries.FindAsync(_usersal.ID);
+
+            if (s != null)
+            {
+                _context.Salaries.Remove(s);
+                //_context.SaveChanges();
+                //return true;
+            }
+
+            //if (_usersal != null)
+            //{
+            //    _context.Salaries.Remove(_usersal);
+            //    _context.SaveChanges();
+            //    return true;
+            //}
+
+            if (_userprofile != null)
             {
                 _context.UserProfiles.Remove(_userprofile);
                 _context.SaveChanges();
