@@ -30,12 +30,12 @@
 
                             <tbody>
                                 <tr>
-                                    <td>Email : @Model.Email</td>
-                                    <td>Grade : @Model.GradeName</td>
+                                    <td><span><strong>Email</strong></span> : @Model.Email</td>
+                                    <td><span><strong>Grade</strong></span>  : @Model.GradeName</td>
                                 </tr>
                                 <tr>
-                                    <td>Level : @Model.GradeLevel</td>
-                                    <td>Step : @Model.GradeStep</td>
+                                    <td><span><strong>Level</strong></span>  : @Model.GradeLevel</td>
+                                    <td><span><strong>Step</strong></span> : @Model.GradeStep</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -46,7 +46,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>PayItem</th>
+                                    <th><strong>PayItem </strong></th>
                                     <th>Amount</th>
                                     <th>%</th>
                                     <th>PayItem Type</th>
@@ -54,35 +54,35 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Tax</td>
+                                    <td><strong>Tax</strong></td>
                                     <td>@Model.Tax</td>
                                     <td>@Model.TaxPercent</td>
                                     <td>@Model.TaxItemType</td>
 
                                 </tr>
                                 <tr>
-                                    <td>Housing</td>
+                                    <td><strong>Housing</strong></td>
                                     <td>@Model.Housing</td>
                                     <td>@Model.HousingPercent</td>
                                     <td>@Model.HousingItemType</td>
 
                                 </tr>
                                 <tr>
-                                    <td>Lunch</td>
+                                    <td><strong>Lunch</strong></td>
                                     <td>@Model.Lunch</td>
                                     <td>@Model.LunchPercent</td>
                                     <td>@Model.LunchItemType</td>
 
                                 </tr>
                                 <tr>
-                                    <td>Transport</td>
+                                    <td><strong>Transport</strong></td>
                                     <td>@Model.Transport</td>
                                     <td>@Model.TransportPercent</td>
                                     <td>@Model.TransportItemType</td>
 
                                 </tr>
                                 <tr>
-                                    <td>Medical</td>
+                                    <td><strong>Medical</strong></td>
                                     <td>@Model.Medical</td>
                                     <td>@Model.MedicalPercent</td>
                                     <td>@Model.MedicalItemType</td>
@@ -96,7 +96,7 @@
                             <p><h3>Net Allowance: @Model.TotAllowance</h3></p>
                         </div>
                         <div>
-                            <p><h3>Net Deduction: @Model.TotDeduction</h3></p>
+                            <p ><h3 >Net Deduction: <span style="color:red">@Model.TotDeduction</span></h3></p>
                         </div>
                         <div>
                             <p><h3>Net Salary: @Model.NetSalary</h3></p>
