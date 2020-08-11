@@ -1,4 +1,8 @@
-﻿@model StaffPortal.Entities.Salary;
+﻿@using Microsoft.AspNetCore.Identity
+@using StaffPortal.Entities
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@model StaffPortal.Entities.Salary;
 @{
     ViewData["Title"] = "Index";
 }
@@ -14,7 +18,8 @@
     <!-- column -->
     <div class="col-sm-12">
         <div class="white-box">
-            <h3>Salary</h3>
+            <h2 align="center"> @UserManager.GetUserName(User)'s Salary Details</h2>
+            @*<h3>Salary Details</h3>*@
             <div class="table-responsive">
                 <form asp-action="Index" method="post" class="mt-4">
 
@@ -22,205 +27,81 @@
 
                     <div class="table-responsive">
                         <table class="table">
+
+                            <tbody>
+                                <tr>
+                                    <td>Email : @Model.Email</td>
+                                    <td>Grade : @Model.GradeName</td>
+                                </tr>
+                                <tr>
+                                    <td>Level : @Model.GradeLevel</td>
+                                    <td>Step : @Model.GradeStep</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <br />
+                        <p>   <h3>Basic Salary: @Model.BasicSalary</h3></p>
+                        <br />
+                        <table class="table">
                             <thead>
                                 <tr>
-                                    <th></th>
-                                    <th></th>
+                                    <th>PayItem</th>
+                                    <th>Amount</th>
+                                    <th>%</th>
+                                    <th>PayItem Type</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>
-                                        <div class="form-group">
-                                            <label class="col-md-4"> Email</label>
-                                            <div class="col-md-6">
-                                                <input type="text" asp-for="Email" class="form-control " disabled>
-                                            </div>
+                                    <td>Tax</td>
+                                    <td>@Model.Tax</td>
+                                    <td>@Model.TaxPercent</td>
+                                    <td>@Model.TaxItemType</td>
 
-                                        </div>
-                                        <!--  <div class="form-group mb-4">
-                            <label for="exampleFormControlSelect1">Employees</label>
-                            <select class="form-control" id="exampleFormControlSelect1" asp-for="Email">
-                                <option>Choose Option</option>
-                            </select>
-                        </div>
-                          -->
-                                    </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <label class="col-md-4"> Grade</label>
-                                            <div class="col-md-6">
-                                                <input type="text" asp-for="GradeName" class="form-control " disabled>
-                                            </div>
-
-                                        </div>
-                                    </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        <div class="form-group">
-                                            <label class="col-md-4"> Level</label>
-                                            <div class="col-md-6">
-                                                <input type="text" asp-for="GradeLevel" class="form-control " disabled>
-                                            </div>
+                                    <td>Housing</td>
+                                    <td>@Model.Housing</td>
+                                    <td>@Model.HousingPercent</td>
+                                    <td>@Model.HousingItemType</td>
 
-                                        </div>
-                                    </td>
-                                    <td>
-
-
-                                        <div class="form-group">
-                                            <label class="col-md-4"> Step</label>
-                                            <div class="col-md-6">
-                                                <input type="text" asp-for="GradeStep" class="form-control " disabled>
-                                            </div>
-
-                                        </div>
-
-
-                                    </td>
                                 </tr>
+                                <tr>
+                                    <td>Lunch</td>
+                                    <td>@Model.Lunch</td>
+                                    <td>@Model.LunchPercent</td>
+                                    <td>@Model.LunchItemType</td>
+
+                                </tr>
+                                <tr>
+                                    <td>Transport</td>
+                                    <td>@Model.Transport</td>
+                                    <td>@Model.TransportPercent</td>
+                                    <td>@Model.TransportItemType</td>
+
+                                </tr>
+                                <tr>
+                                    <td>Medical</td>
+                                    <td>@Model.Medical</td>
+                                    <td>@Model.MedicalPercent</td>
+                                    <td>@Model.MedicalItemType</td>
+
+                                </tr>
+
                             </tbody>
                         </table>
+                        <br />
+                        <div>
+                            <p><h3>Net Allowance: @Model.TotAllowance</h3></p>
+                        </div>
+                        <div>
+                            <p><h3>Net Deduction: @Model.TotDeduction</h3></p>
+                        </div>
+                        <div>
+                            <p><h3>Net Salary: @Model.NetSalary</h3></p>
+                        </div>
                     </div>
-                    <br />
-                    <div class="form-group">
-                        <label for="Tax">Basic Salary</label>
-                        <input type="text" disabled class="form-control " value="@Model.BasicSalary" />
-                    </div>
-                    <br />
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>PayItem</th>
-                                <th style="text-align:center;">Amount</th>
-                                <th style="text-align:center;">%</th>
-                                <th style="text-align:center;">PayItem Type</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <label for="Tax">Tax</label>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        @*<label for="Tax">Tax</label>*@
-                                        <input type="text" disabled class="form-control" value="@Model.Tax" />
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="text" disabled class="form-control" value="@Model.TaxPercent" />
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="text" disabled class="form-control" value="@Model.TaxItemType" />
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="Housing">Housing</label>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="text" disabled class="form-control" value="@Model.Housing" />
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="text" disabled class="form-control" value="@Model.HousingPercent" />
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="text" disabled class="form-control" value="@Model.HousingItemType" />
-                                    </div>
-                                </td>
-
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <label for="Lunch">Lunch</label>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="text" disabled class="form-control" value="@Model.Lunch" />
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="text" disabled class="form-control" value="@Model.LunchPercent" />
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="text" disabled class="form-control" value="@Model.LunchItemType" />
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <label for="Transport">Transport</label>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="text" disabled class="form-control" value="@Model.Transport" />
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="text" disabled class="form-control" value="@Model.TransportPercent" />
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="text" disabled class="form-control" value="@Model.TransportItemType" />
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="Medical">Medical</label>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="text" disabled class="form-control" value="@Model.Medical" />
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="text" disabled class="form-control" value="@Model.MedicalPercent" />
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="text" disabled class="form-control" value="@Model.MedicalItemType" />
-                                    </div>
-                                </td>
-                            </tr>
-                    </table>
-                    <br />
-                    <div class="form-group">
-                        <label for="NetSalary">Total Allowance</label>
-                        <input type="text" disabled class="form-control" value="@Model.TotAllowance" />
-                    </div>
-                    <div class="form-group">
-                        <label for="NetSalary">Total Deduction</label>
-                        <input type="text" disabled class="form-control" value="@Model.TotDeduction" />
-                    </div>
-                    <div class="form-group">
-                        <label for="NetSalary">Net Salary</label>
-                        <input type="text" disabled class="form-control" value="@Model.NetSalary" />
-                    </div>
-                    @*<button type="submit" class="btn btn-success mr-2">Submit</button>
-        <button type="submit" class="btn btn-dark">Cancel</button>
-                    <a href="Cancel" type="button" class="btn btn-dark">Cancel</a> *@
-
                 </form>
             </div>
         </div>
