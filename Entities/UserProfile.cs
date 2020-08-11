@@ -24,14 +24,12 @@ namespace StaffPortal.Entities
         public int NewStateId { get; set; }
         public int LGAId { get; set; }
 
-        //public int ApplicationUserId { get; set; }
-        //public ApplicationUser ApplicationUser { get; set; }
+       
         public NewState NewState { get; set; }
         public LGA LGA { get; set; }
         public Department Department { get; set; }
         
-        //public Salary Salary { get; set; }
-        //public int SalaryID { get; set; }
+       
 
         public string CreatedBy { get; set; }
         private DateTime? dateCreated = null;
