@@ -113,7 +113,10 @@ namespace StaffPortal.Controllers
             //ViewBag.gradeLevel = gradeListLevel;
             //ViewBag.gradeStep = gradeListStep;
 
-            ViewBag.users = _context.Users.ToList();
+            List<string> tempEmailList = _context.Salaries.Select(s => s.Email).ToList();
+            var temp = _context.Users.Where(u => !tempEmailList.Contains(u.Email));
+
+            ViewBag.users = temp.ToList();
 
             return View(new Salary());
         }

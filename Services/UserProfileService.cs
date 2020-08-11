@@ -125,6 +125,7 @@ namespace StaffPortal.Services
             {
                 var _user = _context.UserProfiles.First(u => u.Email == Email);
                 
+                
                 return _user.Id;
             }
             catch (Exception)

@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using StaffPortal.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace StaffPortal.Controllers
 {
@@ -105,8 +106,15 @@ namespace StaffPortal.Controllers
                 Value = d.Id.ToString(),
                 Text = d.DeptName
             });
+            //SELECT Email FROM AspNetUsers WHERE AspNetUsers.Email NOT IN(SELECT Email FROM UserProfiles)
+            //var query = "SELECT Email FROM AspNetUsers WHERE AspNetUsers.Email NOT IN(SELECT Email FROM UserProfiles)";
 
-            ViewBag.users =  _context.Users.ToList();
+            //var list = _context.Users.ToList().Except(UserProfiles).ToList();
+            List<string> tempEmailList = _context.UserProfiles.Select(q => q.Email).ToList();
+            var temp = _context.Users.Where(u => !tempEmailList.Contains(u.Email));
+
+            ViewBag.users = temp.ToList();
+            //ViewBag.users =  _context.Users.ToList();
             //ViewBag.faculty = facultyList;
             ViewBag.department = departmentList;
             ViewBag.state = _context.NewStates.ToList();
