@@ -55,6 +55,10 @@ namespace StaffPortal.Entities
 
         public ApplicationUser ApplicationUser { get; set; }
 
+        public double TotDeduction { get; set; }
+
+        public double TotAllowance { get; set; }
+
         public string Email { get; set; }
         public string GradeName { get; set; }
         public int GradeLevel { get; set; }
