@@ -24,7 +24,7 @@ namespace StaffPortal.Controllers
             _faculty = faculty;
             _userManager = userManager;
         }
-
+        //Hello
         public async Task<IActionResult> Index()
         {
             var model = await _faculty.GetAll();
