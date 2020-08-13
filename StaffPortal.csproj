@@ -35,7 +35,6 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Views\Faculty\" />
-    <Folder Include="Views\Salary\" />
     <Folder Include="wwwroot\sweetAlert\" />
     <Folder Include="Views\Account\" />
   </ItemGroup>

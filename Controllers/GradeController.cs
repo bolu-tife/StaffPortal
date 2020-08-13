@@ -79,12 +79,11 @@ namespace StaffPortal.Controllers
         {
             //var editGrade = await _Grade.GetById(id);
             var editGrade = await _grade.Update(grade);
-            
+
 
             if (editGrade && ModelState.IsValid)
             {
-                //    editGrade.Name = Grade.Name;
-                //    context.SaveChanges();
+                
                 Alert("Grade edited successfully!", NotificationType.success);
                 return RedirectToAction("Index");
                 //return RedirectToAction("Details", new { id = editGrade.Id });
@@ -98,7 +97,7 @@ namespace StaffPortal.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var deleteGrade = await _grade.Delete(id);
-            
+
             if (deleteGrade)
             {
                 Alert("Grade deleted successfully.", NotificationType.success);

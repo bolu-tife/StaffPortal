@@ -34,9 +34,39 @@
                             <input type="text" asp-for="Step" class="form-control" id="name" placeholder="Enter Author Name" required="">
                             <span asp-validation-for="Step" class="text-danger"></span>
                         </div>
+                        <div class="form-group">
+                            <label asp-for="BasicSalary">Basic Salary</label>
+                            <input type="text" asp-for="BasicSalary" class="form-control" id="name" placeholder="Enter Basic Salary" required="">
+                            <span asp-validation-for="BasicSalary" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Tax">Tax</label>
+                            <input type="text" asp-for="Tax" class="form-control" id="name" placeholder="Enter Tax" required="">
+                            <span asp-validation-for="Tax" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Lunch"> Lunch</label>
+                            <input type="text" asp-for="Lunch" class="form-control" id="name" placeholder="Enter Lunch" required="">
+                            <span asp-validation-for="Lunch" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Transport">Tax</label>
+                            <input type="text" asp-for="Transport" class="form-control" id="name" placeholder="Enter Transport" required="">
+                            <span asp-validation-for="Transport" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Medical">Medical</label>
+                            <input type="text" asp-for="Medical" class="form-control" id="name" placeholder="Enter Medical" required="">
+                            <span asp-validation-for="Medical" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Housing">Housing</label>
+                            <input type="text" asp-for="Housing" class="form-control" id="name" placeholder="Enter Housing" required="">
+                            <span asp-validation-for="Housing" class="text-danger"></span>
+                        </div>
 
                         <button type="submit" class="btn btn-success mr-2">Submit</button>
-                        <a asp-action="Cancel" type="button" class="btn btn-dark">Cancel</a>
+                        <a asp-action="Cancel" class="btn btn-dark">Cancel</a>
                     </form>
 
 
