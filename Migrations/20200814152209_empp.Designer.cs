@@ -10,14 +10,14 @@ using StaffPortal.Data;
 namespace StaffPortal.Migrations
 {
     [DbContext(typeof(StaffPortalDataContext))]
-    [Migration("20200813180103_Afresh")]
-    partial class Afresh
+    [Migration("20200814152209_empp")]
+    partial class empp
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -141,6 +141,12 @@ namespace StaffPortal.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<string>("Country");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("DateCreated");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -148,11 +154,19 @@ namespace StaffPortal.Migrations
 
                     b.Property<string>("FirstName");
 
+                    b.Property<int>("LGAId");
+
+                    b.Property<string>("LGAs");
+
                     b.Property<string>("LastName");
 
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<int>("NewStateId");
+
+                    b.Property<string>("NewStates");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
@@ -174,6 +188,10 @@ namespace StaffPortal.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LGAId");
+
+                    b.HasIndex("NewStateId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -319,25 +337,39 @@ namespace StaffPortal.Migrations
 
                     b.Property<DateTime>("DateCreated");
 
+                    b.Property<int>("DepartmentId");
+
+                    b.Property<string>("DepartmentName");
+
                     b.Property<string>("Email");
+
+                    b.Property<string>("FacultyName");
 
                     b.Property<string>("FirstName");
 
-                    b.Property<int>("LGAId");
+                    b.Property<int>("GradeId");
+
+                    b.Property<string>("GradeLevel");
+
+                    b.Property<string>("GradeName");
 
                     b.Property<string>("LGAs");
 
                     b.Property<string>("LastName");
 
-                    b.Property<int>("NewStateId");
+                    b.Property<double>("NetPay");
 
                     b.Property<string>("NewStates");
 
+                    b.Property<double>("TotAllowance");
+
+                    b.Property<double>("TotDeduction");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("LGAId");
+                    b.HasIndex("DepartmentId");
 
-                    b.HasIndex("NewStateId");
+                    b.HasIndex("GradeId");
 
                     b.ToTable("UserProfiles");
                 });
@@ -387,6 +419,19 @@ namespace StaffPortal.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("StaffPortal.Entities.ApplicationUser", b =>
+                {
+                    b.HasOne("StaffPortal.Entities.LGA", "LGA")
+                        .WithMany()
+                        .HasForeignKey("LGAId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StaffPortal.Entities.NewState", "NewState")
+                        .WithMany()
+                        .HasForeignKey("NewStateId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("StaffPortal.Entities.Department", b =>
                 {
                     b.HasOne("StaffPortal.Entities.Faculty", "Faculty")
@@ -404,14 +449,14 @@ namespace StaffPortal.Migrations
 
             modelBuilder.Entity("StaffPortal.Entities.UserProfile", b =>
                 {
-                    b.HasOne("StaffPortal.Entities.LGA", "LGA")
+                    b.HasOne("StaffPortal.Entities.Department", "Department")
                         .WithMany()
-                        .HasForeignKey("LGAId")
+                        .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("StaffPortal.Entities.NewState", "NewState")
+                    b.HasOne("StaffPortal.Entities.Grade", "Grade")
                         .WithMany()
-                        .HasForeignKey("NewStateId")
+                        .HasForeignKey("GradeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

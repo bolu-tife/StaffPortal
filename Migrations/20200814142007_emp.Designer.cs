@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StaffPortal.Data;
 
 namespace StaffPortal.Migrations
 {
     [DbContext(typeof(StaffPortalDataContext))]
-    partial class StaffPortalDataContextModelSnapshot : ModelSnapshot
+    [Migration("20200814142007_emp")]
+    partial class emp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -348,8 +350,6 @@ namespace StaffPortal.Migrations
                     b.Property<int>("GradeId");
 
                     b.Property<string>("GradeLevel");
-
-                    b.Property<string>("GradeName");
 
                     b.Property<string>("LGAs");
 

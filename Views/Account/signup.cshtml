@@ -130,7 +130,7 @@
 <script>
     $(function () {
         $("#NewStatesId").change(function () {
-            var url = '@Url.Content("~/")' + "UserProfile/GetLGA";
+            var url = '@Url.Content("~/")' + "Account/GetLGA";
             var ddlsource = "#NewStatesId";
             $.getJSON(url, { id: $(ddlsource).val() }, function (data) {
                 var items = '';
