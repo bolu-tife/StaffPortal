@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using StaffPortal.Data;
 
 namespace StaffPortal.Services
 {
@@ -22,21 +23,19 @@ namespace StaffPortal.Services
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
         private IConfiguration _config;
+        private StaffPortalDataContext _context;
         public AccountService(SignInManager<ApplicationUser> signInManager,
                                 UserManager<ApplicationUser> userManager,
-                                RoleManager<ApplicationRole> roleManager,
+                                RoleManager<ApplicationRole> roleManager, StaffPortalDataContext context,
                                  IConfiguration config)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _roleManager = roleManager;
             _config = config;
+            _context = context;
         }
 
-        //public User Authenticate(string username, string password)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         public async Task<bool> CreateUser(ApplicationUser user, string password)
         {
@@ -150,24 +149,49 @@ namespace StaffPortal.Services
             }
         }
 
-        public async Task<bool> UpdateUser(ApplicationUser user)
+        
+
+        public async Task<bool> UpdateUser(ApplicationUser userprofile) //Update
         {
-            var updateUser = await _userManager.FindByIdAsync(user.Id);
-            if (updateUser != null)
+            var _userprofile = await _userManager.FindByIdAsync(userprofile.Id);
+            if (_userprofile != null)
             {
+                _userprofile.FirstName = userprofile.FirstName;
+                _userprofile.LastName = userprofile.LastName;
+                //_userprofile.Email = userprofile.Email;
 
                
-                updateUser.LastName = user.LastName;
-                updateUser.Email = user.FirstName;
+                _userprofile.LGAs = userprofile.LGAs;
+                _userprofile.NewStates = userprofile.NewStates;
 
-                await _userManager.UpdateAsync(updateUser);
+                _userprofile.NewStateId = userprofile.NewStateId;
+                _userprofile.LGAId = userprofile.LGAId;
+                _userprofile.Country = userprofile.Country;
+
+
+                await _userManager.UpdateAsync(_userprofile);
                 return true;
             }
 
             return false;
+
         }
 
-        public async Task<bool> LoginIn(LoginViewModel loginDetails)
+
+        public string FindNameByStateId(int id)
+        {
+            var name = _context.NewStates.First(n => n.Id == id);
+            return name.Name;
+        }
+
+        public string FindNameByLocalId(int id)
+        {
+            var name = _context.LGAs.First(n => n.Id == id);
+            return name.Name;
+        }
+
+       
+            public async Task<bool> LoginIn(LoginViewModel loginDetails)
         {
 
             try

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StaffPortal.Data;
 
 namespace StaffPortal.Migrations
 {
     [DbContext(typeof(StaffPortalDataContext))]
-    partial class StaffPortalDataContextModelSnapshot : ModelSnapshot
+    [Migration("20200813204557_UserProfilee")]
+    partial class UserProfilee
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -250,43 +252,15 @@ namespace StaffPortal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double>("BasicSalary");
-
                     b.Property<string>("CreatedBy");
 
                     b.Property<DateTime>("DateCreated");
 
                     b.Property<string>("GradeName");
 
-                    b.Property<double>("Housing");
-
-                    b.Property<double>("HousingPercent");
-
                     b.Property<int>("Level");
 
-                    b.Property<double>("Lunch");
-
-                    b.Property<double>("LunchPercent");
-
-                    b.Property<double>("Medical");
-
-                    b.Property<double>("MedicalPercent");
-
-                    b.Property<double>("NetSalary");
-
                     b.Property<int>("Step");
-
-                    b.Property<double>("Tax");
-
-                    b.Property<double>("TaxPercent");
-
-                    b.Property<double>("TotAllowance");
-
-                    b.Property<double>("TotDeduction");
-
-                    b.Property<double>("Transport");
-
-                    b.Property<double>("TransportPercent");
 
                     b.HasKey("Id");
 
@@ -323,6 +297,71 @@ namespace StaffPortal.Migrations
                     b.ToTable("NewStates");
                 });
 
+            modelBuilder.Entity("StaffPortal.Entities.Salary", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserId");
+
+                    b.Property<double>("BasicSalary");
+
+                    b.Property<string>("Email");
+
+                    b.Property<int>("GradeId");
+
+                    b.Property<int>("GradeLevel");
+
+                    b.Property<string>("GradeName");
+
+                    b.Property<int>("GradeStep");
+
+                    b.Property<double>("Housing");
+
+                    b.Property<string>("HousingItemType");
+
+                    b.Property<double>("HousingPercent");
+
+                    b.Property<double>("Lunch");
+
+                    b.Property<string>("LunchItemType");
+
+                    b.Property<double>("LunchPercent");
+
+                    b.Property<double>("Medical");
+
+                    b.Property<string>("MedicalItemType");
+
+                    b.Property<double>("MedicalPercent");
+
+                    b.Property<double>("NetSalary");
+
+                    b.Property<double>("Tax");
+
+                    b.Property<string>("TaxItemType");
+
+                    b.Property<double>("TaxPercent");
+
+                    b.Property<double>("TotAllowance");
+
+                    b.Property<double>("TotDeduction");
+
+                    b.Property<double>("Transport");
+
+                    b.Property<string>("TransportItemType");
+
+                    b.Property<double>("TransportPercent");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("GradeId");
+
+                    b.ToTable("Salaries");
+                });
+
             modelBuilder.Entity("StaffPortal.Entities.UserProfile", b =>
                 {
                     b.Property<int>("Id")
@@ -335,7 +374,13 @@ namespace StaffPortal.Migrations
 
                     b.Property<DateTime>("DateCreated");
 
+                    b.Property<int>("DepartmentId");
+
+                    b.Property<string>("DepartmentName");
+
                     b.Property<string>("Email");
+
+                    b.Property<string>("FacultyName");
 
                     b.Property<string>("FirstName");
 
@@ -350,6 +395,8 @@ namespace StaffPortal.Migrations
                     b.Property<string>("NewStates");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
 
                     b.HasIndex("LGAId");
 
@@ -431,8 +478,25 @@ namespace StaffPortal.Migrations
                         .HasForeignKey("NewStateId");
                 });
 
+            modelBuilder.Entity("StaffPortal.Entities.Salary", b =>
+                {
+                    b.HasOne("StaffPortal.Entities.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("StaffPortal.Entities.Grade", "Grade")
+                        .WithMany()
+                        .HasForeignKey("GradeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("StaffPortal.Entities.UserProfile", b =>
                 {
+                    b.HasOne("StaffPortal.Entities.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("StaffPortal.Entities.LGA", "LGA")
                         .WithMany()
                         .HasForeignKey("LGAId")

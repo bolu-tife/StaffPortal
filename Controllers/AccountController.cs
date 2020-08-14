@@ -11,6 +11,7 @@ using StaffPortal.Dtos;
 using Microsoft.AspNetCore.Identity;
 using StaffPortal.Enums;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using StaffPortal.Data;
 
 namespace StaffPortal.Controllers
 {
@@ -18,17 +19,135 @@ namespace StaffPortal.Controllers
     {
 
         private readonly IAccount _account;
+        private ILocal _local;
 
         private readonly SignInManager<ApplicationUser> _signInManager;
-        
-
-        public AccountController(IAccount account, SignInManager<ApplicationUser> signInManager)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private StaffPortalDataContext _context;
+        public AccountController(IAccount account, StaffPortalDataContext context, ILocal local, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _account = account;
             _signInManager = signInManager;
-          
+            _context = context;
+            _local = local;
+            _userManager = userManager;
 
         }
+
+        //[HttpPost]
+        //public async Task<IActionResult> EditUser(UserProfile userProfile)
+        //{
+        //    var user = _userManager.GetUserName(User);
+        //    var x = await _userManager.FindByNameAsync(user);
+
+        //    userProfile.Id = _userProfile.GetIdByEmail(x.Email);
+        //    userProfile.NewStates = _userProfile.FindNameByStateId(userProfile.NewStateId);
+
+        //    userProfile.LGAs = _userProfile.FindNameByLocalId(userProfile.LGAId);
+
+        //    userProfile.DepartmentName = _userProfile.FindNameByDepartmentId(userProfile.DepartmentId);
+        //    userProfile.FacultyName = _userProfile.FindFacultyNameByDepartmentId(userProfile.DepartmentId);
+        //    var editUserProfile = await _userProfile.UpdateUser(userProfile);
+
+        //    if (editUserProfile)
+        //    {
+
+        //        Alert("UserProfile edited successfully.", NotificationType.success);
+        //        return RedirectToAction("UserIndex");
+
+        //    }
+        //    Alert("UserProfile not edited!", NotificationType.error);
+        //    return View();
+        //}
+
+        [HttpGet]
+        public async Task<IActionResult> UserIndex()
+        {
+
+            var user = _userManager.GetUserName(User);
+            var userprof = await _userManager.FindByNameAsync(user);
+
+            //var editUserProfile = _userProfile.GetIdByEmail(x.Email);
+
+            //var userprof = await _userProfile.GetById(editUserProfile);
+            //var y = _userProfile.FindNameByStateId(userprof.NewStateId);
+            //userprof.NewStates = y;
+            //var z = _userProfile.FindNameByLocalId(userprof.LGAId);
+            //userprof.LGAs = z;
+            //var w = _userProfile.FindNameByDepartmentId(userprof.DepartmentId);
+            //userprof.DepartmentName = w;
+
+            //var
+            if (userprof == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(userprof);
+            }
+
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditUser()
+        {
+
+            var user = _userManager.GetUserName(User);
+            var editUserProfile = await _userManager.FindByNameAsync(user);
+
+            //var id = _userProfile.GetIdByEmail(x.Email);
+
+            //var editUserProfile = await _userProfile.GetById(editUserProfile);
+
+            //var editUserProfile = await _userProfile.GetById(id);
+
+            if (editUserProfile == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            
+
+            //ViewBag.users = _context.Users.ToList();
+
+           
+            ViewBag.state = _context.NewStates.ToList();
+
+
+
+            return View(editUserProfile);
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> EditUser(ApplicationUser userProfile)
+        {
+            var user = _userManager.GetUserName(User);
+            var x = await _userManager.FindByNameAsync(user);
+            userProfile.Id = x.Id;
+            //userProfile.Id = _userProfile.GetIdByEmail(x.Email);
+            userProfile.NewStates = _account.FindNameByStateId(userProfile.NewStateId);
+
+            userProfile.LGAs = _account.FindNameByLocalId(userProfile.LGAId);
+
+            
+            var editUserProfile = await _account.UpdateUser(userProfile);
+
+            if (editUserProfile)
+            {
+
+                Alert("UserProfile edited successfully.", NotificationType.success);
+                return RedirectToAction("UserIndex");
+
+            }
+            Alert("UserProfile not edited!", NotificationType.error);
+            return View();
+        }
+
+
         public IActionResult Login()
         {
             return View();
@@ -66,6 +185,7 @@ namespace StaffPortal.Controllers
         
         public IActionResult Signup()
         {
+            ViewBag.state = _context.NewStates.ToList();
             return View();
         }
 
@@ -77,7 +197,12 @@ namespace StaffPortal.Controllers
             ApplicationUser user = new ApplicationUser
             {
                 UserName = signupmodel.UserName,
-                Email = signupmodel.Email
+                Email = signupmodel.Email,
+                FirstName = signupmodel.FirstName,
+                LastName = signupmodel.LastName,
+                Country = signupmodel.Country,
+                NewStateId = signupmodel.NewStateId,
+                LGAId = signupmodel.LGAId
             };
 
             var sign = await _account.CreateUser(user, signupmodel.Password);
@@ -98,6 +223,7 @@ namespace StaffPortal.Controllers
 
 
 
+
         [HttpGet]
         public async Task<IActionResult> LogOut()
         {
@@ -106,6 +232,22 @@ namespace StaffPortal.Controllers
             return RedirectToAction("Login", "Account");
 
 
+        }
+
+        public JsonResult GetLGA(int id)
+        {
+            int stateid = Convert.ToInt32(id);
+            var local = _local.GetLGAsById(stateid);
+
+
+            var localList = local.Select(f => new SelectListItem()
+            {
+                Value = f.Id.ToString(),
+                Text = f.Name
+            });
+
+            return Json(localList);
+           
         }
 
         public IActionResult Error()
