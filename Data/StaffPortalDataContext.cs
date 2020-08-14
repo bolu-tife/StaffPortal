@@ -11,6 +11,14 @@ namespace StaffPortal.Data
         public StaffPortalDataContext(DbContextOptions<StaffPortalDataContext> options) : base(options)
         {
         }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<Faculty>()
+            .HasIndex(p => new { p.Name, p.Code })
+            .IsUnique(true);
+
+        }
         public virtual DbSet<Faculty> Faculties { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Grade> Grades { get; set; }

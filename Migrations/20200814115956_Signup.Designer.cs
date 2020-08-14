@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StaffPortal.Data;
 
 namespace StaffPortal.Migrations
 {
     [DbContext(typeof(StaffPortalDataContext))]
-    partial class StaffPortalDataContextModelSnapshot : ModelSnapshot
+    [Migration("20200814115956_Signup")]
+    partial class Signup
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -240,10 +242,6 @@ namespace StaffPortal.Migrations
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Name", "Code")
-                        .IsUnique()
-                        .HasFilter("[Name] IS NOT NULL AND [Code] IS NOT NULL");
 
                     b.ToTable("Faculties");
                 });
