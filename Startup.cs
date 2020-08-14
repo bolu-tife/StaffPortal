@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using StaffPortal.Data;
+﻿using StaffPortal.Data;
 using StaffPortal.Entities;
 using StaffPortal.Interface;
 using StaffPortal.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using StaffPortal.Inteface;
 
 namespace StaffPortal
 {
@@ -59,18 +53,12 @@ namespace StaffPortal
             services.AddScoped<IDepartment, DepartmentService>();
             services.AddScoped<IGrade, GradeService>();
 
-            services.AddScoped<IUserProfile, UserProfileService>();
+            //services.AddScoped<IUserProfile, UserProfileService>();
             services.AddScoped<ILocal, LGAService>();
-
-            services.AddScoped<ISalary, SalaryService>();
 
             //services.AddScoped<IUserProfile, UserProfileService>();
 
-            //services.AddScoped<IState, StateService>();
-            //services.AddScoped<ILocal, LocalService>();
-            //services.AddScoped<IPublisher, PublisherService>();
-            //services.AddScoped<IUser, UserService>();
-            services.AddScoped<IAccount, AccountService>();
+           services.AddScoped<IAccount, AccountService>();
             //services.AddScoped<IRole, RoleService>();
 
 

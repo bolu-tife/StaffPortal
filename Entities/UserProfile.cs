@@ -14,10 +14,7 @@ namespace StaffPortal.Entities
         public string Email { get; set; }
         
         
-        public int DepartmentId { get; set; }
-        public string DepartmentName { get; set; }
-        public string FacultyName { get; set; }
-
+      
         public string NewStates { get; set; }
         public string LGAs { get; set; }
         public string Country { get; set; }
@@ -27,7 +24,6 @@ namespace StaffPortal.Entities
        
         public NewState NewState { get; set; }
         public LGA LGA { get; set; }
-        public Department Department { get; set; }
         
        
 

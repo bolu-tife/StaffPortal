@@ -114,8 +114,11 @@
                             </span>
                         </div>
                     </li>
+
                    @* @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                     { *@
+
+                   
                         <li>
                             <a asp-controller="Home" asp-action="Index" class="waves-effect"><i class="glyphicon glyphicon-fire fa-fw"></i> Dashboard</a>
                         </li>
@@ -139,7 +142,9 @@
                             <a asp-controller="Salary" asp-action="Index" class="waves-effect"><i class="ti-user fa-fw"></i>Salary</a>
                         </li>
 
+
                   @*  } *@
+
 
                 </ul>
                 <!-- <div class="center p-20">

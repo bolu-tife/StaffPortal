@@ -18,16 +18,24 @@ namespace StaffPortal.Services
 
         public void Add(Grade grade) //Add
         {
-              _context.Add(grade);
-           
+          
+
+            _context.Add(grade);
+
             _context.SaveChanges();
         }
         public async Task<bool> AddAsync(Grade grade) //AddAsync
         {
             try
             {
+                grade.TotDeduction += grade.Tax;
+
+                grade.TotAllowance = grade.BasicSalary + grade.Lunch + grade.Medical + grade.Housing +
+                    grade.Transport;
+
+                grade.NetSalary = grade.TotAllowance - grade.TotDeduction;
                 await _context.AddAsync(grade);
-               
+
                 await _context.SaveChangesAsync();
             }
             catch (Exception)
@@ -42,7 +50,7 @@ namespace StaffPortal.Services
             // find the entity/object
             var _grade = await _context.Grades.FindAsync(Id);
 
-            if(_grade != null)
+            if (_grade != null)
             {
                 _context.Grades.Remove(_grade);
                 _context.SaveChanges();
@@ -72,7 +80,27 @@ namespace StaffPortal.Services
                 _grade.GradeName = grade.GradeName;
                 _grade.Level = grade.Level;
                 _grade.Step = grade.Step;
-              
+                _grade.BasicSalary = grade.BasicSalary;
+                _grade.Tax = grade.Tax;
+                _grade.Lunch = grade.Lunch;
+                _grade.Transport = grade.Transport;
+                _grade.Housing = grade.Housing;
+                _grade.Medical = grade.Medical;
+                _grade.TotAllowance = _grade.BasicSalary + _grade.Lunch + _grade.Medical + _grade.Housing +
+                    _grade.Transport;
+                _grade.TotDeduction += _grade.Tax;
+                _grade.NetSalary = _grade.TotAllowance - _grade.TotDeduction;
+
+                /*
+                _grade.LunchPercent = grade.LunchPercent;
+                _grade.TaxPercent = grade.TaxPercent;
+                _grade.TransportPercent = grade.TransportPercent;
+                _grade.HousingPercent = grade.HousingPercent;
+                _grade.MedicalPercent = grade.MedicalPercent;
+                 s.Tax = s.TaxPercent * s.BasicSalary / 100; ;
+                s.TotAllowance = 0.0;
+                s.TotDeduction = 0.0;
+                */
                 await _context.SaveChangesAsync();
                 return true;
             }
@@ -80,7 +108,7 @@ namespace StaffPortal.Services
             return false;
 
         }
-       
+
 
     }
 }
