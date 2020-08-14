@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace StaffPortal.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class FacultyController : BaseController
     {
         private IFaculty _faculty;
@@ -24,7 +24,7 @@ namespace StaffPortal.Controllers
             _faculty = faculty;
             _userManager = userManager;
         }
-        //Hello
+        
         public async Task<IActionResult> Index()
         {
             var model = await _faculty.GetAll();

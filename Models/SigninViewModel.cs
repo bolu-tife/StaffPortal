@@ -1,5 +1,6 @@
 ﻿//using System;
 using System.ComponentModel.DataAnnotations;
+using StaffPortal.Entities;
 
 namespace StaffPortal.Models
 {
@@ -13,33 +14,26 @@ namespace StaffPortal.Models
         //[DataType(DataType.Text)]
         public string UserName { get; set; }
 
-        //[Required]
-        ////[DataType(DataType.Text)]
-        //public string FirstName { get; set; }
+        [Required]
+        public string FirstName { get; set; }
 
-        //[Required]
-        ////[DataType(DataType.Text)]
-        //public string LastName { get; set; }
+        [Required]
+        public string LastName { get; set; }
 
-        //[Required]
-        ////[DataType(DataType.Text)]
-        //public int FacultyId { get; set; }
+        [Required]
+        public int NewStateId { get; set; }
 
-        //[Required]
-        ////[DataType(DataType.Text)]
-        //public int DepartmentId { get; set; }
+        [Required]
+        public int LGAId { get; set; }
 
-        //[Required]
-        ////[DataType(DataType.Text)]
-        //public int StateId { get; set; }
 
-        //[Required]
-        ////[DataType(DataType.Text)]
-        //public string LocalId { get; set; }
+        public NewState NewState { get; set; }
+        public LGA LGA { get; set; }
 
-        //[Required]
-        ////[DataType(DataType.Text)]
-        //public string Country { get; set; }
+       
+
+        [Required]
+        public string Country { get; set; }
 
 
         [Required]

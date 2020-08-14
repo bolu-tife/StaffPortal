@@ -40,7 +40,7 @@ namespace StaffPortal.Controllers
             _sal = sal;
 
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             var model = await _userProfile.GetAll();
@@ -63,12 +63,11 @@ namespace StaffPortal.Controllers
             var editUserProfile = _userProfile.GetIdByEmail(x.Email);
 
             var userprof = await _userProfile.GetById(editUserProfile);
-            //var y = _userProfile.FindNameByStateId(userprof.NewStateId);
-            //userprof.NewStates = y;
-            //var z = _userProfile.FindNameByLocalId(userprof.LGAId);
-            //userprof.LGAs = z;
-            //var w = _userProfile.FindNameByDepartmentId(userprof.DepartmentId);
-            //userprof.DepartmentName = w;
+            var y = _userProfile.FindNameByStateId(userprof.NewStateId);
+            userprof.NewStates = y;
+            var z = _userProfile.FindNameByLocalId(userprof.LGAId);
+            userprof.LGAs = z;
+
 
             //var
             if (userprof == null)
@@ -89,7 +88,7 @@ namespace StaffPortal.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -128,7 +127,7 @@ namespace StaffPortal.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(UserProfile userProfile)
         {
@@ -153,7 +152,7 @@ namespace StaffPortal.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -192,7 +191,7 @@ namespace StaffPortal.Controllers
         }
 
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Edit(UserProfile userProfile)
         {
@@ -281,7 +280,7 @@ namespace StaffPortal.Controllers
 
 
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var deleteUserProfile = await _userProfile.Delete(id);
