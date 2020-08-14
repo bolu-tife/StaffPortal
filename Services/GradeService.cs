@@ -28,7 +28,13 @@ namespace StaffPortal.Services
         {
             try
             {
-                grade.TotDeduction += grade.Tax;
+                grade.Tax = grade.TaxPercent * grade.BasicSalary / 100;
+                grade.Lunch = grade.LunchPercent * grade.BasicSalary / 100;
+                grade.Transport = grade.TransportPercent * grade.BasicSalary / 100;
+                grade.Housing = grade.HousingPercent * grade.BasicSalary / 100;
+                grade.Medical = grade.MedicalPercent * grade.BasicSalary / 100;
+
+                grade.TotDeduction = grade.Tax;
 
                 grade.TotAllowance = grade.BasicSalary + grade.Lunch + grade.Medical + grade.Housing +
                     grade.Transport;
@@ -81,14 +87,23 @@ namespace StaffPortal.Services
                 _grade.Level = grade.Level;
                 _grade.Step = grade.Step;
                 _grade.BasicSalary = grade.BasicSalary;
-                _grade.Tax = grade.Tax;
-                _grade.Lunch = grade.Lunch;
-                _grade.Transport = grade.Transport;
-                _grade.Housing = grade.Housing;
-                _grade.Medical = grade.Medical;
+                _grade.LunchPercent = grade.LunchPercent;
+                _grade.TaxPercent = grade.TaxPercent;
+                _grade.TransportPercent = grade.TransportPercent;
+                _grade.HousingPercent = grade.HousingPercent;
+                _grade.MedicalPercent = grade.MedicalPercent;
+
+                 _grade.Tax = _grade.TaxPercent * _grade.BasicSalary / 100;
+                _grade.Lunch = _grade.LunchPercent * _grade.BasicSalary / 100;
+                _grade.Transport = _grade.TransportPercent * _grade.BasicSalary / 100;
+                _grade.Housing = _grade.HousingPercent * _grade.BasicSalary / 100;
+                _grade.Medical = _grade.MedicalPercent * _grade.BasicSalary / 100;
+
+
+
                 _grade.TotAllowance = _grade.BasicSalary + _grade.Lunch + _grade.Medical + _grade.Housing +
                     _grade.Transport;
-                _grade.TotDeduction += _grade.Tax;
+                _grade.TotDeduction = _grade.Tax;
                 _grade.NetSalary = _grade.TotAllowance - _grade.TotDeduction;
 
                 /*
@@ -97,7 +112,21 @@ namespace StaffPortal.Services
                 _grade.TransportPercent = grade.TransportPercent;
                 _grade.HousingPercent = grade.HousingPercent;
                 _grade.MedicalPercent = grade.MedicalPercent;
-                 s.Tax = s.TaxPercent * s.BasicSalary / 100; ;
+
+                grade.Tax = grade.TaxPercent * grade.BasicSalary / 100;
+                grade.Lunch = grade.LunchPercent * grade.BasicSalary / 100;
+                grade.Transport = grade.Transport * grade.BasicSalary / 100;
+                grade.Housing = grade.Housing * grade.BasicSalary / 100;
+                grade.Medical = grade.Medical * grade.BasicSalary / 100;
+
+
+              _grade.Tax = grade.Tax;
+                _grade.Lunch = grade.Lunch;
+                _grade.Transport = grade.Transport;
+                _grade.Housing = grade.Housing;
+                _grade.Medical = grade.Medical;
+
+
                 s.TotAllowance = 0.0;
                 s.TotDeduction = 0.0;
                 */
