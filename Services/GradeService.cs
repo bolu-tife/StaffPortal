@@ -5,6 +5,7 @@ using StaffPortal.Data;
 using StaffPortal.Entities;
 using Microsoft.EntityFrameworkCore;
 using StaffPortal.Interface;
+using System.Linq;
 
 namespace StaffPortal.Services
 {
@@ -138,6 +139,24 @@ namespace StaffPortal.Services
 
         }
 
+        public IEnumerable<Grade> GetLevelsById(string gradenameid) //GetAll
+        {
+            var name = _context.Grades.First(n => n.GradeName == gradenameid);
+            
+            var list = _context.Grades.Where(u => u.GradeName == name.GradeName).ToList();
+            //list.Insert(0, new LGA { Id = 0, Name = "Select Local Government" });
+            return list;
+        }
+
+
+        public IEnumerable<Grade> GetStepsById(int gradelevelid) //GetAll
+        {
+            var name = _context.Grades.First(n => n.Id == gradelevelid);
+           
+            var list = _context.Grades.Where(u => u.Level == name.Level).Where(u => u.GradeName == name.GradeName).ToList();
+            //list.Insert(0, new LGA { Id = 0, Name = "Select Local Government" });
+            return list;
+        }
 
     }
 }

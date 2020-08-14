@@ -3,19 +3,21 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StaffPortal.Data;
 
 namespace StaffPortal.Migrations
 {
     [DbContext(typeof(StaffPortalDataContext))]
-    partial class StaffPortalDataContextModelSnapshot : ModelSnapshot
+    [Migration("20200814120713_Sals")]
+    partial class Sals
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -241,10 +243,6 @@ namespace StaffPortal.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name", "Code")
-                        .IsUnique()
-                        .HasFilter("[Name] IS NOT NULL AND [Code] IS NOT NULL");
-
                     b.ToTable("Faculties");
                 });
 
@@ -339,39 +337,25 @@ namespace StaffPortal.Migrations
 
                     b.Property<DateTime>("DateCreated");
 
-                    b.Property<int>("DepartmentId");
-
-                    b.Property<string>("DepartmentName");
-
                     b.Property<string>("Email");
-
-                    b.Property<string>("FacultyName");
 
                     b.Property<string>("FirstName");
 
-                    b.Property<int>("GradeId");
-
-                    b.Property<string>("GradeLevel");
-
-                    b.Property<string>("GradeName");
+                    b.Property<int>("LGAId");
 
                     b.Property<string>("LGAs");
 
                     b.Property<string>("LastName");
 
-                    b.Property<double>("NetPay");
+                    b.Property<int>("NewStateId");
 
                     b.Property<string>("NewStates");
 
-                    b.Property<double>("TotAllowance");
-
-                    b.Property<double>("TotDeduction");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("DepartmentId");
+                    b.HasIndex("LGAId");
 
-                    b.HasIndex("GradeId");
+                    b.HasIndex("NewStateId");
 
                     b.ToTable("UserProfiles");
                 });
@@ -451,14 +435,14 @@ namespace StaffPortal.Migrations
 
             modelBuilder.Entity("StaffPortal.Entities.UserProfile", b =>
                 {
-                    b.HasOne("StaffPortal.Entities.Department", "Department")
+                    b.HasOne("StaffPortal.Entities.LGA", "LGA")
                         .WithMany()
-                        .HasForeignKey("DepartmentId")
+                        .HasForeignKey("LGAId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("StaffPortal.Entities.Grade", "Grade")
+                    b.HasOne("StaffPortal.Entities.NewState", "NewState")
                         .WithMany()
-                        .HasForeignKey("GradeId")
+                        .HasForeignKey("NewStateId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

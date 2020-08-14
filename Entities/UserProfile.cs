@@ -18,14 +18,24 @@ namespace StaffPortal.Entities
         public string NewStates { get; set; }
         public string LGAs { get; set; }
         public string Country { get; set; }
-        public int NewStateId { get; set; }
-        public int LGAId { get; set; }
 
-       
-        public NewState NewState { get; set; }
-        public LGA LGA { get; set; }
-        
-       
+        public int GradeId { get; set; }
+        public Grade Grade { get; set; }
+
+        public string GradeLevel { get; set; }
+        //public int GradeStep { get; set; }
+        public string GradeName { get; set; }
+
+
+        public int DepartmentId { get; set; }
+        public string DepartmentName { get; set; }
+        public string FacultyName { get; set; }
+        public Department Department { get; set; }
+
+        public double NetPay { get; set; }
+        public double TotDeduction { get; set; }
+        public double TotAllowance { get; set; }
+
 
         public string CreatedBy { get; set; }
         private DateTime? dateCreated = null;
