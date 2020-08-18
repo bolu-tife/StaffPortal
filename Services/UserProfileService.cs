@@ -97,21 +97,21 @@ namespace StaffPortal.Services
             return _userprofile;
         }
 
-        //public int GetIdByEmail(string Email)
-        //{
+        public int GetIdByEmail(string Email)
+        {
 
-        //    try
-        //    {
-        //        var _user = _context.UserProfiles.First(u => u.Email == Email);
-
-
-        //        return _user.Id;
-        //    }
-        //    catch (Exception)
-        //    { return 0; }
+            try
+            {
+                var _user = _context.UserProfiles.First(u => u.Email == Email);
 
 
-        //}
+                return _user.Id;
+            }
+            catch (Exception)
+            { return 0; }
+
+
+        }
 
 
         //public async Task<IEnumerable<Local>> GetLocalByStateIdAsync(int id)
@@ -130,6 +130,40 @@ namespace StaffPortal.Services
 
 
         //}
+        public async Task<bool> UpdateGrade( Grade grade) //Update
+        {
+            var _userprofile = await  _context.UserProfiles.Where(a => a.GradeId == grade.Id).ToListAsync();
+
+            if (_userprofile != null)
+
+            {
+                _userprofile.ForEach(x =>
+                {
+                    x.GradeName = grade.GradeName;
+                    x.GradeLevel = grade.Level.ToString();
+                    x.GradeStep = grade.Step.ToString();
+                    x.BasicSalary = grade.BasicSalary;
+                    x.Tax = grade.Tax;
+                    x.TaxPercent = grade.TaxPercent;
+                    x.Housing = grade.Housing;
+                    x.HousingPercent = grade.HousingPercent;
+                    x.Lunch = grade.Lunch;
+                    x.LunchPercent = grade.LunchPercent;
+                    x.Transport = grade.Transport;
+                    x.TransportPercent = grade.TransportPercent;
+                    x.Medical = grade.Medical;
+                    x.MedicalPercent = grade.MedicalPercent;
+
+                });
+
+                await _context.SaveChangesAsync();
+
+
+                
+
+            }
+            return true;
+        }
 
 
         public async Task<bool> Update(UserProfile userprofile,Grade grade) //Update
@@ -149,6 +183,19 @@ namespace StaffPortal.Services
                 _userprofile.GradeName = grade.GradeName;
                 _userprofile.GradeStep = grade.Step.ToString();
                 _userprofile.GradeLevel = grade.Level.ToString();
+
+                _userprofile.BasicSalary = grade.BasicSalary;
+                _userprofile.Tax = grade.Tax;
+                _userprofile.TaxPercent = grade.TaxPercent;
+                _userprofile.Housing = grade.Housing;
+                _userprofile.HousingPercent = grade.HousingPercent;
+                _userprofile.Lunch = grade.Lunch;
+                _userprofile.LunchPercent = grade.LunchPercent;
+                _userprofile.Transport = grade.Transport;
+                _userprofile.TransportPercent = grade.TransportPercent;
+                _userprofile.Medical = grade.Medical;
+                _userprofile.MedicalPercent = grade.MedicalPercent;
+                
 
                 _userprofile.DepartmentName = userprofile.DepartmentName;
                 _userprofile.FacultyName = userprofile.FacultyName;
@@ -174,15 +221,11 @@ namespace StaffPortal.Services
 
             if (_userprofile != null)
             {
-                //_userprofile.GradeId = Convert.ToInt32(userprofile.GradeStep);
+               
                 _userprofile.FirstName = userprofile.FirstName;
                 _userprofile.LastName = userprofile.LastName;
                 _userprofile.NewStates = userprofile.NewStates;
                 _userprofile.LGAs = userprofile.LGAs;
-
-
-                //_userprofile.DepartmentName = _userProfile.FindNameByDepartmentId(_userprofile.DepartmentId);
-                //_userprofile.FacultyName = _userProfile.FindFacultyNameByDepartmentId(_userprofile.DepartmentId);
 
                 //_context.Update(_userprofile);
                 await _context.SaveChangesAsync();

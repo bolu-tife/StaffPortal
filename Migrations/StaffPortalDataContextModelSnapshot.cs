@@ -15,7 +15,7 @@ namespace StaffPortal.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -337,6 +337,8 @@ namespace StaffPortal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<double>("BasicSalary");
+
                     b.Property<string>("Country");
 
                     b.Property<string>("CreatedBy");
@@ -361,17 +363,37 @@ namespace StaffPortal.Migrations
 
                     b.Property<string>("GradeStep");
 
+                    b.Property<double>("Housing");
+
+                    b.Property<double>("HousingPercent");
+
                     b.Property<string>("LGAs");
 
                     b.Property<string>("LastName");
+
+                    b.Property<double>("Lunch");
+
+                    b.Property<double>("LunchPercent");
+
+                    b.Property<double>("Medical");
+
+                    b.Property<double>("MedicalPercent");
 
                     b.Property<double>("NetPay");
 
                     b.Property<string>("NewStates");
 
+                    b.Property<double>("Tax");
+
+                    b.Property<double>("TaxPercent");
+
                     b.Property<double>("TotAllowance");
 
                     b.Property<double>("TotDeduction");
+
+                    b.Property<double>("Transport");
+
+                    b.Property<double>("TransportPercent");
 
                     b.HasKey("Id");
 

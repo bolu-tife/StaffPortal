@@ -49,6 +49,41 @@ namespace StaffPortal.Entities
             set { dateCreated = value; }
         }
 
+
+        public double BasicSalary { get; set; }
+
+
+        public double Housing { get; set; }
+
+        public double HousingPercent { get; set; }
+
+        
+
+        public double Tax { get; set; }
+
+        public double TaxPercent { get; set; }
+
+      
+        public double Lunch { get; set; }
+
+        public double LunchPercent { get; set; }
+
+
+        public double Transport { get; set; }
+
+        public double TransportPercent { get; set; }
+
+      
+
+        public double Medical { get; set; }
+
+        public double MedicalPercent { get; set; }
+
+    
+
+     
+
+
     }
 }
 

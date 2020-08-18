@@ -13,8 +13,8 @@ namespace StaffPortal.Interface
         Task<bool> UpdateUser(UserProfile userprofile);
         //Task<bool> UpdateUser(UserProfile userprofile);
         Task<IEnumerable<UserProfile>> GetAll();
-        //int GetIdByEmail(string email);
-
+        int GetIdByEmail(string email);
+        Task<bool> UpdateGrade(Grade grade);
         Task<Grade> FindGradeById(int id);
         string FindNameByDepartmentId(int id);
         string FindFacultyNameByDepartmentId(int id);

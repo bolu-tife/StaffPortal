@@ -17,10 +17,11 @@ namespace StaffPortal.Controllers
     public class GradeController : BaseController
     {
         private IGrade _grade;
-
+        private IUserProfile _userProfile;
         private readonly UserManager<ApplicationUser> _userManager;
-        public GradeController(IGrade grade, UserManager<ApplicationUser> userManager)
+        public GradeController(IGrade grade, IUserProfile userProfile, UserManager<ApplicationUser> userManager)
         {
+            _userProfile = userProfile;
             _grade = grade;
             _userManager = userManager;
         }
@@ -79,9 +80,10 @@ namespace StaffPortal.Controllers
         {
             //var editGrade = await _Grade.GetById(id);
             var editGrade = await _grade.Update(grade);
+            var edituserGrade = await _userProfile.UpdateGrade(grade);
 
 
-            if (editGrade && ModelState.IsValid)
+            if (edituserGrade && editGrade && ModelState.IsValid)
             {
                 
                 Alert("Grade edited successfully!", NotificationType.success);

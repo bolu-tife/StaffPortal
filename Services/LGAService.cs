@@ -23,7 +23,7 @@ namespace StaffPortal.Services
         {
 
             var  list =  _context.LGAs.Where(u => u.NewState.Id == id).ToList();
-            list.Insert(0, new LGA { Id = 0, Name = "Select Local Government" });
+            //list.Insert(0, new LGA { Id = 0, Name = "Select Local Government" });
             return list;
         }
 
