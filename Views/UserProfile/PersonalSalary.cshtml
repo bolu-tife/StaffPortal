@@ -22,88 +22,89 @@
             <div class="white-box">
                 <h2 align="center"> @UserManager.GetUserName(User)'s Salary Details</h2>
                 <div class="table-responsive">
-    <form asp-action="Index" method="post" class="mt-4">
+                    <form asp-action="Index" method="post" class="mt-4">
 
-        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div asp-validation-summary="All" class="text-danger"></div>
 
-        <div class="table-responsive">
-            <table class="table">
+                        <div class="table-responsive">
+                            <table class="table">
 
-                <tbody>
-                    <tr>
-                        <td><span><strong>Email</strong></span> : @Model.Email</td>
-                        <td><span><strong>Grade</strong></span>  : @Model.GradeName</td>
-                    </tr>
-                    <tr>
-                        <td><span><strong>Level</strong></span>  : @Model.GradeLevel</td>
-                        <td><span><strong>Step</strong></span> : @Model.GradeStep</td>
-                    </tr>
-                </tbody>
-            </table>
+                                <tbody>
+                                    <tr>
+                                        <td><span><strong>Email</strong></span> : @Model.Email</td>
+                                        <td><span><strong>Grade</strong></span>  : @Model.GradeName</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span><strong>Level</strong></span>  : @Model.GradeLevel</td>
+                                        <td><span><strong>Step</strong></span> : @Model.GradeStep</td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
-            <br />
-            <p>   <h3>Basic Salary: @Model.BasicSalary</h3></p>
-            <br />
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th><strong>PayItem </strong></th>
-                        <th>Amount</th>
-                        <th>%</th>
-                        <th>PayItem Type</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Tax</strong></td>
-                        <td>@Model.Tax</td>
-                        <td>@Model.TaxPercent</td>
-                        
+                            <br />
+                            <p>   <h3>Basic Salary: @Model.BasicSalary</h3></p>
+                            <br />
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th><strong>PayItem </strong></th>
+                                        <th>Amount</th>
+                                        <th>%</th>
+                                        <th>PayItem Type</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Tax</strong></td>
+                                        <td>@Model.Tax</td>
+                                        <td>@Model.TaxPercent</td>
 
-                    </tr>
-                    <tr>
-                        <td><strong>Housing</strong></td>
-                        <td>@Model.Housing</td>
-                        <td>@Model.HousingPercent</td>
-                        
 
-                    </tr>
-                    <tr>
-                        <td><strong>Lunch</strong></td>
-                        <td>@Model.Lunch</td>
-                        <td>@Model.LunchPercent</td>
-                        
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Housing</strong></td>
+                                        <td>@Model.Housing</td>
+                                        <td>@Model.HousingPercent</td>
 
-                    </tr>
-                    <tr>
-                        <td><strong>Transport</strong></td>
-                        <td>@Model.Transport</td>
-                        <td>@Model.TransportPercent</td>
-                        
 
-                    </tr>
-                    <tr>
-                        <td><strong>Medical</strong></td>
-                        <td>@Model.Medical</td>
-                        <td>@Model.MedicalPercent</td>
-                       
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Lunch</strong></td>
+                                        <td>@Model.Lunch</td>
+                                        <td>@Model.LunchPercent</td>
 
-                    </tr>
 
-                </tbody>
-            </table>
-            <br />
-            <div>
-                <p><h3>Net Allowance: @Model.TotAllowance</h3></p>
-            </div>
-            <div>
-                <p><h3>Net Deduction: <span style="color:red">@Model.TotDeduction</span></h3></p>
-            </div>
-            <div>
-                <p><h3>Net Salary: @Model.NetPay</h3></p>
-            </div>
-        </div>
-    </form>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Transport</strong></td>
+                                        <td>@Model.Transport</td>
+                                        <td>@Model.TransportPercent</td>
+
+
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Medical</strong></td>
+                                        <td>@Model.Medical</td>
+                                        <td>@Model.MedicalPercent</td>
+
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <br />
+                            <div>
+                                <p><h3>Net Allowance: @Model.TotAllowance</h3></p>
+                            </div>
+                            <div>
+                                <p><h3>Net Deduction: <span style="color:red">@Model.TotDeduction</span></h3></p>
+                            </div>
+                            <div>
+                                <p><h3>Net Salary: @Model.NetPay</h3></p>
+                            </div>
+                        </div>
+                        <a asp-action="Cancell" type="button" class="btn btn-dark">Cancel</a>
+                    </form>
 </div>
         </div>
     </div>

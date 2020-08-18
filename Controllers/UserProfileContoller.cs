@@ -416,6 +416,10 @@ namespace StaffPortal.Controllers
             return RedirectToAction("Index", "UserProfile");
         }
 
+        public IActionResult Cancell()
+        {
+            return RedirectToAction("UserIndex", "Account");
+        }
 
         public JsonResult GetStep(string gradelevelid)
         {
