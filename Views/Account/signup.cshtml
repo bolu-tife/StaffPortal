@@ -22,16 +22,16 @@
         </div>
 
         <div class="wrap-input100 6">
-            <input asp-for="FirstName" class="input100" type="text" name="username" placeholder="FirstName">
+            <input asp-for="FirstName" class="input100" type="text" placeholder="FirstName">
             <span class="focus-input100"></span>
             <span class="symbol-input100">
                 <span class="lnr lnr-user"></span>
             </span>
-            <span asp-validation-for="UserName" class="text-danger"></span>
+            <span asp-validation-for="FirstName" class="text-danger"></span>
         </div>
 
         <div class="wrap-input100 6">
-            <input asp-for="LastName" class="input100" type="text" name="username" placeholder="LastName">
+            <input asp-for="LastName" class="input100" type="text"  placeholder="LastName">
             <span class="focus-input100"></span>
             <span class="symbol-input100">
                 <span class="lnr lnr-user"></span>
@@ -41,7 +41,7 @@
 
 
         <div class="wrap-input100 validate-input m-b-16" data-validate="Valid email is required: ex@abc.xyz">
-            <input asp-for="Email" class="input100" type="text" name="email" placeholder="Email">
+            <input asp-for="Email" class="input100" type="text"  placeholder="Email">
             <span class="focus-input100"></span>
             <span class="symbol-input100">
                 <span class="lnr lnr-envelope"></span>

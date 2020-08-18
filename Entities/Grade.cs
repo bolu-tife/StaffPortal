@@ -13,8 +13,14 @@ namespace StaffPortal.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string GradeName { get; set; }
+
+        //public int Level { get; set; }
+        //public int Step { get; set; }
+
         public int Level { get; set; }
         public int Step { get; set; }
+
+
         public string CreatedBy { get; set; }
         private DateTime? dateCreated = null;
         public DateTime DateCreated

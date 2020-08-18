@@ -16,7 +16,7 @@ namespace StaffPortal.Interface
         Task<bool> Delete(int Id);
 
         IEnumerable<Grade> GetLevelsById(string gradename);
-        IEnumerable<Grade> GetStepsById(int gradelevel);
+        IEnumerable<Grade> GetStepsById( int gradelevelid);
         /*
         Task<bool> Update(Salary dept);
         Task<IEnumerable<Salary>> GetAll();
