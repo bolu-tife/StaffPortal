@@ -14,9 +14,11 @@ namespace StaffPortal.Services
     public class UserProfileService : IUserProfile
     {
         private StaffPortalDataContext _context;
+        //private IUserProfile _userProfile;
         private readonly UserManager<ApplicationUser> _userManager;
         public UserProfileService(StaffPortalDataContext context, UserManager<ApplicationUser> userManager)
         {
+            //_userProfile = userProfile;
             _userManager = userManager;
             _context = context;
         }
@@ -45,24 +47,24 @@ namespace StaffPortal.Services
         }
 
 
-        //public async Task<bool> Delete(int Id)//Delete
-        //{
-           
-        //    var _userprofile = await _context.UserProfiles.FindAsync(Id);
-            
-        //    var useremail = _userprofile.Email;
-            
-        //                if (_userprofile != null)
-        //    {
-        //        _context.UserProfiles.Remove(_userprofile);
-        //        _context.SaveChanges();
-        //        return true;
-        //    }
+        public async Task<bool> Delete(int Id)//Delete
+        {
 
-        //    return false;
-        //}
+            var _userprofile = await _context.UserProfiles.FindAsync(Id);
 
-       
+            //var useremail = _userprofile.Email;
+
+            if (_userprofile != null)
+            {
+                _context.UserProfiles.Remove(_userprofile);
+                _context.SaveChanges();
+                return true;
+            }
+
+            return false;
+        }
+
+
         public async Task<IEnumerable<UserProfile>> GetAll()
         {
 
@@ -70,17 +72,13 @@ namespace StaffPortal.Services
             //return await _context.UserProfiles.Include(d => d.Department).ToListAsync();
         }
 
-        //public string FindNameByStateId(int id)
-        //{
-        //    var name = _context.NewStates.First(n => n.Id == id);
-        //    return name.Name;
-        //}
 
-        //public string FindNameByLocalId(int id)
-        //{
-        //    var name = _context.LGAs.First(n => n.Id == id);
-        //    return name.Name;
-        //}
+
+        public async Task<Grade> FindGradeById(int id)
+        {
+            var grade = await _context.Grades.FirstAsync(n => n.Id == id);
+            return grade;
+        }
 
         public string FindNameByDepartmentId(int id)
         {
@@ -92,21 +90,21 @@ namespace StaffPortal.Services
             var name = _context.Departments.First(n => n.Id == id);
             return _context.Faculties.First(f => f.Id == name.FacultyId).Name;
         }
-        //public async Task<UserProfile> GetById(int Id)
-        //{
-        //    var _userprofile = await _context.UserProfiles.FindAsync(Id);
+        public async Task<UserProfile> GetById(int Id)
+        {
+            var _userprofile = await _context.UserProfiles.FindAsync(Id);
 
-        //    return _userprofile;
-        //}
+            return _userprofile;
+        }
 
         //public int GetIdByEmail(string Email)
         //{
-            
+
         //    try
         //    {
         //        var _user = _context.UserProfiles.First(u => u.Email == Email);
-                
-                
+
+
         //        return _user.Id;
         //    }
         //    catch (Exception)
@@ -118,7 +116,7 @@ namespace StaffPortal.Services
 
         //public async Task<IEnumerable<Local>> GetLocalByStateIdAsync(int id)
         //{
-           
+
         //    try
         //    {
         //        return await _context.Locals.Where(u => u.States.Id == id);
@@ -134,35 +132,67 @@ namespace StaffPortal.Services
         //}
 
 
-        //public async Task<bool> Update(UserProfile userprofile) //Update
-        //{
-        //    var _userprofile = await _context.UserProfiles.FindAsync(userprofile.Id);
-        //    if (_userprofile != null)
-        //    {
-        //        _userprofile.FirstName = userprofile.FirstName;
-        //        _userprofile.LastName = userprofile.LastName;
-        //        //_userprofile.Email = userprofile.Email;
+        public async Task<bool> Update(UserProfile userprofile,Grade grade) //Update
+        {
+            var _userprofile = await _context.UserProfiles.FindAsync(userprofile.Id);
 
-        //        //_userprofile.Department.FacultyId = userprofile.Department.FacultyId;
-        //        _userprofile.DepartmentId = userprofile.DepartmentId;
-        //        _userprofile.DepartmentName = userprofile.DepartmentName;
-        //        _userprofile.FacultyName = userprofile.FacultyName;
-        //        _userprofile.LGAs = userprofile.LGAs;
-        //        _userprofile.NewStates = userprofile.NewStates;
+            
+            if (_userprofile != null)
+            {
+                //_userprofile.GradeId = Convert.ToInt32(userprofile.GradeStep);
+                _userprofile.DepartmentId = userprofile.DepartmentId;
+                _userprofile.GradeId = userprofile.GradeId;
+                //var grade = await _userProfile.FindGradeById(_userprofile.GradeId);
+                _userprofile.TotAllowance = grade.TotAllowance;
+                _userprofile.TotDeduction = grade.TotDeduction;
+                _userprofile.NetPay = grade.NetSalary;
+                _userprofile.GradeName = grade.GradeName;
+                _userprofile.GradeStep = grade.Step.ToString();
+                _userprofile.GradeLevel = grade.Level.ToString();
 
-        //        //_userprofile.NewStateId = userprofile.NewStateId;
-        //        //_userprofile.LGAId = userprofile.LGAId;
-        //        _userprofile.Country = userprofile.Country;
-                
+                _userprofile.DepartmentName = userprofile.DepartmentName;
+                _userprofile.FacultyName = userprofile.FacultyName;
 
-        //        await _context.SaveChangesAsync();
-        //        return true;
-        //    }
 
-        //    return false;
+                //_userprofile.DepartmentName = _userProfile.FindNameByDepartmentId(_userprofile.DepartmentId);
+                //_userprofile.FacultyName = _userProfile.FindFacultyNameByDepartmentId(_userprofile.DepartmentId);
 
-        //}
+                //_context.Update(_userprofile);
+                await _context.SaveChangesAsync();
 
+                return true;
+            }
+
+            return false;
+
+        }
+
+        public async Task<bool> UpdateUser(UserProfile userprofile) //Update
+        {
+            var _userprofile = await _context.UserProfiles.FindAsync(userprofile.Id);
+
+
+            if (_userprofile != null)
+            {
+                //_userprofile.GradeId = Convert.ToInt32(userprofile.GradeStep);
+                _userprofile.FirstName = userprofile.FirstName;
+                _userprofile.LastName = userprofile.LastName;
+                _userprofile.NewStates = userprofile.NewStates;
+                _userprofile.LGAs = userprofile.LGAs;
+
+
+                //_userprofile.DepartmentName = _userProfile.FindNameByDepartmentId(_userprofile.DepartmentId);
+                //_userprofile.FacultyName = _userProfile.FindFacultyNameByDepartmentId(_userprofile.DepartmentId);
+
+                //_context.Update(_userprofile);
+                await _context.SaveChangesAsync();
+
+                return true;
+            }
+
+            return false;
+
+        }
         //public async Task<bool> UpdateUser(UserProfile userprofile) //Update
         //{
         //    var _userprofile = await _context.UserProfiles.FindAsync(userprofile.Id);

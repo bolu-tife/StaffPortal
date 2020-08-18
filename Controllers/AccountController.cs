@@ -20,12 +20,13 @@ namespace StaffPortal.Controllers
 
         private readonly IAccount _account;
         private ILocal _local;
-
+        private IUserProfile _userPro;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private StaffPortalDataContext _context;
-        public AccountController(IAccount account, StaffPortalDataContext context, ILocal local, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+        public AccountController(IAccount account, IUserProfile userPro, StaffPortalDataContext context, ILocal local, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
+            _userPro = userPro;
             _account = account;
             _signInManager = signInManager;
             _context = context;
@@ -148,6 +149,76 @@ namespace StaffPortal.Controllers
         }
 
 
+        [HttpGet]
+        public async Task<IActionResult> PersonalInfo(int id)
+        {
+            var _userprofile = await _context.UserProfiles.FindAsync(id);
+            //var user = _userManager.GetUserName(User);
+            var editUserProfile = await _userManager.FindByEmailAsync(_userprofile.Email);
+            //var editUserProfile = await _userManager.FindByEmailAsync(Email);
+            //var id = _userProfile.GetIdByEmail(x.Email);
+
+            //var editUserProfile = await _userProfile.GetById(editUserProfile);
+
+            //var editUserProfile = await _userProfile.GetById(id);
+
+            if (editUserProfile == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+
+
+
+
+            ViewBag.state = _context.NewStates.ToList();
+
+
+
+            return View(editUserProfile);
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> PersonalInfo(ApplicationUser userProfile)
+        {
+            //var _userprofile = await _context.UserProfiles.FindAsync(id);
+            //var user = _userManager.GetUserName(User);
+            var _userprofile = await _context.UserProfiles.FindAsync(Convert.ToInt32(userProfile.Id));
+            userProfile.Email = _userprofile.Email;
+            var x = await _userManager.FindByEmailAsync(userProfile.Email);
+            //var x = await _userManager.FindByNameAsync(user);
+            userProfile.Id = x.Id;
+            //userProfile.Id = _userProfile.GetIdByEmail(x.Email);
+            userProfile.NewStates = _account.FindNameByStateId(userProfile.NewStateId);
+
+            userProfile.LGAs = _account.FindNameByLocalId(userProfile.LGAId);
+
+            _userprofile.FirstName = userProfile.FirstName;
+            _userprofile.LastName = userProfile.LastName;
+            _userprofile.NewStates = userProfile.NewStates;
+
+            _userprofile.LGAs = userProfile.LGAs;
+
+            var editUserPro = await _userPro.UpdateUser(_userprofile);
+
+            var editUserProfile = await _account.UpdateUser(userProfile);
+
+            if (editUserProfile)
+            {
+
+                Alert("UserProfile edited successfully.", NotificationType.success);
+                return RedirectToAction("Index", "UserProfile");
+
+            }
+            Alert("UserProfile not edited!", NotificationType.error);
+            return View();
+        }
+
+
+
+
         public IActionResult Login()
         {
             return View();
@@ -194,6 +265,7 @@ namespace StaffPortal.Controllers
         [HttpPost]
         public async Task<IActionResult> Signup( SigninViewModel signupmodel)
         {
+           
             ApplicationUser user = new ApplicationUser
             {
                 UserName = signupmodel.UserName,
@@ -202,8 +274,12 @@ namespace StaffPortal.Controllers
                 LastName = signupmodel.LastName,
                 Country = signupmodel.Country,
                 NewStateId = signupmodel.NewStateId,
-                LGAId = signupmodel.LGAId
-            };
+                LGAId = signupmodel.LGAId,
+                NewStates = _account.FindNameByStateId(signupmodel.NewStateId),
+                LGAs = _account.FindNameByLocalId(signupmodel.LGAId)
+                
+               
+        };
 
             var sign = await _account.CreateUser(user, signupmodel.Password);
             if (sign)
@@ -248,6 +324,10 @@ namespace StaffPortal.Controllers
 
             return Json(localList);
            
+        }
+        public IActionResult Cancel()
+        {
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult Error()

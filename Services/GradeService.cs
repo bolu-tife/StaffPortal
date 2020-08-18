@@ -103,7 +103,7 @@ namespace StaffPortal.Services
 
 
                 _grade.TotAllowance = _grade.BasicSalary + _grade.Lunch + _grade.Medical + _grade.Housing +
-                    _grade.Transport;
+                _grade.Transport;
                 _grade.TotDeduction = _grade.Tax;
                 _grade.NetSalary = _grade.TotAllowance - _grade.TotDeduction;
 
@@ -143,19 +143,29 @@ namespace StaffPortal.Services
         {
             var name = _context.Grades.First(n => n.GradeName == gradenameid);
             
-            var list = _context.Grades.Where(u => u.GradeName == name.GradeName).ToList();
-            //list.Insert(0, new LGA { Id = 0, Name = "Select Local Government" });
+            var list = _context.Grades.Where(u => u.GradeName == name.GradeName).Distinct().ToList();
+            //list.Insert(0, new Grade { Id = 0, Level = -1 });
             return list;
         }
 
 
-        public IEnumerable<Grade> GetStepsById(int gradelevelid) //GetAll
+        public IEnumerable<Grade> GetStepsById( int gradelevelid) //GetAll
         {
-            var name = _context.Grades.First(n => n.Id == gradelevelid);
+            
+            try
+            {
+                var name = _context.Grades.First(n => n.Id == gradelevelid);
+
+                var list = _context.Grades.Where(u => u.Level == name.Level).Where(u => u.GradeName == name.GradeName).Distinct().ToList();
+                //list.Insert(0, new Grade("--Select State--", "0"));
+                //list.Insert(0, new Grade { Id = 0, Step = -1 });
+                return list;
+            }
+            catch (Exception ex)
+            {
+                return _context.Grades.ToList();
+            }
            
-            var list = _context.Grades.Where(u => u.Level == name.Level).Where(u => u.GradeName == name.GradeName).ToList();
-            //list.Insert(0, new LGA { Id = 0, Name = "Select Local Government" });
-            return list;
         }
 
     }

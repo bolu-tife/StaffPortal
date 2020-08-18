@@ -23,7 +23,7 @@ namespace StaffPortal.Entities
         public Grade Grade { get; set; }
 
         public string GradeLevel { get; set; }
-        //public int GradeStep { get; set; }
+        public string GradeStep { get; set; }
         public string GradeName { get; set; }
 
 

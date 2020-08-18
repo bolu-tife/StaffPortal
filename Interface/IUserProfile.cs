@@ -9,15 +9,16 @@ namespace StaffPortal.Interface
     {
         void Add(UserProfile userprofile);
         Task<bool> AddAsync(UserProfile userprofile);
-        //Task<bool> Update(UserProfile userprofile);
+        Task<bool> Update(UserProfile userprofile, Grade grade);
+        Task<bool> UpdateUser(UserProfile userprofile);
         //Task<bool> UpdateUser(UserProfile userprofile);
         Task<IEnumerable<UserProfile>> GetAll();
         //int GetIdByEmail(string email);
-        //string FindNameByStateId(int id);
-        //string FindNameByLocalId(int id);
+
+        Task<Grade> FindGradeById(int id);
         string FindNameByDepartmentId(int id);
         string FindFacultyNameByDepartmentId(int id);
-        //Task<UserProfile> GetById(int Id);
-        //Task<bool> Delete(int Id);
+        Task<UserProfile> GetById(int Id);
+        Task<bool> Delete(int Id);
     }
 }
