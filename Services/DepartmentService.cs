@@ -26,6 +26,7 @@ namespace StaffPortal.Services
         {
             try
             {
+                
                 await _context.AddAsync(department);
 
                 await _context.SaveChangesAsync();
