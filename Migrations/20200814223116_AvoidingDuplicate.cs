@@ -7,43 +7,43 @@ namespace StaffPortal.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "Name",
-                table: "Faculties",
+                name: "DeptName",
+                table: "Departments",
                 nullable: true,
                 oldClrType: typeof(string),
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
-                name: "Code",
-                table: "Faculties",
+                name: "DeptCode",
+                table: "Departments",
                 nullable: true,
                 oldClrType: typeof(string),
                 oldNullable: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Faculties_Name_Code",
-                table: "Faculties",
-                columns: new[] { "Name", "Code" },
+                name: "IX_Departments_DeptCode_DeptName",
+                table: "Departments",
+                columns: new[] { "DeptCode", "DeptName" },
                 unique: true,
-                filter: "[Name] IS NOT NULL AND [Code] IS NOT NULL");
+                filter: "[DeptCode] IS NOT NULL AND [DeptName] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropIndex(
-                name: "IX_Faculties_Name_Code",
-                table: "Faculties");
+                name: "IX_Departments_DeptCode_DeptName",
+                table: "Departments");
 
             migrationBuilder.AlterColumn<string>(
-                name: "Name",
-                table: "Faculties",
+                name: "DeptName",
+                table: "Departments",
                 nullable: true,
                 oldClrType: typeof(string),
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
-                name: "Code",
-                table: "Faculties",
+                name: "DeptCode",
+                table: "Departments",
                 nullable: true,
                 oldClrType: typeof(string),
                 oldNullable: true);

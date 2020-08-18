@@ -10,14 +10,14 @@ using StaffPortal.Data;
 namespace StaffPortal.Migrations
 {
     [DbContext(typeof(StaffPortalDataContext))]
-    [Migration("20200814120713_Sals")]
-    partial class Sals
+    [Migration("20200814221127_Afresh")]
+    partial class Afresh
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -243,6 +243,10 @@ namespace StaffPortal.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name", "Code")
+                        .IsUnique()
+                        .HasFilter("[Name] IS NOT NULL AND [Code] IS NOT NULL");
+
                     b.ToTable("Faculties");
                 });
 
@@ -337,25 +341,39 @@ namespace StaffPortal.Migrations
 
                     b.Property<DateTime>("DateCreated");
 
+                    b.Property<int>("DepartmentId");
+
+                    b.Property<string>("DepartmentName");
+
                     b.Property<string>("Email");
+
+                    b.Property<string>("FacultyName");
 
                     b.Property<string>("FirstName");
 
-                    b.Property<int>("LGAId");
+                    b.Property<int>("GradeId");
+
+                    b.Property<string>("GradeLevel");
+
+                    b.Property<string>("GradeName");
 
                     b.Property<string>("LGAs");
 
                     b.Property<string>("LastName");
 
-                    b.Property<int>("NewStateId");
+                    b.Property<double>("NetPay");
 
                     b.Property<string>("NewStates");
 
+                    b.Property<double>("TotAllowance");
+
+                    b.Property<double>("TotDeduction");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("LGAId");
+                    b.HasIndex("DepartmentId");
 
-                    b.HasIndex("NewStateId");
+                    b.HasIndex("GradeId");
 
                     b.ToTable("UserProfiles");
                 });
@@ -435,14 +453,14 @@ namespace StaffPortal.Migrations
 
             modelBuilder.Entity("StaffPortal.Entities.UserProfile", b =>
                 {
-                    b.HasOne("StaffPortal.Entities.LGA", "LGA")
+                    b.HasOne("StaffPortal.Entities.Department", "Department")
                         .WithMany()
-                        .HasForeignKey("LGAId")
+                        .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("StaffPortal.Entities.NewState", "NewState")
+                    b.HasOne("StaffPortal.Entities.Grade", "Grade")
                         .WithMany()
-                        .HasForeignKey("NewStateId")
+                        .HasForeignKey("GradeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -10,14 +10,14 @@ using StaffPortal.Data;
 namespace StaffPortal.Migrations
 {
     [DbContext(typeof(StaffPortalDataContext))]
-    [Migration("20200814152209_empp")]
-    partial class empp
+    [Migration("20200814223116_AvoidingDuplicate")]
+    partial class AvoidingDuplicate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -224,6 +224,10 @@ namespace StaffPortal.Migrations
 
                     b.HasIndex("FacultyId");
 
+                    b.HasIndex("DeptCode", "DeptName")
+                        .IsUnique()
+                        .HasFilter("[DeptCode] IS NOT NULL AND [DeptName] IS NOT NULL");
+
                     b.ToTable("Departments");
                 });
 
@@ -242,6 +246,10 @@ namespace StaffPortal.Migrations
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name", "Code")
+                        .IsUnique()
+                        .HasFilter("[Name] IS NOT NULL AND [Code] IS NOT NULL");
 
                     b.ToTable("Faculties");
                 });
