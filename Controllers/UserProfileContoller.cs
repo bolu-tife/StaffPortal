@@ -112,9 +112,10 @@ namespace StaffPortal.Controllers
             
 
             ViewBag.users = temp.ToList();
-            if (ViewBag.users == null)
+            bool isEmpty = !temp.ToList().Any();
+            if (isEmpty)
             {
-                Alert("No available User!", NotificationType.error);
+                Alert("No available User!", NotificationType.warning);
                 return RedirectToAction("Index");
             }
             ViewBag.department = departmentList;

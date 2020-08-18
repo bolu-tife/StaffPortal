@@ -115,6 +115,7 @@ namespace StaffPortal.Controllers
 
            
             ViewBag.state = _context.NewStates.ToList();
+            //ViewBag.stateid = new SelectList( "DepartmentId", "DepartmentName", employee.DepartmentId);
 
 
 

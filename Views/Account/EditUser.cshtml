@@ -1,4 +1,7 @@
-﻿@model StaffPortal.Entities.ApplicationUser
+﻿@using Microsoft.AspNetCore.Identity
+@using StaffPortal.Entities
+@inject UserManager<ApplicationUser> UserManager
+@model StaffPortal.Entities.ApplicationUser
 @{
     ViewData["Title"] = "User Profile";
 }
@@ -47,6 +50,7 @@
                         <label asp-for="NewStateId"> State</label>
                         <select asp-for="NewStateId" class="form-control" id="NewStatesId"
                                 asp-items="@(new SelectList(ViewBag.state, "Id", "Name"))">
+
                             <option>Select State Name</option>
                         </select>
                         <span asp-validation-for="NewStateId" class="text-danger"></span>
@@ -67,7 +71,7 @@
 
                     <button type="submit" class="btn btn-success mr-2">Submit</button>
                     <a asp-action="Cancel" type="button" class="btn btn-dark">Cancel</a>
-                    
+
                 </form>
             </div>
         </div>
@@ -86,10 +90,12 @@
             $.getJSON(url, { id: $(ddlsource).val() }, function (data) {
                 var items = '';
                 $("#LGAId").empty();
+                items = "<option hidden disabled selected >-- Select a Local Government Area --</option>";
                 $.each(data, function (i, row) {
                     items += "<option value='" + row.value + "'>" + row.text + "</option>";
                 });
                 $("#LGAId").html(items);
+                
             })
     //    });
     //});
