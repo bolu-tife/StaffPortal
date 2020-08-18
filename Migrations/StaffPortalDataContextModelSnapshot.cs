@@ -222,6 +222,10 @@ namespace StaffPortal.Migrations
 
                     b.HasIndex("FacultyId");
 
+                    b.HasIndex("DeptCode", "DeptName")
+                        .IsUnique()
+                        .HasFilter("[DeptCode] IS NOT NULL AND [DeptName] IS NOT NULL");
+
                     b.ToTable("Departments");
                 });
 

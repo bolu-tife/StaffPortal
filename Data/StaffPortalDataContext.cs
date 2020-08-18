@@ -18,6 +18,11 @@ namespace StaffPortal.Data
             .HasIndex(p => new { p.Name, p.Code })
             .IsUnique(true);
 
+            base.OnModelCreating(builder);
+            builder.Entity<Department>()
+            .HasIndex(p => new { p.DeptCode, p.DeptName })
+            .IsUnique(true);
+
         }
         public virtual DbSet<Faculty> Faculties { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
