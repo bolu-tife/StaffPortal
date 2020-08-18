@@ -152,19 +152,19 @@ namespace StaffPortal.Services
         public IEnumerable<Grade> GetStepsById( int gradelevelid) //GetAll
         {
             
-            try
-            {
+            //try
+            //{
                 var name = _context.Grades.First(n => n.Id == gradelevelid);
 
                 var list = _context.Grades.Where(u => u.Level == name.Level).Where(u => u.GradeName == name.GradeName).Distinct().ToList();
                 //list.Insert(0, new Grade("--Select State--", "0"));
                 //list.Insert(0, new Grade { Id = 0, Step = -1 });
                 return list;
-            }
-            catch (Exception ex)
-            {
-                return _context.Grades.ToList();
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    return _context.Grades.ToList();
+            //}
            
         }
 

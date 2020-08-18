@@ -1,16 +1,16 @@
-﻿@*
+﻿
 
     @using Microsoft.AspNetCore.Identity
     @using StaffPortal.Entities
     @inject SignInManager<ApplicationUser> SignInManager
     @inject UserManager<ApplicationUser> UserManager
-    @model StaffPortal.Entities.Salary;
+    @model StaffPortal.Entities.UserProfile;
     @{
         ViewData["Title"] = "Index";
     }
     <div class="row page-titles"> 
         <div class="col-md-5 align-self-center">
-            <h3 class="text-themecolor">Salary</h3>
+            <h3 class="text-themecolor">Salary Report</h3>
         </div>
         <!--   <div class="col-md-7 align-self-center">
              <a href="https://wrappixel.com/templates/adminpro/" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down"> Upgrade to Pro</a>
@@ -20,7 +20,7 @@
         <!-- column -->
         <div class="col-sm-12">
             <div class="white-box">
-                <h2 align="center"> @UserManager.GetUserName(User)'s Salary Details</h2>
+                <h2 align="center"> @Model.FirstName @Model.LastName's Salary Details</h2>
                 <div class="table-responsive">
     <form asp-action="Index" method="post" class="mt-4">
 
@@ -41,6 +41,8 @@
                 </tbody>
             </table>
 
+            
+
             <br />
             <p>   <h3>Basic Salary: @Model.BasicSalary</h3></p>
             <br />
@@ -58,35 +60,35 @@
                         <td><strong>Tax</strong></td>
                         <td>@Model.Tax</td>
                         <td>@Model.TaxPercent</td>
-                        <td>@Model.TaxItemType</td>
+                        
 
                     </tr>
                     <tr>
                         <td><strong>Housing</strong></td>
                         <td>@Model.Housing</td>
                         <td>@Model.HousingPercent</td>
-                        <td>@Model.HousingItemType</td>
+                       
 
                     </tr>
                     <tr>
                         <td><strong>Lunch</strong></td>
                         <td>@Model.Lunch</td>
                         <td>@Model.LunchPercent</td>
-                        <td>@Model.LunchItemType</td>
+                        
 
                     </tr>
                     <tr>
                         <td><strong>Transport</strong></td>
                         <td>@Model.Transport</td>
                         <td>@Model.TransportPercent</td>
-                        <td>@Model.TransportItemType</td>
+                        
 
                     </tr>
                     <tr>
                         <td><strong>Medical</strong></td>
                         <td>@Model.Medical</td>
                         <td>@Model.MedicalPercent</td>
-                        <td>@Model.MedicalItemType</td>
+                        
 
                     </tr>
 
@@ -100,7 +102,7 @@
                 <p><h3>Net Deduction: <span style="color:red">@Model.TotDeduction</span></h3></p>
             </div>
             <div>
-                <p><h3>Net Salary: @Model.NetSalary</h3></p>
+                <p><h3>Net Salary: @Model.NetPay</h3></p>
             </div>
         </div>
     </form>
@@ -112,4 +114,3 @@
 
 
 
-*@

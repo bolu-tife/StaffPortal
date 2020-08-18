@@ -40,7 +40,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Views\Grade\Personal Salary.cshtml">
+    <Content Update="Views\UserProfile\Personal Salary.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\UserProfile\Personal Salary %28copy%29.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\UserProfile\SalaryReport.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\UserProfile\SalaryReport %28copy%29.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\UserProfile\SalaryReporttt.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\UserProfile\PersonalSalary.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>

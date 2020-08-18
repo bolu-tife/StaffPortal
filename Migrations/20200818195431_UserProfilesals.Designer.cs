@@ -10,8 +10,8 @@ using StaffPortal.Data;
 namespace StaffPortal.Migrations
 {
     [DbContext(typeof(StaffPortalDataContext))]
-    [Migration("20200815175237_UserProfGradestep")]
-    partial class UserProfGradestep
+    [Migration("20200818195431_UserProfilesals")]
+    partial class UserProfilesals
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -224,6 +224,10 @@ namespace StaffPortal.Migrations
 
                     b.HasIndex("FacultyId");
 
+                    b.HasIndex("DeptCode", "DeptName")
+                        .IsUnique()
+                        .HasFilter("[DeptCode] IS NOT NULL AND [DeptName] IS NOT NULL");
+
                     b.ToTable("Departments");
                 });
 
@@ -242,6 +246,10 @@ namespace StaffPortal.Migrations
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name", "Code")
+                        .IsUnique()
+                        .HasFilter("[Name] IS NOT NULL AND [Code] IS NOT NULL");
 
                     b.ToTable("Faculties");
                 });
@@ -331,6 +339,8 @@ namespace StaffPortal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<double>("BasicSalary");
+
                     b.Property<string>("Country");
 
                     b.Property<string>("CreatedBy");
@@ -355,17 +365,37 @@ namespace StaffPortal.Migrations
 
                     b.Property<string>("GradeStep");
 
+                    b.Property<double>("Housing");
+
+                    b.Property<double>("HousingPercent");
+
                     b.Property<string>("LGAs");
 
                     b.Property<string>("LastName");
+
+                    b.Property<double>("Lunch");
+
+                    b.Property<double>("LunchPercent");
+
+                    b.Property<double>("Medical");
+
+                    b.Property<double>("MedicalPercent");
 
                     b.Property<double>("NetPay");
 
                     b.Property<string>("NewStates");
 
+                    b.Property<double>("Tax");
+
+                    b.Property<double>("TaxPercent");
+
                     b.Property<double>("TotAllowance");
 
                     b.Property<double>("TotDeduction");
+
+                    b.Property<double>("Transport");
+
+                    b.Property<double>("TransportPercent");
 
                     b.HasKey("Id");
 

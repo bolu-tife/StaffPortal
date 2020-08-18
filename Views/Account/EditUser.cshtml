@@ -59,7 +59,9 @@
 
                     <div class="form-group">
                         <label asp-for="LGAId"> Local Government</label>
-                        <select class="form-control" id="LGAId" asp-for="LGAId" asp-items="@(new SelectList(string.Empty, "Id", "Name"))"></select>
+                        <select class="form-control" id="LGAId" asp-for="LGAId" asp-items="@(new SelectList(string.Empty, "Id", "Name"))">
+                            
+                        </select>
                         <span asp-validation-for="LGAId" class="text-danger"></span>
                     </div>
 

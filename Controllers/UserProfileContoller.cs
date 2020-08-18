@@ -53,6 +53,80 @@ namespace StaffPortal.Controllers
             return View();
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> PersonalSalary()
+        {
+
+            var user = _userManager.GetUserName(User);
+            var x = await _userManager.FindByNameAsync(user);
+
+            var sal = _userProfile.GetIdByEmail(x.Email);
+
+            var usersal = await _userProfile.GetById(sal);
+
+           
+
+            if (usersal == null)
+            {
+                return RedirectToAction("UserError");
+            }
+            else
+            {
+                return View(usersal);
+            }
+
+
+        }
+        
+
+        [HttpGet]
+        public async Task<IActionResult> SalaryReport(int id)
+        {
+
+           
+
+            var usersal = await _userProfile.GetById(id);
+
+
+
+            if (usersal == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(usersal);
+            }
+
+
+        }
+        [HttpGet]
+        public async Task<IActionResult> SalaryReporttt(int id)
+        {
+
+
+
+            var usersal = await _userProfile.GetById(id);
+
+
+
+            if (usersal == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(usersal);
+            }
+
+
+        }
+        [HttpGet]
+        public IActionResult UserError()
+        {
+            return View();
+        }
         //[HttpGet]
         //public async Task<IActionResult> UserIndex()
         //{
@@ -89,7 +163,7 @@ namespace StaffPortal.Controllers
         //}
 
         //[Authorize(Roles = "Admin")]
-       
+
 
         [HttpGet]
         public async Task<IActionResult> Create()
@@ -160,7 +234,20 @@ namespace StaffPortal.Controllers
             userProfile.GradeStep = grade.Step.ToString();
             userProfile.GradeLevel = grade.Level.ToString();
 
+            userProfile.BasicSalary = grade.BasicSalary;
+            userProfile.Housing = grade.Housing;
+            userProfile.HousingPercent = grade.HousingPercent;
+            userProfile.Tax = grade.Tax;
+            userProfile.TaxPercent = grade.TaxPercent;
+            userProfile.Lunch = grade.Lunch;
+            userProfile.LunchPercent = grade.LunchPercent;
+            userProfile.Transport = grade.Transport;
+            userProfile.TransportPercent = grade.TransportPercent;
+            userProfile.Medical = grade.Medical;
+            userProfile.MedicalPercent = grade.MedicalPercent;
             
+
+
 
             userProfile.DepartmentName = _userProfile.FindNameByDepartmentId(userProfile.DepartmentId);
             userProfile.FacultyName = _userProfile.FindFacultyNameByDepartmentId(userProfile.DepartmentId);
