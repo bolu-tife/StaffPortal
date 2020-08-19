@@ -10,6 +10,8 @@
         Layout = "~/Views/Shared/Blanket.cshtml";
 
     }
+
+   
     <div class="row page-titles"> 
         <div class="col-md-5 align-self-center">
             <h3 class="text-themecolor">Salary Report</h3>
@@ -105,8 +107,8 @@
                                 <p><h3>Net Salary: @Model.NetPay</h3></p>
                             </div>
                         </div>
-                        <input type="button" value="Print" onclick="window.print(); window.open('http://localhost:17442/UserProfile/PersonalSalary');" />
-
+                        <input type="button" value="Print" onclick="window.print()" />
+                        
                         @*<a asp-action="Cancell" type="button" class="btn btn-dark">Cancel</a>*@
                     </form>
 </div>
