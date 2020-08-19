@@ -43,6 +43,15 @@
     <Content Remove="Views\UserProfile\SalaryReport %28copy%29.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Update="Views\News\Create.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\News\Edit.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\News\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\UserProfile\Personal Salary.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
@@ -50,9 +59,6 @@
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\UserProfile\SalaryReport.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Views\UserProfile\SalaryReporttt.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\UserProfile\PersonalSalary.cshtml">

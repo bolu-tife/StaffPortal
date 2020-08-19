@@ -55,10 +55,11 @@ namespace StaffPortal
 
             services.AddScoped<IUserProfile, UserProfileService>();
             services.AddScoped<ILocal, LGAService>();
+            services.AddScoped<INews, NewsService>();
 
             //services.AddScoped<IUserProfile, UserProfileService>();
 
-           services.AddScoped<IAccount, AccountService>();
+            services.AddScoped<IAccount, AccountService>();
             //services.AddScoped<IRole, RoleService>();
 
 

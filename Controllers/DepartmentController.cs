@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace StaffPortal.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class DepartmentController : BaseController
 
     {
@@ -44,7 +44,7 @@ namespace StaffPortal.Controllers
             var FacList = fac.Select(f => new SelectListItem()
             {
                 Value = f.Id.ToString(),
-                Text = f.Name
+                Text = f.Name + " - " +  f.Code
             });
 
 

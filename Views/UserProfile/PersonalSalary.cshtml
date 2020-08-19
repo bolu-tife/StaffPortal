@@ -7,6 +7,8 @@
     @model StaffPortal.Entities.UserProfile;
     @{
         ViewData["Title"] = "Index";
+        Layout = "~/Views/Shared/Blanket.cshtml";
+
     }
     <div class="row page-titles"> 
         <div class="col-md-5 align-self-center">
@@ -103,7 +105,9 @@
                                 <p><h3>Net Salary: @Model.NetPay</h3></p>
                             </div>
                         </div>
-                        <a asp-action="Cancell" type="button" class="btn btn-dark">Cancel</a>
+                        <input type="button" value="Print" onclick="window.print(); window.open('http://localhost:17442/UserProfile/PersonalSalary');" />
+
+                        @*<a asp-action="Cancell" type="button" class="btn btn-dark">Cancel</a>*@
                     </form>
 </div>
         </div>

@@ -177,7 +177,7 @@ namespace StaffPortal.Controllers
             var departmentList = department.Select(d => new SelectListItem()
             {
                 Value = d.Id.ToString(),
-                Text = d.DeptName
+                Text = d.DeptName + " - " + d.DeptCode
             });
 
             List<string> tempEmailList = _context.UserProfiles.Select(q => q.Email).ToList();

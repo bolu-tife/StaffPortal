@@ -34,6 +34,8 @@ namespace StaffPortal.Data
 
         public virtual DbSet<NewState> NewStates { get; set; }
         public virtual DbSet<LGA> LGAs { get; set; }
+        public virtual DbSet<News> NewsRoom { get; set; }
+
 
 
     }

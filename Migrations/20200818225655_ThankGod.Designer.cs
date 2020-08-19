@@ -10,14 +10,14 @@ using StaffPortal.Data;
 namespace StaffPortal.Migrations
 {
     [DbContext(typeof(StaffPortalDataContext))]
-    [Migration("20200818195431_UserProfilesals")]
-    partial class UserProfilesals
+    [Migration("20200818225655_ThankGod")]
+    partial class ThankGod
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -318,6 +318,19 @@ namespace StaffPortal.Migrations
                     b.HasIndex("NewStateId");
 
                     b.ToTable("LGAs");
+                });
+
+            modelBuilder.Entity("StaffPortal.Entities.News", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Message");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("NewsRoom");
                 });
 
             modelBuilder.Entity("StaffPortal.Entities.NewState", b =>

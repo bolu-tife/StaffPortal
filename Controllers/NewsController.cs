@@ -13,21 +13,21 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace StaffPortal.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    public class FacultyController : BaseController
+    //[Authorize(Roles = "Admin")]
+    public class NewsController : BaseController
     {
-        private IFaculty _faculty;
+        private INews _news;
 
-        private readonly UserManager<ApplicationUser> _userManager;
-        public FacultyController(IFaculty faculty, UserManager<ApplicationUser> userManager)
+        //private readonly UserManager<ApplicationUser> _userManager;
+        public NewsController(INews news)
         {
-            _faculty = faculty;
-            _userManager = userManager;
+            _news = news;
+            //_userManager = userManager;
         }
         
         public async Task<IActionResult> Index()
         {
-            var model = await _faculty.GetAll();
+            var model = await _news.GetAll();
 
             if (model != null)
                 return View(model);
@@ -40,56 +40,58 @@ namespace StaffPortal.Controllers
             return View();
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<IActionResult> Create(Faculty faculty)
+        public async Task<IActionResult> Create(News news)
         {
-            faculty.CreatedBy = _userManager.GetUserName(User);
+            
+            var createNews = await _news.AddAsync(news);
 
-            var createFaculty = await _faculty.AddAsync(faculty);
-
-            if (createFaculty)
+            if (createNews)
             {
-                Alert("Faculty created successfully.", NotificationType.success);
+                Alert("News created successfully.", NotificationType.success);
                 return RedirectToAction("Index");
             }
             else
             {
-                Alert("Duplicate Faculty cannot created!", NotificationType.error);
+                Alert("News not created!", NotificationType.error);
             }
 
 
             return View();
         }
 
+
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var editFaculty = await _faculty.GetById(id);
+            var editNews = await _news.GetById(id);
 
-            if (editFaculty == null)
+            if (editNews == null)
             {
                 return RedirectToAction("Index");
             }
-            return View(editFaculty);
+            return View(editNews);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<IActionResult> Edit(Faculty faculty)
+        public async Task<IActionResult> Edit(News news)
         {
-            //var editFaculty = await _faculty.GetById(id);
-            var editFaculty = await _faculty.Update(faculty);
+            //var editNews = await _news.GetById(id);
+            var editNews = await _news.Update(news);
             
 
-            if (editFaculty && ModelState.IsValid)
+            if (editNews && ModelState.IsValid)
             {
-                //    editFaculty.Name = faculty.Name;
+                //    editNews.Name = news.Name;
                 //    context.SaveChanges();
-                Alert("Faculty edited successfully!", NotificationType.success);
+                Alert("News edited successfully!", NotificationType.success);
                 return RedirectToAction("Index");
-                //return RedirectToAction("Details", new { id = editFaculty.Id });
+                //return RedirectToAction("Details", new { id = editNews.Id });
             }
-            Alert("Faculty not edited!", NotificationType.warning);
+            Alert("News not edited!", NotificationType.warning);
             return View();
         }
 
@@ -97,20 +99,20 @@ namespace StaffPortal.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            var deleteFaculty = await _faculty.Delete(id);
+            var deleteNews = await _news.Delete(id);
             
-            if (deleteFaculty)
+            if (deleteNews)
             {
-                Alert("Faculty deleted successfully.", NotificationType.success);
+                Alert("News deleted successfully.", NotificationType.success);
                 return RedirectToAction("Index");
             }
-            Alert("Faculty not deleted!", NotificationType.error);
+            Alert("News not deleted!", NotificationType.error);
             return View();
         }
 
         public IActionResult Cancel()
         {
-            return RedirectToAction("Index", "Faculty");
+            return RedirectToAction("Index", "News");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
